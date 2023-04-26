@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -27,7 +30,17 @@ public class DaoClienteImp implements DaoCliente {
 		json.put("nombre", cliente.getNombre());
 		json.put("activo", true);
 		
-		// TODO Auto-generated method stub
+		JSONObject data = loadData();
+		JSONObject clientes = data.getJSONObject("clientes");
+		
+		id = data.getInt("proximo id");
+		json.put("id", id);
+		
+		clientes.put(json.get("id").toString(), json);
+		data.put("proximo id", id + 1);
+		
+		saveData(data);
+		
 		return id;
 	}
 
@@ -63,11 +76,30 @@ public class DaoClienteImp implements DaoCliente {
 			jsonInput = new JSONObject(new JSONTokener(input));
 		} catch (FileNotFoundException e) {
 			jsonInput = new JSONObject();
-			jsonInput.put("Ultimo id", 0);
-			jsonInput.put("Clientes", new JSONArray());
+			jsonInput.put("proximo id", 0);
+			jsonInput.put("clientes", new JSONObject());
 		}
 		
 		return jsonInput;
+	}
+	
+	private boolean saveData(JSONObject data) {
+		try(OutputStream output = new FileOutputStream(new File(ARCHIVO))){
+			PrintStream print = new PrintStream(output);
+			print.print(data);
+			
+		} catch (FileNotFoundException e) {
+			return false;
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static void main(String[] args) {
+		TCliente c = new TCliente(1, "PEPE");
+		DaoCliente d = new DaoClienteImp();
+		d.createCliente(c);
 	}
 
 }
