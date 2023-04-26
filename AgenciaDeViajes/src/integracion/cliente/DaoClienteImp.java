@@ -8,8 +8,11 @@ public class DaoClienteImp implements DaoCliente {
 
 	@Override
 	public int createCliente(TCliente cliente) {
+		int id = -1;
+		JSONObject json = new JSONObject();
+		
 		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
 
 	@Override
