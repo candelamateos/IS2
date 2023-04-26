@@ -15,4 +15,6 @@ public int createCliente(TCliente cliente);
 	public TCliente readCliente(TCliente cliente);
 	
 	public List<TCliente> readAllCliente(TCliente cliente);
+	
+	
 }
