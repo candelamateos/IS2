@@ -2,7 +2,11 @@ package integracion.cliente;
 
 import java.util.List;
 
+import org.json.JSONObject;
+
 import negocio.cliente.TCliente;
+
+
 
 public class DaoClienteImp implements DaoCliente {
 
@@ -10,6 +14,8 @@ public class DaoClienteImp implements DaoCliente {
 	public int createCliente(TCliente cliente) {
 		int id = -1;
 		JSONObject json = new JSONObject();
+		
+		json.
 		
 		// TODO Auto-generated method stub
 		return id;
