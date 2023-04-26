@@ -19,5 +19,11 @@ public class Eventos {
 	//Viaje 4xx
 	
 	//Cliente 5xx
+	public static final int ALTA_CLIENTE = 501;
+	public static final int BAJA_CLIENTE = 502;
+	public static final int BUSCAR_CLIENTE = 503;
+	public static final int MODIFICAR_CLIENTE = 504;
+	public static final int LISTAR_CLIENTE = 505;
+	
 	
 }
