@@ -15,7 +15,8 @@ public class DaoClienteImp implements DaoCliente {
 		int id = -1;
 		JSONObject json = new JSONObject();
 		
-		json.
+		json.put("nombre", cliente.getNombre());
+		json.put("activo", cliente.getActivo());
 		
 		// TODO Auto-generated method stub
 		return id;
