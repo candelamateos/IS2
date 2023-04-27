@@ -2,6 +2,8 @@ package integracion.servicio;
 
 import java.util.List;
 
+import negocio.servicio.TServicio;
+
 
 public interface DaoServicio {
 	public int altaServicio(TServicio servicio);
@@ -10,7 +12,7 @@ public interface DaoServicio {
 	
 	public int modificarServicio(TServicio servicio);
 	
-	public TServicio buscarServicio(ID id);
+	public TServicio buscarServicio(int id);
 	
 	public List<TServicio> listarServicio();
 }
