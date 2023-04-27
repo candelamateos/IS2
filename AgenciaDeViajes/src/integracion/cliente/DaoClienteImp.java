@@ -25,18 +25,18 @@ public class DaoClienteImp implements DaoCliente {
 	@Override
 	public int createCliente(TCliente cliente) {
 		int id = -1;
-		JSONObject json = new JSONObject();
+		JSONObject data = loadData();
 		
+		id = data.getInt("proximo id");
+		
+		JSONObject json = new JSONObject();
+		json.put("id", id);
 		json.put("nombre", cliente.getNombre());
 		json.put("activo", true);
 		
-		JSONObject data = loadData();
 		JSONObject clientes = data.getJSONObject("clientes");
-		
-		id = data.getInt("proximo id");
-		json.put("id", id);
-		
 		clientes.put(json.get("id").toString(), json);
+		
 		data.put("proximo id", id + 1);
 		
 		saveData(data);
@@ -51,9 +51,17 @@ public class DaoClienteImp implements DaoCliente {
 	}
 
 	@Override
-	public int deleteCliente(TCliente cliente) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean deleteCliente(int id) {
+		boolean resultado = true;
+		JSONObject data = loadData();
+		JSONObject clientes = data.getJSONObject("clientes");
+		
+		if(clientes.has(Integer.toString(id))) {
+			clientes.remove(Integer.toString(id));
+			resultado = saveData(data);
+		}
+		else resultado = false;
+		return resultado;
 	}
 
 	@Override
@@ -97,8 +105,9 @@ public class DaoClienteImp implements DaoCliente {
 	}
 	
 	public static void main(String[] args) {
-		TCliente c = new TCliente(1, "PEPE");
+		TCliente c = new TCliente(1, "MICHAEL");
 		DaoCliente d = new DaoClienteImp();
+		d.createCliente(c);
 		d.createCliente(c);
 	}
 

@@ -10,7 +10,7 @@ public int createCliente(TCliente cliente);
 	
 	public int updateCliente(TCliente cliente);
 	
-	public int deleteCliente(TCliente cliente);
+	public boolean deleteCliente(int id);
 	
 	public TCliente readCliente(TCliente cliente);
 	
