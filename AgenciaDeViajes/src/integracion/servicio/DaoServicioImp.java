@@ -11,7 +11,7 @@ public class DaoServicioImp implements DaoServicio {
 	private static final String ARCHIVO = "clientes.json";
 
 	@Override
-	public int altaServicio(TServicio servicio) {
+	public int createServicio(TServicio servicio) {
 		int id = -1;
 		JSONObject json = new JSONObject();
 		
@@ -34,25 +34,25 @@ public class DaoServicioImp implements DaoServicio {
 	}
 
 	@Override
-	public int bajaServicio(TServicio servicio) {
+	public int deleteServicio(TServicio servicio) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int modificarServicio(TServicio servicio) {
+	public int updateServicio(TServicio servicio) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public TServicio buscarServicio(int id) {
+	public TServicio readServicio(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<TServicio> listarServicio() {
+	public List<TServicio> readAllServicio() {
 		// TODO Auto-generated method stub
 		return null;
 	}

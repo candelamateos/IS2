@@ -3,14 +3,15 @@ package negocio.cliente;
 public class TCliente {
 	
 	private int id;
-
 	private String nombre;
-
 	private Boolean activo;
 
-	public TCliente(int _id, String _nombre) {
-		id = _id;
-		nombre = _nombre;
+	public TCliente() {
+	}
+	
+	public TCliente(String nombre) {
+		this.nombre = nombre;
+		this.activo = true;
 	}
 
 	public int getId() {

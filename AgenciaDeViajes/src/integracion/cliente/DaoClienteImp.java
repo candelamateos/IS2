@@ -16,41 +16,52 @@ import org.json.JSONTokener;
 
 import negocio.cliente.TCliente;
 
+<<<<<<< HEAD
 
 <<<<<<< Updated upstream
 
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> 51ff255133375d18c899b45a76393274b38cafed
 public class DaoClienteImp implements DaoCliente {
 
 	private static final String ARCHIVO = "clientes.json";
-	
+
 	@Override
 	public int createCliente(TCliente cliente) {
 		int id = -1;
 		JSONObject data = loadData();
-		
+
 		id = data.getInt("proximo id");
-		
+
 		JSONObject json = new JSONObject();
 		json.put("id", id);
 		json.put("nombre", cliente.getNombre());
 		json.put("activo", true);
-		
+
 		JSONObject clientes = data.getJSONObject("clientes");
 		clientes.put(json.get("id").toString(), json);
-		
+
 		data.put("proximo id", id + 1);
-		
-		saveData(data);
-		
+
+		if (!saveData(data)) {
+			return -1;
+		}
+
 		return id;
 	}
 
 	@Override
-	public int updateCliente(TCliente cliente) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean updateCliente(TCliente cliente) {
+		int id = cliente.getId();
+		
+		JSONObject data = loadData();
+		JSONObject clientes = data.getJSONObject("clientes");
+
+		if (clientes.has(Integer.toString(id))) {
+			JSONObject json = new JSONObject();
+		}
 	}
 
 	@Override
@@ -58,19 +69,33 @@ public class DaoClienteImp implements DaoCliente {
 		boolean resultado = true;
 		JSONObject data = loadData();
 		JSONObject clientes = data.getJSONObject("clientes");
-		
-		if(clientes.has(Integer.toString(id))) {
+
+		if (clientes.has(Integer.toString(id))) {
 			clientes.remove(Integer.toString(id));
 			resultado = saveData(data);
-		}
-		else resultado = false;
+		} else
+			resultado = false;
 		return resultado;
 	}
 
 	@Override
-	public TCliente readCliente(TCliente cliente) {
-		// TODO Auto-generated method stub
-		return null;
+	public TCliente readCliente(int id) {
+		TCliente cliente = null;
+
+		JSONObject data = loadData();
+		JSONObject clientes = data.getJSONObject("clientes");
+
+		if (clientes.has(Integer.toString(id))) {
+			JSONObject json = clientes.getJSONObject(Integer.toString(id));
+			cliente = new TCliente();
+			if (!json.has("id") || !json.has("nombre") || !json.has("activo")) {
+				return null;
+			}
+			cliente.setId(json.getInt("id"));
+			cliente.setNombre(json.getString("nombre"));
+			cliente.setActivo(json.getBoolean("activo"));
+		}
+		return cliente;
 	}
 
 	@Override
@@ -78,7 +103,7 @@ public class DaoClienteImp implements DaoCliente {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	private JSONObject loadData() {
 		InputStream input;
 		JSONObject jsonInput;
@@ -90,28 +115,36 @@ public class DaoClienteImp implements DaoCliente {
 			jsonInput.put("proximo id", 0);
 			jsonInput.put("clientes", new JSONObject());
 		}
-		
+
 		return jsonInput;
 	}
-	
+
 	private boolean saveData(JSONObject data) {
-		try(OutputStream output = new FileOutputStream(new File(ARCHIVO))){
+		try (OutputStream output = new FileOutputStream(new File(ARCHIVO))) {
 			PrintStream print = new PrintStream(output);
 			print.print(data);
-			
+
 		} catch (FileNotFoundException e) {
 			return false;
 		} catch (IOException e) {
 			return false;
 		}
 		return true;
-	}
 	
+		
+	}
+
 	public static void main(String[] args) {
-		TCliente c = new TCliente(1, "MICHAEL");
+		TCliente c = new TCliente("ANTONIO");
 		DaoCliente d = new DaoClienteImp();
 		d.createCliente(c);
 		d.createCliente(c);
+		TCliente e = d.readCliente(3);
+		if (e == null) {
+			System.out.println("Error");
+		} else {
+			System.out.println(e.getId() + " " + e.getNombre() + " " + e.getActivo());
+		}
 	}
 
 }

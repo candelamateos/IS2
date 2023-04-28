@@ -2,24 +2,22 @@ package negocio.servicio;
 
 public class TActividad extends TServicio{
 
-
-
-	protected String tipo;
-	protected boolean colectivo;
+	private String tipoActividad;
+	private boolean colectivo;
 	
-	public TActividad(int id, String nombre, int numPlazas, int precio, String tipo, boolean colectivo) {
-		super(id, nombre, numPlazas, precio);
-		this.tipo = tipo;
+	public TActividad(String nombre, int numPlazas, int precio, String tipoActividad, boolean colectivo) {
+		super(nombre, numPlazas, precio, "Actividad");
+		this.tipoActividad = tipoActividad;
 		this.colectivo = colectivo;
 	}
 	
 	
-	public String getTipo() {
-		return tipo;
+	public String getTipoActividad() {
+		return tipoActividad;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoActividad(String tipoActividad) {
+		this.tipoActividad = tipoActividad;
 	}
 
 	public boolean isColectivo() {
