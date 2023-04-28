@@ -8,9 +8,9 @@ import negocio.servicio.TServicio;
 public interface DaoServicio {
 	public int createServicio(TServicio servicio);
 	
-	public int deleteServicio(TServicio servicio);
+	public boolean deleteServicio(int id);
 	
-	public int updateServicio(TServicio servicio);
+	public boolean updateServicio(TServicio servicio);
 	
 	public TServicio readServicio(int id);
 	

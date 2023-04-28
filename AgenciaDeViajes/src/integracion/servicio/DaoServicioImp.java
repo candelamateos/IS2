@@ -8,41 +8,27 @@ import negocio.servicio.TServicio;
 
 public class DaoServicioImp implements DaoServicio {
 	
-	private static final String ARCHIVO = "clientes.json";
+	private static final String ARCHIVO_AlOJAMIENTOS = "servicios_alojamientos.json";
+	private static final String ARCHIVO_TRANSPORTES = "servicios_transportes.json";
+	private static final String ARCHIVO_ACTIVIDADES = "servicios_actividades.json";
 
 	@Override
 	public int createServicio(TServicio servicio) {
-		int id = -1;
-		JSONObject json = new JSONObject();
 		
-		json.put("nombre", cliente.getNombre());
-		json.put("activo", true);
-		
-		JSONObject data = loadData();
-		JSONObject clientes = data.getJSONObject("clientes");
-		
-		id = data.getInt("proximo id");
-		json.put("id", id);
-		
-		clientes.put(json.get("id").toString(), json);
-		data.put("proximo id", id + 1);
-		
-		saveData(data);
-		
-		return id;
+		return 0;
 		
 	}
 
 	@Override
-	public int deleteServicio(TServicio servicio) {
+	public boolean deleteServicio(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return true;
 	}
 
 	@Override
-	public int updateServicio(TServicio servicio) {
+	public boolean updateServicio(TServicio servicio) {
 		// TODO Auto-generated method stub
-		return 0;
+		return true;
 	}
 
 	@Override
