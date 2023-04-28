@@ -39,7 +39,7 @@ public class DaoClienteImp implements DaoCliente {
 		
 		data.put("proximo id", id + 1);
 		
-		saveData(data);
+		if(saveData(data))
 		
 		return id;
 	}
@@ -65,9 +65,11 @@ public class DaoClienteImp implements DaoCliente {
 	}
 
 	@Override
-	public TCliente readCliente(TCliente cliente) {
-		// TODO Auto-generated method stub
-		return null;
+	public TCliente readCliente(int id) {
+		TCliente cliente = null;
+		
+		
+		return cliente;
 	}
 
 	@Override

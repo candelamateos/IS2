@@ -12,7 +12,7 @@ public int createCliente(TCliente cliente);
 	
 	public boolean deleteCliente(int id);
 	
-	public TCliente readCliente(TCliente cliente);
+	public TCliente readCliente(int id);
 	
 	public List<TCliente> readAllCliente(TCliente cliente);
 	
