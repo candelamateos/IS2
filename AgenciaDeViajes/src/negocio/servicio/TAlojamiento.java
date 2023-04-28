@@ -5,8 +5,8 @@ public class TAlojamiento extends TServicio {
 	private String regimen;
 	private int estrellas;
 	
-	public TAlojamiento(int id, String nombre, int numPlazas, int precio, String regimen, int estrellas) {
-		super(id, nombre, numPlazas, precio);
+	public TAlojamiento(String nombre, int numPlazas, int precio, String regimen, int estrellas) {
+		super(nombre, numPlazas, precio, "Alojamiento");
 		this.regimen = regimen;
 		this.estrellas = estrellas;
 	}

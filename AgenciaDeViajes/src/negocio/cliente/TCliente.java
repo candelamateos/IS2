@@ -3,19 +3,15 @@ package negocio.cliente;
 public class TCliente {
 	
 	private int id;
-
 	private String nombre;
-
 	private Boolean activo;
 
 	public TCliente() {
-		
 	}
 	
-	public TCliente(String _nombre) {
-		//EL id lo pone el DAOClienteImp
-		nombre = _nombre;
-		activo = true;
+	public TCliente(String nombre) {
+		this.nombre = nombre;
+		this.activo = true;
 	}
 
 	public int getId() {

@@ -1,5 +1,18 @@
 package integracion.trabajador;
 
-public interface DaoTrabajador {
+import java.util.List;
 
+import negocio.trabajador.TTrabajador;
+
+public interface DaoTrabajador {
+	
+	public int createTrabajador(TTrabajador trabajo);
+	
+	public int updateTrabajador(TTrabajador trabajo);
+	
+	public boolean deleteTrabajador(int id);
+	
+	public TTrabajador readTrabajador(int id);
+	
+	public List<TTrabajador> readAllTrabajador(TTrabajador trabajo);
 }

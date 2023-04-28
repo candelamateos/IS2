@@ -9,8 +9,8 @@ public class TDepartamento {
 	}
 	
 	public TDepartamento(String nombre) {
-		this.nombre=nombre;
-		this.numEmpleados=0;
+		this.nombre = nombre;
+		this.numEmpleados = 0;
 	}
 	
 	public int getId() {
