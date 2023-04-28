@@ -17,6 +17,11 @@ public class Eventos {
 	//Trabajador 3xx
 	
 	//Viaje 4xx
+	public static final int ALTA_VIAJE = 401;
+	public static final int BAJA_VIAJE = 402;
+	public static final int BUSCAR_VIAJE = 403;
+	public static final int MODIFICAR_VIAJE = 404;
+	public static final int LISTAR_VIAJE = 405;
 	
 	//Cliente 5xx
 	public static final int ALTA_CLIENTE = 501;

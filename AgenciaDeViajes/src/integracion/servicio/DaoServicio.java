@@ -6,7 +6,7 @@ import negocio.servicio.TServicio;
 
 
 public interface DaoServicio {
-	public int createServicio(TServicio servicio);
+	public boolean createServicio(TServicio servicio);
 	
 	public boolean deleteServicio(int id);
 	

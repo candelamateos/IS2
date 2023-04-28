@@ -1,1 +1,1 @@
-{"proximo id":4,"clientes":{"0":{"id":0,"nombre":"ANTONIO","activo":true},"1":{"id":1,"nombre":"ANTONIO","activo":true},"2":{"id":2,"nombre":"ANTONIO","activo":true},"3":{"id":3,"nombre":"ANTONIO","activo":true}}}
+{"proximo id":1,"clientes":[{"id":0,"nombre":"ANTONIO","activo":true}]}

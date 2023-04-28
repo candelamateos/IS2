@@ -16,14 +16,6 @@ import org.json.JSONTokener;
 
 import negocio.cliente.TCliente;
 
-<<<<<<< HEAD
-
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> 51ff255133375d18c899b45a76393274b38cafed
 public class DaoClienteImp implements DaoCliente {
 
 	private static final String ARCHIVO = "clientes.json";
@@ -40,8 +32,8 @@ public class DaoClienteImp implements DaoCliente {
 		json.put("nombre", cliente.getNombre());
 		json.put("activo", true);
 
-		JSONObject clientes = data.getJSONObject("clientes");
-		clientes.put(json.get("id").toString(), json);
+		JSONArray clientes = data.getJSONArray("clientes");
+		clientes.put(json.getInt("id"), json);
 
 		data.put("proximo id", id + 1);
 
@@ -57,16 +49,16 @@ public class DaoClienteImp implements DaoCliente {
 		int id = cliente.getId();
 		
 		JSONObject data = loadData();
-		JSONObject clientes = data.getJSONObject("clientes");
+		JSONArray clientes = data.getJSONArray("clientes");
 		
 
-		if (clientes.has(Integer.toString(id))) {
+		if (id < data.getInt("proximo id")) {
 			JSONObject json = new JSONObject();
 			json.put("id", id);
 			json.put("nombre", cliente.getNombre());
 			json.put("activo", true);
 			
-			clientes.put(json.get("id").toString(), json);
+			clientes.put(json.getInt("id"), json);
 		}
 		
 		return saveData(data);
@@ -91,10 +83,10 @@ public class DaoClienteImp implements DaoCliente {
 		TCliente cliente = null;
 
 		JSONObject data = loadData();
-		JSONObject clientes = data.getJSONObject("clientes");
+		JSONArray clientes = data.getJSONArray("clientes");
 
-		if (clientes.has(Integer.toString(id))) {
-			JSONObject json = clientes.getJSONObject(Integer.toString(id));
+		if (id < data.getInt("proximo id")) {
+			JSONObject json = clientes.getJSONObject(id);
 			cliente = new TCliente();
 			if (!json.has("id") || !json.has("nombre") || !json.has("activo")) {
 				return null;
@@ -121,7 +113,7 @@ public class DaoClienteImp implements DaoCliente {
 		} catch (FileNotFoundException e) {
 			jsonInput = new JSONObject();
 			jsonInput.put("proximo id", 0);
-			jsonInput.put("clientes", new JSONObject());
+			jsonInput.put("clientes", new JSONArray());
 		}
 
 		return jsonInput;
@@ -146,15 +138,15 @@ public class DaoClienteImp implements DaoCliente {
 		TCliente c = new TCliente("ANTONIO");
 		DaoCliente d = new DaoClienteImp();
 		d.createCliente(c);
-		d.createCliente(c);
-		TCliente e = d.readCliente(3);
-		if (e == null) {
-			System.out.println("Error");
-		} else {
-			System.out.println(e.getId() + " " + e.getNombre() + " " + e.getActivo());
-		}
-		e.setActivo(false);
-		d.updateCliente(e);
+//		d.createCliente(c);
+//		TCliente e = d.readCliente(3);
+//		if (e == null) {
+//			System.out.println("Error");
+//		} else {
+//			System.out.println(e.getId() + " " + e.getNombre() + " " + e.getActivo());
+//		}
+//		e.setActivo(false);
+//		d.updateCliente(e);
 	}
 
 }

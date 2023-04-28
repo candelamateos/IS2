@@ -14,7 +14,7 @@ public interface DaoCliente {
 	
 	public TCliente readCliente(int id);
 	
-	public List<TCliente> readAllCliente(TCliente cliente);
+	public List<TCliente> readAllCliente();
 	
 	
 }

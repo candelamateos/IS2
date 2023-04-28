@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface SATrabajador {
 
-	public int createServicio(TTrabajador Trabajador);
+	public boolean createServicio(TTrabajador Trabajador);
 	
-	public int updateServicio(TTrabajador Trabajador);
+	public boolean updateServicio(TTrabajador Trabajador);
 		
-	public int deleteServicio(TTrabajador Trabajador);
+	public boolean deleteServicio(int id);
 		
-	public TTrabajador readServicio(TTrabajador Trabajador);
+	public TTrabajador readServicio(int id);
 		
-	public List<TTrabajador> readAllServicio(TTrabajador Trabajador);
+	public List<TTrabajador> readAllServicio();
 }

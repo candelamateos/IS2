@@ -25,10 +25,6 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 	public VistaAniadirCliente() {
 		setTitle("ANIADIR CLIENTE");
 		JPanel panel = new JPanel();
-		lId= new JLabel("ID:");
-		tId = new JTextField(5);
-		panel.add(lId);
-		panel.add(tId);
 		lNombre= new JLabel("NOMBRE:");
 		tNombre = new JTextField(5);
 		panel.add(lNombre);
@@ -39,10 +35,8 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String id = tId.getText();
-				int Iid = Integer.parseInt(id);
 				String nombre = tNombre.getText();
-				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(Iid, nombre));
+				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(nombre));
 			}
 		});
 	}

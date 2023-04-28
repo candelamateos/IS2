@@ -8,11 +8,11 @@ public interface DaoDepartamento {
 	
 	public int createDepartamento(TDepartamento departamento);
 	
-	public int updateDepartamento(TDepartamento departamento);
+	public boolean updateDepartamento(TDepartamento departamento);
 	
-	public int deleteDepartamento(TDepartamento departamento);
+	public boolean deleteDepartamento(int id);
 	
-	public TDepartamento readDepartamento(TDepartamento departamento);
+	public TDepartamento readDepartamento(int id);
 	
-	public List<TDepartamento> readAllDepartamento(TDepartamento departamento);
+	public List<TDepartamento> readAllDepartamento();
 }
