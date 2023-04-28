@@ -20,7 +20,7 @@ public class VistaAniadirDepartamento extends JFrame implements IGUI{
 	private JButton ok;
 	
 	public VistaAniadirDepartamento() {
-		setTitle("AÑADIR DEPARTAMENTO");
+		setTitle("AÃ‘ADIR DEPARTAMENTO");
 		JPanel panel = new JPanel();
 		lNombre= new JLabel("NOMBRE:");
 		tNombre = new JTextField(5);

@@ -1,17 +1,17 @@
 package negocio.servicio;
 
 public class TServicio {
-	protected int id;
-	protected String nombre;
-	protected int numPlazas;
-	protected int precio;
+	private int id;
+	private String nombre;
+	private int numPlazas;
+	private int precio;
+	private String tipo;
 	
-	public TServicio(int id, String nombre, int numPlazas, int precio) {
-		super();
-		this.id = id;
+	public TServicio(String nombre, int numPlazas, int precio, String tipo) {
 		this.nombre = nombre;
 		this.numPlazas = numPlazas;
 		this.precio = precio;
+		this.tipo = tipo;
 	}
 	public int getId() {
 		return id;
@@ -36,6 +36,12 @@ public class TServicio {
 	}
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

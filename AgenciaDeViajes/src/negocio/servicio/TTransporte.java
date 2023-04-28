@@ -2,21 +2,21 @@ package negocio.servicio;
 
 public class TTransporte extends TServicio{
 
-	protected String tipo;
+	protected String tipoTransporte;
 	protected boolean comida;
 	
-	public TTransporte(int id, String nombre, int numPlazas, int precio, String tipo, boolean comida) {
-		super(id, nombre, numPlazas, precio);
-		this.tipo = tipo;
+	public TTransporte(String nombre, int numPlazas, int precio, String tipoTransporte, boolean comida) {
+		super(nombre, numPlazas, precio, "Transporte");
+		this.tipoTransporte = tipoTransporte;
 		this.comida = comida;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getTipoTransporte() {
+		return tipoTransporte;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoTransporte(String tipoTransporte) {
+		this.tipoTransporte = tipoTransporte;
 	}
 
 	public boolean isComida() {
