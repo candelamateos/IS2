@@ -8,7 +8,7 @@ public interface DaoCliente {
 	
 public int createCliente(TCliente cliente);
 	
-	public int updateCliente(TCliente cliente);
+	public boolean updateCliente(TCliente cliente);
 	
 	public boolean deleteCliente(int id);
 	

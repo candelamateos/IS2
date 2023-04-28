@@ -45,9 +45,15 @@ public class DaoClienteImp implements DaoCliente {
 	}
 
 	@Override
-	public int updateCliente(TCliente cliente) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean updateCliente(TCliente cliente) {
+		int id = cliente.getId();
+		
+		JSONObject data = loadData();
+		JSONObject clientes = data.getJSONObject("clientes");
+
+		if (clientes.has(Integer.toString(id))) {
+			JSONObject json = new JSONObject();
+		}
 	}
 
 	@Override
@@ -119,7 +125,7 @@ public class DaoClienteImp implements DaoCliente {
 	}
 
 	public static void main(String[] args) {
-		TCliente c = new TCliente("MICHAEL");
+		TCliente c = new TCliente("ANTONIO");
 		DaoCliente d = new DaoClienteImp();
 		d.createCliente(c);
 		d.createCliente(c);
