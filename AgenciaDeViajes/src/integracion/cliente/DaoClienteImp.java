@@ -122,6 +122,8 @@ public class DaoClienteImp implements DaoCliente {
 			return false;
 		}
 		return true;
+	
+		
 	}
 
 	public static void main(String[] args) {
