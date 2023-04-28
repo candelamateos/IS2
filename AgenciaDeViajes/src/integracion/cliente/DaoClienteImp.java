@@ -17,7 +17,10 @@ import org.json.JSONTokener;
 import negocio.cliente.TCliente;
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 public class DaoClienteImp implements DaoCliente {
 
 	private static final String ARCHIVO = "clientes.json";
