@@ -6,13 +6,13 @@ import negocio.servicio.TServicio;
 
 
 public interface DaoServicio {
-	public int altaServicio(TServicio servicio);
+	public int createServicio(TServicio servicio);
 	
-	public int bajaServicio(TServicio servicio);
+	public int deleteServicio(TServicio servicio);
 	
-	public int modificarServicio(TServicio servicio);
+	public int updateServicio(TServicio servicio);
 	
-	public TServicio buscarServicio(int id);
+	public TServicio readServicio(int id);
 	
-	public List<TServicio> listarServicio();
+	public List<TServicio> readAllServicio();
 }
