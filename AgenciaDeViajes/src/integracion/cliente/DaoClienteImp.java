@@ -50,10 +50,18 @@ public class DaoClienteImp implements DaoCliente {
 		
 		JSONObject data = loadData();
 		JSONObject clientes = data.getJSONObject("clientes");
+		
 
 		if (clientes.has(Integer.toString(id))) {
 			JSONObject json = new JSONObject();
+			json.put("id", id);
+			json.put("nombre", cliente.getNombre());
+			json.put("activo", true);
+			
+			clientes.put(json.get("id").toString(), json);
 		}
+		
+		return saveData(data);
 	}
 
 	@Override
@@ -135,6 +143,8 @@ public class DaoClienteImp implements DaoCliente {
 		} else {
 			System.out.println(e.getId() + " " + e.getNombre() + " " + e.getActivo());
 		}
+		e.setActivo(false);
+		d.updateCliente(e);
 	}
 
 }
