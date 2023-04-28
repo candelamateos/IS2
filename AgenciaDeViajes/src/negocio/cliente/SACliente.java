@@ -5,13 +5,13 @@ import java.util.List;
 
 public interface SACliente {
 	
-	public int createCliente(TCliente Cliente);
+	public boolean createCliente(TCliente Cliente);
 	
-	public int updateCliente(TCliente Cliente);
+	public boolean updateCliente(TCliente Cliente);
 	
-	public int deleteCliente(TCliente Cliente);
+	public boolean deleteCliente(int id);
 	
-	public TCliente readCliente(TCliente Cliente);
+	public TCliente readCliente(int id);
 	
-	public List<TCliente> readAllCliente(TCliente Cliente);
+	public List<TCliente> readAllCliente();
 }

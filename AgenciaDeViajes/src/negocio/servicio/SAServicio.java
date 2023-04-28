@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface SAServicio {
 	
-	public int createServicio(TServicio Servicio);
+	public boolean createServicio(TServicio Servicio);
 		
-	public int updateServicio(TServicio Servicio);
+	public boolean updateServicio(TServicio Servicio);
 		
-	public int deleteServicio(TServicio Servicio);
+	public boolean deleteServicio(int id);
 		
-	public TServicio readServicio(TServicio Servicio);
+	public TServicio readServicio(int id);
 		
-	public List<TServicio> readAllServicio(TServicio Servicio);
+	public List<TServicio> readAllServicio();
 }

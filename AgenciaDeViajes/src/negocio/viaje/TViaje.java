@@ -8,7 +8,8 @@ public class TViaje {
 	private int idActividad;
 	private int idAlojamiento;
 	private int idTransporte;
-	
+	private boolean activo;
+
 	public TViaje() {
 	}
 	
@@ -65,5 +66,12 @@ public class TViaje {
 		this.idTransporte = idTransporte;
 	}
 		
-		
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 }

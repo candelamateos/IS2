@@ -16,14 +16,6 @@ import org.json.JSONTokener;
 
 import negocio.cliente.TCliente;
 
-<<<<<<< HEAD
-
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> 51ff255133375d18c899b45a76393274b38cafed
 public class DaoClienteImp implements DaoCliente {
 
 	private static final String ARCHIVO = "clientes.json";

@@ -6,7 +6,14 @@ public class TServicio {
 	private int numPlazas;
 	private int precio;
 	private String tipo;
+	private boolean activo;
 	
+	public boolean isActivo() {
+		return activo;
+	}
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 	public TServicio(String nombre, int numPlazas, int precio, String tipo) {
 		this.nombre = nombre;
 		this.numPlazas = numPlazas;

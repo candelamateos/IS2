@@ -6,11 +6,11 @@ import negocio.viaje.TViaje;
 
 public interface DaoViaje {
 	
-	public int createViaje(TViaje viaje);
+	public boolean createViaje(TViaje viaje);
 	
-	public int deleteViaje(TViaje viaje);
+	public boolean deleteViaje(int id);
 	
-	public int updateViaje(TViaje viaje);
+	public boolean updateViaje(TViaje viaje);
 	
 	public TViaje readViaje(int id);
 	
