@@ -16,14 +16,6 @@ import org.json.JSONTokener;
 
 import negocio.cliente.TCliente;
 
-<<<<<<< HEAD
-
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> 51ff255133375d18c899b45a76393274b38cafed
 public class DaoClienteImp implements DaoCliente {
 
 	private static final String ARCHIVO = "clientes.json";
@@ -40,7 +32,7 @@ public class DaoClienteImp implements DaoCliente {
 		json.put("nombre", cliente.getNombre());
 		json.put("activo", true);
 
-		JSONObject clientes = data.getJSONObject("clientes");
+		JSONArray clientes = data.getJSONArray("clientes");
 		clientes.put(json.get("id").toString(), json);
 
 		data.put("proximo id", id + 1);
@@ -57,7 +49,7 @@ public class DaoClienteImp implements DaoCliente {
 		int id = cliente.getId();
 		
 		JSONObject data = loadData();
-		JSONObject clientes = data.getJSONObject("clientes");
+		JSONObject clientes = data.getJSONArray("clientes");
 		
 
 		if (clientes.has(Integer.toString(id))) {
