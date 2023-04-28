@@ -6,7 +6,7 @@ import negocio.departamento.TDepartamento;
 
 public interface DaoDepartamento {
 	
-	public boolean createDepartamento(TDepartamento departamento);
+	public int createDepartamento(TDepartamento departamento);
 	
 	public boolean updateDepartamento(TDepartamento departamento);
 	

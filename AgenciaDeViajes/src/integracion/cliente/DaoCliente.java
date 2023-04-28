@@ -6,7 +6,7 @@ import negocio.cliente.TCliente;
 
 public interface DaoCliente {
 	
-	public boolean createCliente(TCliente cliente);
+	public int createCliente(TCliente cliente);
 	
 	public boolean updateCliente(TCliente cliente);
 	
