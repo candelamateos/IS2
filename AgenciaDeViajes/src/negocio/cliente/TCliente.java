@@ -8,9 +8,14 @@ public class TCliente {
 
 	private Boolean activo;
 
-	public TCliente(int _id, String _nombre) {
-		id = _id;
+	public TCliente() {
+		
+	}
+	
+	public TCliente(String _nombre) {
+		//EL id lo pone el DAOClienteImp
 		nombre = _nombre;
+		activo = true;
 	}
 
 	public int getId() {
