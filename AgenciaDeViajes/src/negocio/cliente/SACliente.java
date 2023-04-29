@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface SACliente {
 	
-	public boolean createCliente(TCliente Cliente);
+	public int createCliente(TCliente Cliente);
 	
 	public boolean updateCliente(TCliente Cliente);
 	

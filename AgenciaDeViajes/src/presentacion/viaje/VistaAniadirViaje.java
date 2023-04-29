@@ -6,11 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import negocio.viaje.TViaje;
 import presentacion.IGUI;
+import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
@@ -28,7 +30,11 @@ public class VistaAniadirViaje extends JFrame implements IGUI{
 	private JButton ok;
 
 	public VistaAniadirViaje() {
-		setTitle("ANIADIR VIAJE");
+		super("AÑADIR VIAJE");
+		initGUI();	
+	}
+	
+	private void initGUI() {
 		JPanel panel = new JPanel();
 		
 		lPrecio= new JLabel("PRECIO:");
@@ -69,12 +75,28 @@ public class VistaAniadirViaje extends JFrame implements IGUI{
 				Controlador.getInstancia().accion(Eventos.ALTA_VIAJE, new TViaje(Iprecio, InumPlazas));
 			}
 		});
+		panel.add(ok);
+		setContentPane(panel);
+		
+		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
 	}
 
 	@Override
 	public void actualizar(int evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+		switch(evento) {
+		case(Eventos.RES_ALTA_VIAJE_OK):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Viaje a�adido con id " + datos, "Viaje A�adido", JOptionPane.INFORMATION_MESSAGE);
+			setVisible(true);
+			break;
+		case(Eventos.RES_ALTA_VIAJE_ERROR):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo a�adir el viaje", "Error", JOptionPane.ERROR_MESSAGE);
+			setVisible(true);
+			break;
+		}
 	}
 	
 }

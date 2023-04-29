@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface SAServicio {
 	
-	public boolean createServicio(TServicio Servicio);
+	public int createServicio(TServicio Servicio);
 		
 	public boolean updateServicio(TServicio Servicio);
 		

@@ -3,7 +3,7 @@ package negocio.departamento;
 import java.util.List;
 
 public interface SADepartamento {
-    public boolean createDepartamento(TDepartamento departamento);
+    public int createDepartamento(TDepartamento departamento);
 	
 	public boolean updateDepartamento(TDepartamento departamento);
 	
