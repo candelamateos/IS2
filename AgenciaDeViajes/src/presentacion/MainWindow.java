@@ -3,6 +3,8 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -11,7 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
+
+import presentacion.controlador.Controlador;
+import presentacion.controlador.Eventos;
 
 public class MainWindow extends JFrame implements IGUI {
 
@@ -38,6 +42,7 @@ public class MainWindow extends JFrame implements IGUI {
 		//mainPanel con margen de 10
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		mainPanel.setPreferredSize(new Dimension(320, 180));
 		this.setContentPane(mainPanel);
 		
 		//Cabecera con el título en zona "NORTH"
@@ -59,7 +64,12 @@ public class MainWindow extends JFrame implements IGUI {
 		
 		//Botones de acceso a los distintos subsistemas
 		BCliente = new JButton("Clientes");
-		BCliente.addActionListener(null);
+		BCliente.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstancia().accion(Eventos.CLIENTES, null);
+			}
+		});
 		contentPanel.add(BCliente);
 		
 		BDepartamento = new JButton("Departamentos");
