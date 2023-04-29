@@ -84,7 +84,6 @@ public class MainWindow extends JFrame implements IGUI {
 		
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-//		setPreferredSize(new Dimension(700, 400));
 		pack();
 		setVisible(true);
 	}
