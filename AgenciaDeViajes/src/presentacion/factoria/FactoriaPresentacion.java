@@ -1,10 +1,10 @@
 package presentacion.factoria;
 
 import presentacion.IGUI;
-import presentacion.cliente.VistaAniadirCliente;
-import presentacion.cliente.VistaClientes;
+import presentacion.cliente.*;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
+import presentacion.viaje.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	public IGUI createVista(int id) {
@@ -29,6 +29,16 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 		//Trabajador
 		
 		//Viaje
+		case Eventos.ALTA_VIAJE:{
+			return new VistaAniadirViaje(); }
+		case Eventos.BAJA_VIAJE:{
+			return new VistaEliminarViaje(); }
+		case Eventos.BUSCAR_VIAJE:{
+			return new VistaBuscarViaje(); }
+		case Eventos.MODIFICAR_VIAJE:{
+			return new VistaModificarViaje(); }
+		case Eventos.LISTAR_VIAJE:{
+			return new VistaListarViaje(); }
 		
 		//Clientes
 		case Eventos.CLIENTES:{
@@ -36,13 +46,13 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 		case Eventos.ALTA_CLIENTE:{
 			return new VistaAniadirCliente();}
 		case Eventos.BAJA_CLIENTE:{
-			return new VistaEliminarDepartamento(); }
+			return new VistaEliminarCliente(); }
 		case Eventos.BUSCAR_CLIENTE:{
-			return new VistaBuscarDepartamento(); }
+			return new VistaBuscarCliente(); }
 		case Eventos.MODIFICAR_CLIENTE:{
-			return new VistaModificarDepartamento(); }
+			return new VistaModificarCliente(); }
 		case Eventos.LISTAR_CLIENTE:{
-			return new VistaListarDepartamento(); }
+			return new VistaListarCliente(); }
 		}
 		
 		

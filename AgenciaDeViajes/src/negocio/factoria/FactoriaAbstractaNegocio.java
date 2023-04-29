@@ -8,6 +8,7 @@ import negocio.trabajador.SATrabajador;
 import negocio.viaje.SAViaje;
 
 public abstract class FactoriaAbstractaNegocio {
+	
 	private static FactoriaAbstractaNegocio instancia = null;
 	
 	public static FactoriaAbstractaNegocio getInstancia() {
