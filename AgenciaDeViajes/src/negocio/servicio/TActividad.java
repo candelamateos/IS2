@@ -6,7 +6,7 @@ public class TActividad extends TServicio{
 	private boolean colectivo;
 	
 	public TActividad(String nombre, int numPlazas, int precio, String tipoActividad, boolean colectivo) {
-		super(nombre, numPlazas, precio, "Actividad");
+		super(nombre, numPlazas, precio, "actividad");
 		this.tipoActividad = tipoActividad;
 		this.colectivo = colectivo;
 	}
