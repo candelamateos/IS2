@@ -30,6 +30,8 @@ public class Eventos {
 	public static final int BUSCAR_CLIENTE = 503;
 	public static final int MODIFICAR_CLIENTE = 504;
 	public static final int LISTAR_CLIENTE = 505;
+	public static final int RES_ALTA_DEPARTAMENTO_OK = 506;
+	public static final int RES_ALTA_DEPARTAMENTO_ERROR = 507;
 	
 	
 }

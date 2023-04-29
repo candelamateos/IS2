@@ -35,7 +35,16 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaClientes();}
 		case Eventos.ALTA_CLIENTE:{
 			return new VistaAniadirCliente();}
+		case Eventos.BAJA_CLIENTE:{
+			return new VistaEliminarDepartamento(); }
+		case Eventos.BUSCAR_CLIENTE:{
+			return new VistaBuscarDepartamento(); }
+		case Eventos.MODIFICAR_CLIENTE:{
+			return new VistaModificarDepartamento(); }
+		case Eventos.LISTAR_CLIENTE:{
+			return new VistaListarDepartamento(); }
 		}
+		
 		
 		
 		return null;

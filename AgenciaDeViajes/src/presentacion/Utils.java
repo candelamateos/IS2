@@ -6,12 +6,12 @@ import java.awt.Frame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-class Utils {
+public class Utils {
 
 	/*
 	 * return the frame to which 'c' belongs
 	 */
-	static Frame getWindow(Component c) {
+	public static Frame getWindow(Component c) {
 		Frame w = null;
 		if (c != null) {
 			if (c instanceof Frame)

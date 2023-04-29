@@ -1,5 +1,7 @@
 package presentacion.controlador;
 
+import negocio.cliente.SACliente;
+import negocio.cliente.TCliente;
 import negocio.departamento.SADepartamento;
 import negocio.departamento.TDepartamento;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -10,17 +12,16 @@ public class ControladorImp extends Controlador {
 		switch (evento) {
 		
 		//Departamento
-//		case (Eventos.ALTA_DEPARTAMENTO): {
-//			TDepartamento tDepartamento = (TDepartamento) datos;
-//			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
+		case (Eventos.ALTA_DEPARTAMENTO): {
+			TDepartamento tDepartamento = (TDepartamento) datos;
+			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
 //			int res = saDepartamento.createDepartamento(tDepartamento);
-//			// TODO segun el valor de res, se actualiza la vista de una manera u otra.
-//			// Si todo ok el aspecto es este(falta el else)
-//			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,
-//					res);
-//			// ...
-//			// break;} }
-//		}
+			// TODO segun el valor de res, se actualiza la vista de una manera u otra.
+			// Si todo ok el aspecto es este(falta el else)
+//			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
+			// ...
+			// break;} }
+		}
 		
 		//Factura
 		
@@ -31,6 +32,17 @@ public class ControladorImp extends Controlador {
 		//Viaje
 		
 		//Clientes
+		case(Eventos.ALTA_CLIENTE): {
+			TCliente tCliente = (TCliente) datos;
+			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+			int res = saCliente.createCliente(tCliente);
+			if(res > 0) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_ERROR,res);
+			}
+		}
 		}
 	}
 }
