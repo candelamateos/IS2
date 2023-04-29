@@ -4,6 +4,7 @@ import presentacion.IGUI;
 import presentacion.cliente.*;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
+import presentacion.servicio.VistaServicios;
 import presentacion.viaje.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
@@ -25,6 +26,19 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 		//Factura
 		
 		//Servicio
+		case Eventos.SERVICIOS:{
+			return new VistaServicios();}
+		case Eventos.ALTA_SERVICIO:{
+			return new VistaAniadirCliente();}
+		case Eventos.BAJA_SERVICIO:{
+			return new VistaEliminarCliente(); }
+		case Eventos.BUSCAR_SERVICIO:{
+			return new VistaBuscarCliente(); }
+		case Eventos.MODIFICAR_SERVICIO:{
+			return new VistaModificarCliente(); }
+		case Eventos.LISTAR_SERVICIO:{
+			return new VistaListarCliente(); }
+		
 		
 		//Trabajador
 		

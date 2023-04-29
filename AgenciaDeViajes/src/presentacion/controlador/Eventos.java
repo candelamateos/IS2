@@ -13,6 +13,13 @@ public class Eventos {
 	//Factura 1xx
 	
 	//Servicio 2xx
+
+	public static final int SERVICIOS = 200;
+	public static final int ALTA_SERVICIO = 201;
+	public static final int BAJA_SERVICIO = 202;
+	public static final int BUSCAR_SERVICIO = 203;
+	public static final int MODIFICAR_SERVICIO = 204;
+	public static final int LISTAR_SERVICIO = 205;
 	
 	//Trabajador 3xx
 	
