@@ -2,7 +2,7 @@ package presentacion.departamento;
 
 import presentacion.IGUI;
 
-public class VistaModificarDepartamento implements IGUI{
+public class VistaListarDepartamento implements IGUI{
 
 	@Override
 	public void actualizar(int evento, Object datos) {
