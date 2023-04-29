@@ -36,7 +36,7 @@ public class ControladorImp extends Controlador {
 			TCliente tCliente = (TCliente) datos;
 			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
 			int res = saCliente.createCliente(tCliente);
-			if(res > 0) {
+			if(res != -1) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
 			}
 			else {
