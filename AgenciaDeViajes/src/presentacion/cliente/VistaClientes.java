@@ -1,6 +1,8 @@
 package presentacion.cliente;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -9,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import presentacion.IGUI;
+import presentacion.controlador.Controlador;
+import presentacion.controlador.Eventos;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaClientes extends JFrame implements IGUI {
 
@@ -45,7 +50,12 @@ public class VistaClientes extends JFrame implements IGUI {
 		mainPanel.add(fila3);
 		
 		BAniadirCliente = new JButton("Añadir Cliente");
-		BAniadirCliente.addActionListener(null);
+		BAniadirCliente.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ALTA_CLIENTE);
+			}	
+		});
 		BAniadirCliente.setPreferredSize(new Dimension(130,30));
 		fila1.add(BAniadirCliente);
 		

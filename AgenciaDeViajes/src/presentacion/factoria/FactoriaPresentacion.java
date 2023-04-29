@@ -1,6 +1,7 @@
 package presentacion.factoria;
 
 import presentacion.IGUI;
+import presentacion.cliente.VistaAniadirCliente;
 import presentacion.cliente.VistaClientes;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
@@ -8,12 +9,8 @@ import presentacion.departamento.*;
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	public IGUI createVista(int id) {
 		switch(id) {
-		case Eventos.CLIENTES:{
-			return new VistaClientes();}
 		
-		
-		
-		
+		//Departamento
 		case Eventos.ALTA_DEPARTAMENTO:{
 			return new VistaAniadirDepartamento(); }
 		case Eventos.BAJA_DEPARTAMENTO:{
@@ -24,7 +21,23 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaModificarDepartamento(); }
 		case Eventos.LISTAR_DEPARTAMENTO:{
 			return new VistaListarDepartamento(); }
+		
+		//Factura
+		
+		//Servicio
+		
+		//Trabajador
+		
+		//Viaje
+		
+		//Clientes
+		case Eventos.CLIENTES:{
+			return new VistaClientes();}
+		case Eventos.ALTA_CLIENTE:{
+			return new VistaAniadirCliente();}
 		}
+		
+		
 		return null;
 	}
 }

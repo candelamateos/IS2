@@ -8,11 +8,8 @@ import presentacion.factoria.FactoriaAbstractaPresentacion;
 public class ControladorImp extends Controlador {
 	public void accion(int evento, Object datos) {
 		switch (evento) {
-		case(Eventos.CLIENTES):{
-			FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.CLIENTES);
-			break;
-		}
 		
+		//Departamento
 //		case (Eventos.ALTA_DEPARTAMENTO): {
 //			TDepartamento tDepartamento = (TDepartamento) datos;
 //			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
@@ -24,6 +21,16 @@ public class ControladorImp extends Controlador {
 //			// ...
 //			// break;} }
 //		}
+		
+		//Factura
+		
+		//Servicio
+		
+		//Trabajador
+		
+		//Viaje
+		
+		//Clientes
 		}
 	}
 }

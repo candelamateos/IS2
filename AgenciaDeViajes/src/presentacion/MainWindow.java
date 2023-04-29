@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class MainWindow extends JFrame implements IGUI {
 
@@ -67,7 +68,7 @@ public class MainWindow extends JFrame implements IGUI {
 		BCliente.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstancia().accion(Eventos.CLIENTES, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.CLIENTES);
 			}
 		});
 		contentPanel.add(BCliente);
