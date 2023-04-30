@@ -50,14 +50,19 @@ public class VistaFacturas extends JFrame implements IGUI {
 		BAbrirVenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ALTA_CLIENTE);
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ABRIR_VENTA);
 			}	
 		});
 		BAbrirVenta.setPreferredSize(new Dimension(130,30));
 		fila1.add(BAbrirVenta);
 		
 		BCerrarVenta = new JButton("Cerrar Venta");
-		BCerrarVenta.addActionListener(null);
+		BCerrarVenta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.CERRAR_VENTA);
+			}	
+		});
 		BCerrarVenta.setPreferredSize(new Dimension(130,30));
 		fila1.add(BCerrarVenta);
 		

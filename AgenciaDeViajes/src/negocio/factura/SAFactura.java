@@ -4,7 +4,9 @@ import java.util.List;
 
 public interface SAFactura {
 	
-	public int createFactura(TFactura Factura);
+	public int abrirVenta(TFactura Factura);
+	
+	public boolean cerrarVenta(int id);
 	
 	public TFactura readFactura(int id);
 	

@@ -14,10 +14,14 @@ public class Eventos {
 	public static final int FACTURAS = 100;
 	public static final int ABRIR_VENTA = 101;
 	public static final int CERRAR_VENTA = 102;
-	public static final int AÑADIR_VENTA = 103;
+	public static final int ANIADIR_VIAJE = 103;
 	public static final int MODIFICAR_FACTURA = 104;
 	public static final int BUSCAR_FACTURA = 105;
 	public static final int LISTAR_FACTURA = 106;
+	public static final int RES_ABRIR_VENTA_OK = 107;
+	public static final int RES_ABRIR_VENTA_ERROR = 108;
+	public static final int RES_CERRAR_VENTA_OK = 109;
+	public static final int RES_CERRAR_VENTA_ERROR = 110;
 	
 	//Servicio 2xx
 
