@@ -6,7 +6,7 @@ public class TTransporte extends TServicio{
 	protected boolean comida;
 	
 	public TTransporte(String nombre, int numPlazas, int precio, String tipoTransporte, boolean comida) {
-		super(nombre, numPlazas, precio, "Transporte");
+		super(nombre, numPlazas, precio, "transporte");
 		this.tipoTransporte = tipoTransporte;
 		this.comida = comida;
 	}

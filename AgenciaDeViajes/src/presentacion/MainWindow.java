@@ -46,7 +46,7 @@ public class MainWindow extends JFrame implements IGUI {
 		mainPanel.setPreferredSize(new Dimension(320, 180));
 		this.setContentPane(mainPanel);
 		
-		//Cabecera con el título en zona "NORTH"
+		//Cabecera con el tï¿½tulo en zona "NORTH"
 		JPanel cabecera = new JPanel();
 		cabecera.setLayout(new BoxLayout(cabecera, BoxLayout.Y_AXIS));
 		mainPanel.add(cabecera, BorderLayout.NORTH);
@@ -54,7 +54,7 @@ public class MainWindow extends JFrame implements IGUI {
 		JLabel titulo = new JLabel(TITULO);
 		titulo.setAlignmentX(CENTER_ALIGNMENT);
 		cabecera.add(titulo);
-		cabecera.add(Box.createVerticalStrut(10)); //Espacio entre el título y los botones
+		cabecera.add(Box.createVerticalStrut(10)); //Espacio entre el tï¿½tulo y los botones
 		
 		//ContentPanel con los botones en la zona "CENTER"
 		//El contentPanel usa GridLayout
@@ -78,11 +78,16 @@ public class MainWindow extends JFrame implements IGUI {
 		contentPanel.add(BDepartamento);
 		
 		BFactura = new JButton("Facturas");
-		BFactura.addActionListener(null);
+		BFactura.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.FACTURAS);
+			}
+		});
 		contentPanel.add(BFactura);
 		
 		BServicio = new JButton("Servicios");
-		BServicio.addActionListener(null);
+		BServicio.addActionListener(e -> {FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.SERVICIOS);});
 		contentPanel.add(BServicio);
 		
 		BTrabajador = new JButton("Trabajadores");

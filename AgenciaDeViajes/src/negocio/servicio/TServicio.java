@@ -1,24 +1,20 @@
 package negocio.servicio;
 
 public class TServicio {
-	private int id;
-	private String nombre;
-	private int numPlazas;
-	private int precio;
-	private String tipo;
-	private boolean activo;
+	protected int id;
+	protected String nombre;
+	protected int numPlazas;
+	protected int precio;
+	protected String tipo;
+	protected boolean activo;
 	
-	public boolean isActivo() {
-		return activo;
-	}
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
+	
 	public TServicio(String nombre, int numPlazas, int precio, String tipo) {
 		this.nombre = nombre;
 		this.numPlazas = numPlazas;
 		this.precio = precio;
 		this.tipo = tipo;
+		this.activo = true;
 	}
 	public int getId() {
 		return id;
