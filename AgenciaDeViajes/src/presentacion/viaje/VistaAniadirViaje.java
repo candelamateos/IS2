@@ -34,7 +34,7 @@ public class VistaAniadirViaje extends JFrame implements IGUI{
 		initGUI();	
 	}
 	
-	private void initGUI() {
+	void initGUI() {
 		JPanel panel = new JPanel();
 		
 		lPrecio= new JLabel("PRECIO:");

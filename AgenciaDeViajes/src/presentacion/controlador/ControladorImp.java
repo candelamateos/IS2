@@ -1,12 +1,14 @@
 package presentacion.controlador;
 
+import java.util.List;
+
 import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
 import negocio.departamento.SADepartamento;
 import negocio.departamento.TDepartamento;
 import negocio.factoria.FactoriaAbstractaNegocio;
-import negocio.factura.SAFactura;
-import negocio.factura.TFactura;
+import negocio.viaje.SAViaje;
+import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
@@ -26,35 +28,76 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//Factura
-		case(Eventos.ABRIR_VENTA):{
-			TFactura tFactura = (TFactura) datos;
-			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
-			int res = saFactura.abrirVenta(tFactura);
-			if(res != -1) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ABRIR_VENTA_OK,res);
-			}
-			else {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ABRIR_VENTA_ERROR,res);
-			}
-		break;}
-		case(Eventos.CERRAR_VENTA):{
-			int id = (int) datos;
-			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
-			boolean res = saFactura.cerrarVenta(id);
-			if(res) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_OK,res);
-			}
-			else {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_ERROR,res);
-			}
-		break;}
-			
-			
+		
 		//Servicio
 		
 		//Trabajador
 		
 		//Viaje
+		case (Eventos.ALTA_VIAJE): {
+			TViaje tViaje = (TViaje) datos;
+			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
+			int res = saViaje.createViaje(tViaje);
+			if(res != -1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_VIAJE_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_VIAJE_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.BAJA_VIAJE): {
+			int id = (int) datos;
+			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
+			boolean res = saViaje.deleteViaje(id);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_VIAJE_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_VIAJE_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.BUSCAR_VIAJE): {
+			int id = (int) datos;
+			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
+			TViaje res = saViaje.readViaje(id);
+			if(res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_VIAJE_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_VIAJE_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.LISTAR_VIAJE): {
+			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
+			List<TViaje> res = saViaje.readAllViaje();
+			if(res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_VIAJE_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_VIAJE_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.MODIFICAR_VIAJE): {
+			int id = (int) datos;
+			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
+			boolean res = saViaje.updateViaje(saViaje.readViaje(id));
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_MODIFICAR_VIAJE_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_MODIFICAR_VIAJE_ERROR,res);
+				break;
+			}
+		}
 		
 		//Clientes
 		case(Eventos.ALTA_CLIENTE): {
@@ -62,12 +105,12 @@ public class ControladorImp extends Controlador {
 			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
 			int res = saCliente.createCliente(tCliente);
 			if(res != -1) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_CLIENTE_OK,res);
 			}
 			else {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_ERROR,res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_CLIENTE_ERROR,res);
 			}
-		break;}
+		}
 		}
 	}
 }

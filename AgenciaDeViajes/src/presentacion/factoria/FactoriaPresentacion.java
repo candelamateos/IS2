@@ -4,8 +4,6 @@ import presentacion.IGUI;
 import presentacion.cliente.*;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
-import presentacion.factura.VistaAbrirVenta;
-import presentacion.factura.VistaCerrarVenta;
 import presentacion.factura.VistaFacturas;
 //import presentacion.servicio.VistaServicios;
 import presentacion.viaje.*;
@@ -27,17 +25,9 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaListarDepartamento(); }
 		
 		//Factura
-		case Eventos.FACTURAS:
-			return new VistaFacturas();
-		case Eventos.ABRIR_VENTA:
-			return new VistaAbrirVenta();
-		case Eventos.CERRAR_VENTA:
-			return new VistaCerrarVenta();
-		case Eventos.ANIADIR_VIAJE:
-		case Eventos.MODIFICAR_FACTURA:
-		case Eventos.BUSCAR_FACTURA:
-		case Eventos.LISTAR_FACTURA:
-		
+//		case Eventos.FACTURAS:
+//			return new VistaFacturas();
+//		
 		//Servicio
 //		case Eventos.SERVICIOS:{
 //			return new VistaServicios();}
@@ -56,6 +46,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 		//Trabajador
 		
 		//Viaje
+		case Eventos.VIAJES:{
+			return new VistaViajes(); }
 		case Eventos.ALTA_VIAJE:{
 			return new VistaAniadirViaje(); }
 		case Eventos.BAJA_VIAJE:{
