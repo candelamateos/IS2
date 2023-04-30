@@ -63,12 +63,12 @@ public class VistaCerrarVenta extends JFrame implements IGUI {
 					try{
 						idFactura = Integer.parseInt(tFactura.getText());
 					}catch(NumberFormatException ex) {
+						tFactura.setText("");
 						throw new IllegalArgumentException("El id de la factura debe ser un número", ex);
 					}
 					Controlador.getInstancia().accion(Eventos.CERRAR_VENTA, idFactura);
 				}
 				catch(IllegalArgumentException ex) {
-					tFactura.setText("");
 					JOptionPane.showMessageDialog(Utils.getWindow(VistaCerrarVenta.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}

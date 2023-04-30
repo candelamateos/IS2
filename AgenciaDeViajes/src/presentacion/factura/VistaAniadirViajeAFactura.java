@@ -13,8 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 import negocio.factura.TFactura;
+import negocio.factura.TLineaFactura;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
@@ -71,8 +73,8 @@ public class VistaAniadirViajeAFactura extends JFrame implements IGUI {
 		fila2.add(tViaje);
 		
 		JLabel lPlazas = new JLabel("Número de plazas:");
-		lPlazas.setPreferredSize(new Dimension(100,25));
-		sPlazas = new JSpinner();
+		lPlazas.setPreferredSize(new Dimension(110,25));
+		sPlazas = new JSpinner(new SpinnerNumberModel(1, 1, null, 1));
 		sPlazas.setPreferredSize(new Dimension(100,25));
 		fila3.add(lPlazas);
 		fila3.add(sPlazas);
@@ -85,21 +87,27 @@ public class VistaAniadirViajeAFactura extends JFrame implements IGUI {
 				try {
 					int idFactura;
 					int idViaje;
+					int plazas;
 					try{
 						idFactura = Integer.parseInt(tFactura.getText());
 					}catch(NumberFormatException ex) {
+						tFactura.setText("");
 						throw new IllegalArgumentException("El id de la factura debe ser un número", ex);
 					}
 					try{
 						idViaje = Integer.parseInt(tViaje.getText());
 					}catch(NumberFormatException ex) {
+						tViaje.setText("");
 						throw new IllegalArgumentException("El id del viaje debe ser un número", ex);
 					}
-					Controlador.getInstancia().accion(Eventos.ANIADIR_VIAJE_A_FACTURA, TLineaFactura(plazas, idFactura, idViaje));
+					plazas = (int) sPlazas.getValue();
+					if(plazas <= 0) {
+						sPlazas.setValue(0);
+						throw new IllegalArgumentException("El número de plazas debe ser mayor que 0");
+					}
+					Controlador.getInstancia().accion(Eventos.ANIADIR_VIAJE_A_FACTURA, new TLineaFactura(plazas, idFactura, idViaje));
 				}
 				catch(IllegalArgumentException ex) {
-					tFactura.setText("");
-					tViaje.setText("");
 					JOptionPane.showMessageDialog(Utils.getWindow(VistaAniadirViajeAFactura.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}
