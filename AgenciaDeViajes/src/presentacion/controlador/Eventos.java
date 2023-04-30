@@ -11,6 +11,13 @@ public class Eventos {
 	public static final int LISTAR_DEPARTAMENTO = 005;
 	
 	//Factura 1xx
+	public static final int FACTURAS = 100;
+	public static final int ABRIR_VENTA = 101;
+	public static final int CERRAR_VENTA = 102;
+	public static final int AÑADIR_VENTA = 103;
+	public static final int MODIFICAR_FACTURA = 104;
+	public static final int BUSCAR_FACTURA = 105;
+	public static final int LISTAR_FACTURA = 106;
 	
 	//Servicio 2xx
 

@@ -78,7 +78,12 @@ public class MainWindow extends JFrame implements IGUI {
 		contentPanel.add(BDepartamento);
 		
 		BFactura = new JButton("Facturas");
-		BFactura.addActionListener(null);
+		BFactura.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.FACTURAS);
+			}
+		});
 		contentPanel.add(BFactura);
 		
 		BServicio = new JButton("Servicios");

@@ -10,12 +10,14 @@ public class SAFacturaImp implements SAFactura{
 	}
 
 	@Override
-	public TFactura readFactura(TFactura Factura) {
+	public TFactura readFactura(int id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<TFactura> readAllFactura(TFactura Factura) {
+	public List<TFactura> readAllFactura() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
