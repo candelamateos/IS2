@@ -1,6 +1,8 @@
 package negocio.trabajador;
 
-public class TTrabajador {
+import java.util.Collection;
+
+public abstract class TTrabajador {
 	
 	private int id;
 	private String nombre;
@@ -57,6 +59,8 @@ public class TTrabajador {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
 	
+	public abstract int getIdJefe();
+	
+	public abstract void setIdJefe(int idJefe);
 }

@@ -50,19 +50,29 @@ public class VistaFacturas extends JFrame implements IGUI {
 		BAbrirVenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ALTA_CLIENTE);
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ABRIR_VENTA);
 			}	
 		});
 		BAbrirVenta.setPreferredSize(new Dimension(130,30));
 		fila1.add(BAbrirVenta);
 		
 		BCerrarVenta = new JButton("Cerrar Venta");
-		BCerrarVenta.addActionListener(null);
+		BCerrarVenta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.CERRAR_VENTA);
+			}	
+		});
 		BCerrarVenta.setPreferredSize(new Dimension(130,30));
 		fila1.add(BCerrarVenta);
 		
-		BAniadirViaje = new JButton("Añadir Venta");
-		BAniadirViaje.addActionListener(null);
+		BAniadirViaje = new JButton("Añadir Viaje");
+		BAniadirViaje.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ANIADIR_VIAJE_A_FACTURA);
+			}	
+		});
 		BAniadirViaje.setPreferredSize(new Dimension(130,30));
 		fila2.add(BAniadirViaje);
 		

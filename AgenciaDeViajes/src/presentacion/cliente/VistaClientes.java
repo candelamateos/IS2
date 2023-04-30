@@ -49,7 +49,7 @@ public class VistaClientes extends JFrame implements IGUI {
 		fila3.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila3);
 		
-		BAniadirCliente = new JButton("Añadir Cliente");
+		BAniadirCliente = new JButton("Aï¿½adir Cliente");
 		BAniadirCliente.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -60,7 +60,13 @@ public class VistaClientes extends JFrame implements IGUI {
 		fila1.add(BAniadirCliente);
 		
 		BBuscarCliente = new JButton("Buscar Cliente");
-		BBuscarCliente.addActionListener(null);
+		BBuscarCliente.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.BAJA_CLIENTE);
+			}	
+		});
 		BBuscarCliente.setPreferredSize(new Dimension(130,30));
 		fila1.add(BBuscarCliente);
 		
