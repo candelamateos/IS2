@@ -11,13 +11,11 @@ public class SAViajeImp implements SAViaje{
 	public int createViaje(TViaje Viaje) {
 		int id = -1;
 		DaoViaje d = FactoriaAbstractaIntegracion.getInstancia().crearDaoViaje();
-		
-		if(Viaje != null) {
-			TViaje existe = d.readViaje(Viaje.getId());
-			if(existe == null) {
-				id = d.createViaje(Viaje);
-			}
+		int precio = Viaje.getPrecio();
+		if(precio != 0) {
+			id = d.createViaje(Viaje);
 		}
+		
 		return id;
 	}
 
@@ -41,10 +39,7 @@ public class SAViajeImp implements SAViaje{
 		DaoViaje d = FactoriaAbstractaIntegracion.getInstancia().crearDaoViaje();
 		
 		if(id != -1) {
-			TViaje existe = d.readViaje(id);
-			if(existe != null) {
-				delete = d.deleteViaje(id);
-			}
+			delete = d.deleteViaje(id);
 		}
 		return delete;
 	}

@@ -58,7 +58,7 @@ public class VistaEliminarViaje extends JFrame implements IGUI{
 		switch(evento) {
 		case(Eventos.RES_BAJA_VIAJE_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Viaje eliminado con id " + datos, "Viaje Eliminado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Viaje eliminado", "Viaje Eliminado", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		case(Eventos.RES_BAJA_VIAJE_ERROR):

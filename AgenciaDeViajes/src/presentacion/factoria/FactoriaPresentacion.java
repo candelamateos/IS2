@@ -25,9 +25,9 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaListarDepartamento(); }
 		
 		//Factura
-		case Eventos.FACTURAS:
-			return new VistaFacturas();
-		
+//		case Eventos.FACTURAS:
+//			return new VistaFacturas();
+//		
 		//Servicio
 //		case Eventos.SERVICIOS:{
 //			return new VistaServicios();}
@@ -46,6 +46,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 		//Trabajador
 		
 		//Viaje
+		case Eventos.VIAJES:{
+			return new VistaViajes(); }
 		case Eventos.ALTA_VIAJE:{
 			return new VistaAniadirViaje(); }
 		case Eventos.BAJA_VIAJE:{
