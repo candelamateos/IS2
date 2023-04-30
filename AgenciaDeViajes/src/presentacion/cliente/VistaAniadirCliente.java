@@ -25,7 +25,7 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 	private JButton ok;
 	
 	public VistaAniadirCliente() {
-		super("Añadir Cliente");
+		super("AÑADIR CLIENTE");
 		initGUI();
 	}
 	

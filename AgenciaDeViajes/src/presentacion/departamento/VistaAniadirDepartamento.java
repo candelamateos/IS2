@@ -6,42 +6,68 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import negocio.departamento.TDepartamento;
 import presentacion.IGUI;
+import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
-public class VistaAniadirDepartamento extends JFrame implements IGUI{
+public class VistaAniadirDepartamento extends JFrame implements IGUI {
 	private JLabel lNombre;
 	private JTextField tNombre;
 	private JButton ok;
-	
+
 	public VistaAniadirDepartamento() {
-		setTitle("AÃ‘ADIR DEPARTAMENTO");
+		super("Añadir Cliente");
+		initGUI();
+	}
+
+	private void initGUI() {
 		JPanel panel = new JPanel();
-		lNombre= new JLabel("NOMBRE:");
+
+		lNombre = new JLabel("PRECIO:");
 		tNombre = new JTextField(5);
 		panel.add(lNombre);
 		panel.add(tNombre);
-		ok=new JButton("OK");
+
+		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String nombre=tNombre.getText();
+				String nombre = tNombre.getText();
 				Controlador.getInstancia().accion(Eventos.ALTA_DEPARTAMENTO, new TDepartamento(nombre));
 			}
-			
 		});
+		panel.add(ok);
+		setContentPane(panel);
+
+		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
 	}
-	
+
 	@Override
 	public void actualizar(int evento, Object datos) {
-		// TODO Auto-generated method stub Controlador lo llama para actualizar la GUI
+		switch (evento) {
+		case (Eventos.RES_ALTA_DEPARTAMENTO_OK):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento añadido con id " + datos,
+					"Departamento añadido", JOptionPane.INFORMATION_MESSAGE);
+			setVisible(true);
+			break;
+		case (Eventos.RES_ALTA_DEPARTAMENTO_ERROR):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo añadir el departamento", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			setVisible(true);
+			break;
+		}
 	}
-	
+
 }

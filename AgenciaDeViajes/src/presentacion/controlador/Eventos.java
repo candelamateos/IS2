@@ -9,6 +9,16 @@ public class Eventos {
 	public static final int BUSCAR_DEPARTAMENTO = 003;
 	public static final int MODIFICAR_DEPARTAMENTO = 004;
 	public static final int LISTAR_DEPARTAMENTO = 005;
+	public static final int RES_ALTA_DEPARTAMENTO_OK = 406;
+	public static final int RES_ALTA_DEPARTAMENTO_ERROR = 407;
+	public static final int RES_BAJA_DEPARTAMENTO_OK = 408;
+	public static final int RES_BAJA_DEPARTAMENTO_ERROR = 409;
+	public static final int RES_BUSCAR_DEPARTAMENTO_OK = 410;
+	public static final int RES_BUSCAR_DEPARTAMENTO_ERROR = 411;
+	public static final int RES_MODIFICAR_DEPARTAMENTO_OK = 412;
+	public static final int RES_MODIFICAR_DEPARTAMENTO_ERROR = 413;
+	public static final int RES_LISTAR_DEPARTAMENTO_OK = 414;
+	public static final int RES_LISTAR_DEPARTAMENTO_ERROR = 415;
 	
 	//Factura 1xx
 	
