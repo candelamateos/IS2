@@ -8,9 +8,9 @@ public interface DaoDepartamento {
 	
 	public int createDepartamento(TDepartamento departamento);
 	
-	public boolean updateDepartamento(TDepartamento departamento);
-	
 	public boolean deleteDepartamento(int id);
+	
+	public boolean updateDepartamento(TDepartamento departamento);
 	
 	public TDepartamento readDepartamento(int id);
 	
