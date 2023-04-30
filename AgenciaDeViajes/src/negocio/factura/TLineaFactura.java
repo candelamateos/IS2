@@ -7,8 +7,26 @@ public class TLineaFactura {
 	private int plazasVendidas;
 	private int idFactura;
 	private int idViaje;
+	private boolean activo;
 	
 	public TLineaFactura() {
+		
+	}
+	
+	public TLineaFactura(int coste, int plazasVendidas, int idFactura, int idViaje) {
+		this.coste = coste;
+		this.plazasVendidas = plazasVendidas;
+		this.idFactura = idFactura;
+		this.idViaje = idViaje;
+		this.activo = true;
+	}
+	
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 	public int getId() {

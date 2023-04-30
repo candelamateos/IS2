@@ -1,10 +1,14 @@
 package presentacion.factoria;
 
 import presentacion.IGUI;
-import presentacion.cliente.VistaAniadirCliente;
-import presentacion.cliente.VistaClientes;
+import presentacion.cliente.*;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
+import presentacion.factura.VistaAbrirVenta;
+import presentacion.factura.VistaCerrarVenta;
+import presentacion.factura.VistaFacturas;
+//import presentacion.servicio.VistaServicios;
+import presentacion.viaje.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	public IGUI createVista(int id) {
@@ -23,12 +27,45 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaListarDepartamento(); }
 		
 		//Factura
+		case Eventos.FACTURAS:
+			return new VistaFacturas();
+		case Eventos.ABRIR_VENTA:
+			return new VistaAbrirVenta();
+		case Eventos.CERRAR_VENTA:
+			return new VistaCerrarVenta();
+		case Eventos.ANIADIR_VIAJE:
+		case Eventos.MODIFICAR_FACTURA:
+		case Eventos.BUSCAR_FACTURA:
+		case Eventos.LISTAR_FACTURA:
 		
 		//Servicio
+//		case Eventos.SERVICIOS:{
+//			return new VistaServicios();}
+		case Eventos.ALTA_SERVICIO:{
+			return new VistaAniadirCliente();}
+		case Eventos.BAJA_SERVICIO:{
+			return new VistaEliminarCliente(); }
+		case Eventos.BUSCAR_SERVICIO:{
+			return new VistaBuscarCliente(); }
+		case Eventos.MODIFICAR_SERVICIO:{
+			return new VistaModificarCliente(); }
+		case Eventos.LISTAR_SERVICIO:{
+			return new VistaListarCliente(); }
+		
 		
 		//Trabajador
 		
 		//Viaje
+		case Eventos.ALTA_VIAJE:{
+			return new VistaAniadirViaje(); }
+		case Eventos.BAJA_VIAJE:{
+			return new VistaEliminarViaje(); }
+		case Eventos.BUSCAR_VIAJE:{
+			return new VistaBuscarViaje(); }
+		case Eventos.MODIFICAR_VIAJE:{
+			return new VistaModificarViaje(); }
+		case Eventos.LISTAR_VIAJE:{
+			return new VistaListarViaje(); }
 		
 		//Clientes
 		case Eventos.CLIENTES:{
@@ -36,13 +73,13 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 		case Eventos.ALTA_CLIENTE:{
 			return new VistaAniadirCliente();}
 		case Eventos.BAJA_CLIENTE:{
-			return new VistaEliminarDepartamento(); }
+			return new VistaEliminarCliente(); }
 		case Eventos.BUSCAR_CLIENTE:{
-			return new VistaBuscarDepartamento(); }
+			return new VistaBuscarCliente(); }
 		case Eventos.MODIFICAR_CLIENTE:{
-			return new VistaModificarDepartamento(); }
+			return new VistaModificarCliente(); }
 		case Eventos.LISTAR_CLIENTE:{
-			return new VistaListarDepartamento(); }
+			return new VistaListarCliente(); }
 		}
 		
 		

@@ -6,8 +6,35 @@ public class TFactura {
 	private int coste;
 	private int idCliente;
 	private int idVendedor;
+	private boolean abierta;
+	private boolean activo;
 	
+	public TFactura(int idCliente, int idVendedor) {
+		this.idCliente = idCliente;
+		this.idVendedor = idVendedor;
+		abierta = true;
+		activo = true;
+		coste = 0;
+	}
+
 	public TFactura() {
+		
+	}
+
+	public boolean isAbierta() {
+		return abierta;
+	}
+
+	public void setAbierta(boolean abierta) {
+		this.abierta = abierta;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 	public int getId() {

@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import presentacion.IGUI;
+import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
@@ -19,7 +21,11 @@ public class VistaModificarViaje extends JFrame implements IGUI{
 	private JButton ok;
 	
 	public VistaModificarViaje() {
-		setTitle("MODIFICAR VIAJE");
+		super("MODIFICAR VIAJE");
+		initGUI();
+	}
+	
+	private void initGUI() {
 		JPanel panel = new JPanel();
 		
 		lId= new JLabel("ID:");
@@ -39,11 +45,28 @@ public class VistaModificarViaje extends JFrame implements IGUI{
 				Controlador.getInstancia().accion(Eventos.MODIFICAR_VIAJE, Iid);
 			}
 		});
+		panel.add(ok);
+		setContentPane(panel);
+		
+		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
 	}
+	
 	@Override
 	public void actualizar(int evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+		switch(evento) {
+		case(Eventos.RES_MODIFICAR_VIAJE_OK):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Viaje modificado con id " + datos, "Viaje modificado", JOptionPane.INFORMATION_MESSAGE);
+			setVisible(true);
+			break;
+		case(Eventos.RES_MODIFICAR_VIAJE_ERROR):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo modificar el viaje", "Error", JOptionPane.ERROR_MESSAGE);
+			setVisible(true);
+			break;
+		}
 	}
 
 }

@@ -6,7 +6,7 @@ import negocio.trabajador.TTrabajador;
 
 public interface DaoTrabajador {
 	
-	public boolean createTrabajador(TTrabajador trabajo);
+	public int createTrabajador(TTrabajador trabajo);
 	
 	public boolean updateTrabajador(TTrabajador trabajo);
 	
@@ -14,5 +14,5 @@ public interface DaoTrabajador {
 	
 	public TTrabajador readTrabajador(int id);
 	
-	public List<TTrabajador> readAllTrabajador();
+	public List<TTrabajador> readAllTrabajador(TTrabajador trabajo);
 }

@@ -11,8 +11,26 @@ public class Eventos {
 	public static final int LISTAR_DEPARTAMENTO = 005;
 	
 	//Factura 1xx
+	public static final int FACTURAS = 100;
+	public static final int ABRIR_VENTA = 101;
+	public static final int CERRAR_VENTA = 102;
+	public static final int ANIADIR_VIAJE = 103;
+	public static final int MODIFICAR_FACTURA = 104;
+	public static final int BUSCAR_FACTURA = 105;
+	public static final int LISTAR_FACTURA = 106;
+	public static final int RES_ABRIR_VENTA_OK = 107;
+	public static final int RES_ABRIR_VENTA_ERROR = 108;
+	public static final int RES_CERRAR_VENTA_OK = 109;
+	public static final int RES_CERRAR_VENTA_ERROR = 110;
 	
 	//Servicio 2xx
+
+	public static final int SERVICIOS = 200;
+	public static final int ALTA_SERVICIO = 201;
+	public static final int BAJA_SERVICIO = 202;
+	public static final int BUSCAR_SERVICIO = 203;
+	public static final int MODIFICAR_SERVICIO = 204;
+	public static final int LISTAR_SERVICIO = 205;
 	
 	//Trabajador 3xx
 	
@@ -22,6 +40,17 @@ public class Eventos {
 	public static final int BUSCAR_VIAJE = 403;
 	public static final int MODIFICAR_VIAJE = 404;
 	public static final int LISTAR_VIAJE = 405;
+	public static final int RES_ALTA_VIAJE_OK = 406;
+	public static final int RES_ALTA_VIAJE_ERROR = 407;
+	public static final int RES_BAJA_VIAJE_OK = 408;
+	public static final int RES_BAJA_VIAJE_ERROR = 409;
+	public static final int RES_BUSCAR_VIAJE_OK = 410;
+	public static final int RES_BUSCAR_VIAJE_ERROR = 411;
+	public static final int RES_MODIFICAR_VIAJE_OK = 412;
+	public static final int RES_MODIFICAR_VIAJE_ERROR = 413;
+	public static final int RES_LISTAR_VIAJE_OK = 414;
+	public static final int RES_LISTAR_VIAJE_ERROR = 415;
+	
 	
 	//Cliente 5xx
 	public static final int CLIENTES = 500;
