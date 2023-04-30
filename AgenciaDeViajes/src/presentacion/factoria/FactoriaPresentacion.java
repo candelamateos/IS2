@@ -5,6 +5,7 @@ import presentacion.cliente.*;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
 import presentacion.factura.VistaAbrirVenta;
+import presentacion.factura.VistaAniadirViajeAFactura;
 import presentacion.factura.VistaCerrarVenta;
 import presentacion.factura.VistaFacturas;
 //import presentacion.servicio.VistaServicios;
@@ -33,7 +34,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaAbrirVenta();
 		case Eventos.CERRAR_VENTA:
 			return new VistaCerrarVenta();
-		case Eventos.ANIADIR_VIAJE:
+		case Eventos.ANIADIR_VIAJE_A_FACTURA:
+			return new VistaAniadirViajeAFactura();
 		case Eventos.MODIFICAR_FACTURA:
 		case Eventos.BUSCAR_FACTURA:
 		case Eventos.LISTAR_FACTURA:

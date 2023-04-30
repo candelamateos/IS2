@@ -13,8 +13,7 @@ public class TLineaFactura {
 		
 	}
 	
-	public TLineaFactura(int coste, int plazasVendidas, int idFactura, int idViaje) {
-		this.coste = coste;
+	public TLineaFactura(int plazasVendidas, int idFactura, int idViaje) {
 		this.plazasVendidas = plazasVendidas;
 		this.idFactura = idFactura;
 		this.idViaje = idViaje;

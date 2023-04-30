@@ -62,10 +62,10 @@ public class ControladorImp extends Controlador {
 			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
 			int res = saCliente.createCliente(tCliente);
 			if(res != -1) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_CLIENTE_OK,res);
 			}
 			else {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_ERROR,res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_CLIENTE_ERROR,res);
 			}
 		break;}
 		}

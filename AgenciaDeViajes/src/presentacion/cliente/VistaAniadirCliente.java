@@ -25,7 +25,7 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 	private JButton ok;
 	
 	public VistaAniadirCliente() {
-		super("Añadir Cliente");
+		super("Aï¿½adir Cliente");
 		initGUI();
 	}
 	
@@ -56,14 +56,14 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch(evento) {
-		case(Eventos.RES_ALTA_DEPARTAMENTO_OK):
+		case(Eventos.RES_ALTA_CLIENTE_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente añadido con id " + datos, "Cliente Añadido", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente aï¿½adido con id " + datos, "Cliente Aï¿½adido", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
-		case(Eventos.RES_ALTA_DEPARTAMENTO_ERROR):
+		case(Eventos.RES_ALTA_CLIENTE_ERROR):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo añadir el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo aï¿½adir el cliente", "Error", JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
 		}
