@@ -16,7 +16,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import negocio.departamento.TDepartamento;
-import negocio.viaje.TViaje;
 
 public class DaoDepartamentoImp implements DaoDepartamento {
 
