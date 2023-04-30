@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import negocio.trabajador.TTrabajador;
+import negocio.trabajador.TVendedor;
 
 public class DaoTrabajadorImp implements DaoTrabajador{
 	
@@ -39,14 +40,15 @@ public class DaoTrabajadorImp implements DaoTrabajador{
 		
 		// comprobamos si se trata de un vendedor para asociarle el atributo idJefe
 		if (trabajador.getTipo().equals("vendedor")) {
-			json.put("idJefe", trabajador.getIdJefe());
+			TVendedor aux = (TVendedor) trabajador;
+			json.put("idJefe", aux.getIdJefe());
 		}
 		
-		// ahora rellenamos con la información de cada trabajador de la lista
+		// ahora rellenamos con la informaciï¿½n de cada trabajador de la lista
 		JSONArray trabajadores = data.getJSONArray("trabajadores");
 		trabajadores.put(json.getInt("id"), json);
 		
-		// actualizamos el valor del próximo id de la lista
+		// actualizamos el valor del prï¿½ximo id de la lista
 		data.put("proximo id", id + 1);
 		
 		// comprobamos que se hayan podido leer los datos
@@ -72,9 +74,11 @@ public class DaoTrabajadorImp implements DaoTrabajador{
 			json.put("activo", true);
 			json.put("sueldo", trabajador.getSueldo());
 			json.put("tipo", trabajador.getTipo());
+			json.put("idDepart", trabajador.getIdDepart());
 			
 			if (trabajador.getTipo().equals("vendedor")) {
-				json.put("idJefe", trabajador.getIdJefe());
+				TVendedor aux = (TVendedor) trabajador;
+				json.put("idJefe", aux.getIdJefe());
 			}
 			
 			// metemos el json en la lista
@@ -94,10 +98,10 @@ public class DaoTrabajadorImp implements DaoTrabajador{
 			JSONObject json = trabajadores.getJSONObject(id);
 			
 			if (!json.has("id") || !json.has("nombre") || !json.has("activo")
-					|| !json.has("sueldo") || !json.has("tipo")) {
+					|| !json.has("sueldo") || !json.has("tipo") || !json.has("idDepart")) {
 				return false;
 			}
-			// en caso de estar todos los campos, comprobamos si está el de idJefe
+			// en caso de estar todos los campos, comprobamos si estï¿½ el de idJefe
 			// cuando el tipo es vendedor
 			else {
 				if (json.getString("tipo").equals("vendedor") && !json.has("idJefe")) {
@@ -155,13 +159,11 @@ public class DaoTrabajadorImp implements DaoTrabajador{
 						transfer.setActivo(json.getBoolean("activo"));
 						transfer.setSueldo(json.getInt("sueldo"));
 						transfer.setTipo(json.getString("tipo"));
+						
 						transfer.setIdJefe(json.getInt("idJefe"));
 					}
 				}
-	
 			}
-				
-			
 		}
 		
 		return transfer;

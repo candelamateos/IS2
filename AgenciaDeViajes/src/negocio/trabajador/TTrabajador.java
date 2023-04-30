@@ -2,21 +2,23 @@ package negocio.trabajador;
 
 import java.util.Collection;
 
-public abstract class TTrabajador {
+public class TTrabajador {
 	
 	private int id;
 	private String nombre;
 	private boolean activo;
 	private int sueldo;
+	private int idDepart;
 	private String tipo;
 	
 	public TTrabajador() {
 	}
 	
-	public TTrabajador(String nombre, int sueldo, String tipo) {
+	public TTrabajador(String nombre, int sueldo, int idDepart, String tipo) {
 		this.nombre = nombre;
 		this.sueldo = sueldo;
 		this.activo = true;
+		this.idDepart = idDepart;
 		this.tipo = tipo;
 	}
 	
@@ -51,7 +53,15 @@ public abstract class TTrabajador {
 	public void setSueldo(int sueldo) {
 		this.sueldo = sueldo;
 	}
+	
+	public int getIdDepart() {
+		return this.idDepart;
+	}
 
+	public void setIdDepart(int id) {
+		this.id = id;
+	}
+	
 	public String getTipo() {
 		return tipo;
 	}
@@ -59,8 +69,4 @@ public abstract class TTrabajador {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
-	public abstract int getIdJefe();
-	
-	public abstract void setIdJefe(int idJefe);
 }
