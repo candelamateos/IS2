@@ -129,7 +129,7 @@ public class ControladorImp extends Controlador {
 			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_OK,res);
 			}
 			else {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_CLIENTE_ERROR,res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR,res);
 			}
 		}
 		}

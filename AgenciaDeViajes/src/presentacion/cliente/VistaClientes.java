@@ -83,12 +83,22 @@ public class VistaClientes extends JFrame implements IGUI {
 		fila2.add(BEliminarCliente);
 
 		BListarCliente = new JButton("Listar Clientes");
-		BListarCliente.addActionListener(null);
+		BListarCliente.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.LISTAR_CLIENTE);
+			}
+		});
 		BListarCliente.setPreferredSize(new Dimension(130, 30));
 		fila2.add(BListarCliente);
 
 		BModificarCliente = new JButton("Modificar Cliente");
-		BModificarCliente.addActionListener(null);
+		BModificarCliente.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.MODIFICAR_CLIENTE);
+			}
+		});
 		BModificarCliente.setPreferredSize(new Dimension(130, 30));
 		fila3.add(BModificarCliente);
 
