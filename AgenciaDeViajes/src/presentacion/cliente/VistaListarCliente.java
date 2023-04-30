@@ -19,7 +19,13 @@ public class VistaListarCliente extends JFrame implements IGUI {
 	JTextField tId;
 	JButton ok;
 	public VistaListarCliente() {
-		setTitle("LISTAR CLIENTE");
+		super("LISTAR CLIENTE");
+		initGUI();
+	}
+	
+	void initGUI() {
+		JPanel panel = new JPanel();
+		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 
 			@Override
@@ -28,6 +34,13 @@ public class VistaListarCliente extends JFrame implements IGUI {
 				Controlador.getInstancia().accion(Eventos.LISTAR_CLIENTE, null);
 			}
 		});
+
+		panel.add(ok);
+		setContentPane(panel);
+		
+		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
 	}
 
 	
