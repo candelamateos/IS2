@@ -68,6 +68,17 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_CLIENTE_ERROR,res);
 			}
 		break;}
+		case (Eventos.BAJA_CLIENTE): {
+			int id = (int) datos;
+			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+			boolean res = saCliente.deleteCliente(id);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_CLIENTE_OK,res);
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_CLIENTE_ERROR,res);
+			}
+		}
 		}
 	}
 }

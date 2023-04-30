@@ -61,6 +61,14 @@ public class Eventos {
 	public static final int LISTAR_CLIENTE = 505;
 	public static final int RES_ALTA_CLIENTE_OK = 506;
 	public static final int RES_ALTA_CLIENTE_ERROR = 507;
+	public static final int RES_BAJA_CLIENTE_OK = 508;
+	public static final int RES_BAJA_CLIENTE_ERROR = 509;
+	public static final int RES_BUSCAR_CLIENTE_OK = 510;
+	public static final int RES_BUSCAR_CLIENTE_ERROR = 511;
+	public static final int RES_MODIFICAR_CLIENTE_OK = 512;
+	public static final int RES_MODIFICAR_CLIENTE_ERROR = 513;
+	public static final int RES_LISTAR_CLIENTE_OK = 514;
+	public static final int RES_LISTAR_CLIENTE_ERROR = 515;
 	
 	
 }
