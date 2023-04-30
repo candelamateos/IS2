@@ -21,9 +21,8 @@ import presentacion.controlador.Eventos;
 
 public class VistaListarCliente extends JFrame implements IGUI {
 
-	JLabel lId;
-	JTextField tId;
-	JButton ok;
+	private JButton ok;
+	
 	public VistaListarCliente() {
 		super("LISTAR CLIENTE");
 		initGUI();
@@ -31,6 +30,7 @@ public class VistaListarCliente extends JFrame implements IGUI {
 	
 	void initGUI() {
 		JPanel panel = new JPanel();
+		
 		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 

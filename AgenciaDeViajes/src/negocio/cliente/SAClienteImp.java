@@ -4,6 +4,8 @@ import java.util.List;
 
 import integracion.cliente.DaoCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
+import integracion.viaje.DaoViaje;
+import negocio.viaje.TViaje;
 
 public class SAClienteImp implements SACliente {
 
@@ -20,8 +22,16 @@ public class SAClienteImp implements SACliente {
 
 	@Override
 	public boolean updateCliente(TCliente Cliente) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean update = false;
+		DaoCliente d = FactoriaAbstractaIntegracion.getInstancia().crearDaoCliente();
+		
+		if(Cliente!= null) {
+			TCliente existe = d.readCliente(Cliente.getId());
+			if(existe != null) {
+				update = d.updateCliente(Cliente);
+			}
+		}
+		return update;
 	}
 
 	@Override
@@ -37,14 +47,19 @@ public class SAClienteImp implements SACliente {
 
 	@Override
 	public TCliente readCliente(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		TCliente cliente = null;
+		DaoCliente d = FactoriaAbstractaIntegracion.getInstancia().crearDaoCliente();
+		
+		if(id != -1) {
+			cliente = d.readCliente(id);
+		}
+		return cliente;
 	}
 
 	@Override
 	public List<TCliente> readAllCliente() {
-		// TODO Auto-generated method stub
-		return null;
+		DaoCliente d = FactoriaAbstractaIntegracion.getInstancia().crearDaoCliente();
+		return d.readAllCliente();
 	}
 
 }
