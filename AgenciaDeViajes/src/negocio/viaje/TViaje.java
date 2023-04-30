@@ -67,7 +67,7 @@ public class TViaje {
 	}
 		
 
-	public boolean isActivo() {
+	public boolean getActivo() {
 		return activo;
 	}
 

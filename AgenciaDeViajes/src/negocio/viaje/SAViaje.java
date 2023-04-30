@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface SAViaje {
 	
-	public boolean createViaje(TViaje Viaje);
+	public int createViaje(TViaje Viaje);
 	
 	public boolean updateViaje(TViaje Viaje);
 		

@@ -1,7 +1,17 @@
 package negocio.factoria;
 
+import negocio.cliente.SACliente;
+import negocio.cliente.SAClienteImp;
 import negocio.departamento.SADepartamento;
 import negocio.departamento.SADepartamentoImp;
+import negocio.factura.SAFactura;
+import negocio.factura.SAFacturaImp;
+import negocio.servicio.SAServicio;
+import negocio.servicio.SAServicioImp;
+import negocio.trabajador.SATrabajador;
+import negocio.trabajador.SATrabajadorImp;
+import negocio.viaje.SAViaje;
+import negocio.viaje.SAViajeImp;
 
 public class FactoriaNegocio extends FactoriaAbstractaNegocio {
 
@@ -11,27 +21,27 @@ public class FactoriaNegocio extends FactoriaAbstractaNegocio {
 	}
 
 	@Override
-	public SADepartamento crearSACliente() {
+	public SACliente crearSACliente() {
 		return new SAClienteImp();
 	}
 
 	@Override
-	public SADepartamento crearSATrabajador() {
+	public SATrabajador crearSATrabajador() {
 		return new SATrabajadorImp();
 	}
 
 	@Override
-	public SADepartamento crearSAFactura() {
+	public SAFactura crearSAFactura() {
 		return new SAFacturaImp();
 	}
 
 	@Override
-	public SADepartamento crearSAViaje() {
+	public SAViaje crearSAViaje() {
 		return new SAViajeImp();
 	}
 
 	@Override
-	public SADepartamento crearSAServicio() {
+	public SAServicio crearSAServicio() {
 		return new SAServicioImp();
 	}
 	

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface SATrabajador {
 
-	public boolean createServicio(TTrabajador Trabajador);
+	public int createServicio(TTrabajador Trabajador);
 	
 	public boolean updateServicio(TTrabajador Trabajador);
 		
