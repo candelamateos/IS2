@@ -241,6 +241,20 @@ public class ControladorImp extends Controlador {
 						.actualizar(Eventos.RES_BUSCAR_CLIENTE_ERROR, res);
 				break;
 			}
+		}
+		case (Eventos.MODIFICAR_CLIENTE): {
+			TCliente cliente = (TCliente) datos;
+			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+			boolean res = saCliente.updateCliente(cliente);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_CLIENTE_OK, res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_CLIENTE_ERROR, res);
+				break;
+			}
 
 		}
 		}
