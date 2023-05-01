@@ -14,5 +14,5 @@ public interface DaoTrabajador {
 	
 	public TTrabajador readTrabajador(int id);
 	
-	public List<TTrabajador> readAllTrabajador(TTrabajador trabajo);
+	public List<TTrabajador> readAllTrabajador();
 }
