@@ -235,7 +235,8 @@ public class ControladorImp extends Controlador {
 			TServicio t = (TServicio) datos;
 			SAServicio sa = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
 			int id = sa.createServicio(t);
-			//if(id != -1) FactoriaAbstractaPresentacion.getInstance().createVista(id);
+			if(id != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_OK, id);
+			else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_ERROR, id);
 			break;
 		}
 		
