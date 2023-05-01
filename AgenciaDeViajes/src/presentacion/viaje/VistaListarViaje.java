@@ -48,8 +48,6 @@ public class VistaListarViaje extends JFrame implements IGUI{
 		};
 		dataTableModel.setColumnIdentifiers(HEADERS);
 		
-		Controlador.getInstancia().accion(Eventos.LISTAR_VIAJE, null);
-		
 		JTable tabla = new JTable(dataTableModel);
 		JScrollPane scroll = new JScrollPane(tabla);
 		mainPanel.add(scroll);
