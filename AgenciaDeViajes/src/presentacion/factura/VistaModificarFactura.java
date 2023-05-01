@@ -11,31 +11,28 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
 
 import negocio.factura.TFactura;
-import negocio.factura.TLineaFactura;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
-public class VistaAniadirViajeAFactura extends JFrame implements IGUI {
+public class VistaModificarFactura extends JFrame implements IGUI {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	private JTextField tFactura;
-	private JTextField tViaje;
-	private JSpinner sPlazas;
+	private JTextField tVendedor;
+	private JTextField tCliente;
 	private JButton ok;
 	
-	public VistaAniadirViajeAFactura() {
-		super("Añadir Viaje");
+	public VistaModificarFactura() {
+		super("Modificar factura");
 		initGUI();
 	}
 
@@ -45,6 +42,9 @@ public class VistaAniadirViajeAFactura extends JFrame implements IGUI {
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		setContentPane(mainPanel);
 		
+		JPanel fila0 = new JPanel();
+		fila0.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(fila0);
 		JPanel fila1 = new JPanel();
 		fila1.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila1);
@@ -54,30 +54,27 @@ public class VistaAniadirViajeAFactura extends JFrame implements IGUI {
 		JPanel fila3 = new JPanel();
 		fila3.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila3);
-		JPanel fila4 = new JPanel();
-		fila4.setAlignmentX(CENTER_ALIGNMENT);
-		mainPanel.add(fila4);
 		
 		JLabel lFactura = new JLabel("Id de la factura:");
 		lFactura.setPreferredSize(new Dimension(100,25));
 		tFactura = new JTextField(10);
 		tFactura.setPreferredSize(new Dimension(100,25));
-		fila1.add(lFactura);
-		fila1.add(tFactura);
+		fila0.add(lFactura);
+		fila0.add(tFactura);
 		
-		JLabel lViaje = new JLabel("Id del viaje:");
-		lViaje.setPreferredSize(new Dimension(100,25));
-		tViaje = new JTextField(10);
-		tViaje.setPreferredSize(new Dimension(100,25));
-		fila2.add(lViaje);
-		fila2.add(tViaje);
+		JLabel lVendedor = new JLabel("Id del vendedor:");
+		lVendedor.setPreferredSize(new Dimension(100,25));
+		tVendedor = new JTextField(10);
+		tVendedor.setPreferredSize(new Dimension(100,25));
+		fila1.add(lVendedor);
+		fila1.add(tVendedor);
 		
-		JLabel lPlazas = new JLabel("Número de plazas:");
-		lPlazas.setPreferredSize(new Dimension(110,25));
-		sPlazas = new JSpinner(new SpinnerNumberModel(1, 1, null, 1));
-		sPlazas.setPreferredSize(new Dimension(100,25));
-		fila3.add(lPlazas);
-		fila3.add(sPlazas);
+		JLabel lCliente = new JLabel("Id del cliente:");
+		lCliente.setPreferredSize(new Dimension(100,25));
+		tCliente = new JTextField(10);
+		tCliente.setPreferredSize(new Dimension(100,25));
+		fila2.add(lCliente);
+		fila2.add(tCliente);
 		
 		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
@@ -86,8 +83,8 @@ public class VistaAniadirViajeAFactura extends JFrame implements IGUI {
 				setVisible(false);
 				try {
 					int idFactura;
-					int idViaje;
-					int plazas;
+					int idVendedor;
+					int idCliente;
 					try{
 						idFactura = Integer.parseInt(tFactura.getText());
 					}catch(NumberFormatException ex) {
@@ -95,25 +92,28 @@ public class VistaAniadirViajeAFactura extends JFrame implements IGUI {
 						throw new IllegalArgumentException("El id de la factura debe ser un número", ex);
 					}
 					try{
-						idViaje = Integer.parseInt(tViaje.getText());
+						idVendedor = Integer.parseInt(tVendedor.getText());
 					}catch(NumberFormatException ex) {
-						tViaje.setText("");
-						throw new IllegalArgumentException("El id del viaje debe ser un número", ex);
+						tVendedor.setText("");
+						throw new IllegalArgumentException("El id del vendedor debe ser un número", ex);
 					}
-					plazas = (int) sPlazas.getValue();
-					if(plazas <= 0) {
-						sPlazas.setValue(0);
-						throw new IllegalArgumentException("El número de plazas debe ser mayor que 0");
+					try{
+						idCliente = Integer.parseInt(tCliente.getText());
+					}catch(NumberFormatException ex) {
+						tCliente.setText("");
+						throw new IllegalArgumentException("El id del cliente debe ser un número", ex);
 					}
-					Controlador.getInstancia().accion(Eventos.ANIADIR_VIAJE_A_FACTURA, new TLineaFactura(plazas, idFactura, idViaje));
+					TFactura factura =  new TFactura(idCliente,idVendedor);
+					factura.setId(idFactura);
+					Controlador.getInstancia().accion(Eventos.MODIFICAR_FACTURA, factura);
 				}
 				catch(IllegalArgumentException ex) {
-					JOptionPane.showMessageDialog(Utils.getWindow(VistaAniadirViajeAFactura.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarFactura.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}
 			}
 		});
-		fila4.add(ok);
+		fila3.add(ok);
 		
 		setLocationRelativeTo(null);
 		pack();
@@ -123,18 +123,17 @@ public class VistaAniadirViajeAFactura extends JFrame implements IGUI {
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch(evento) {
-		case(Eventos.RES_ANIADIR_VIAJE_A_FACTURA_OK):
+		case(Eventos.RES_MODIFICAR_FACTURA_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Viaje añadido con éxito", "Factura abierta", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Factura modificada correctamente ", "Factura abierta", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
-		case(Eventos.RES_ANIADIR_VIAJE_A_FACTURA_ERROR):
+		case(Eventos.RES_MODIFICAR_FACTURA_ERROR):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se ha podido añadir el viaje", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "El cliente o el vendedor no existen", "Error", JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
 		}
-		
 	}
 
 }

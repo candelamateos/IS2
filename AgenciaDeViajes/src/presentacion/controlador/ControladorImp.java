@@ -8,7 +8,9 @@ import negocio.departamento.SADepartamento;
 import negocio.departamento.TDepartamento;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
+import negocio.factura.SALineaFactura;
 import negocio.factura.TFactura;
+import negocio.factura.TLineaFactura;
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -43,6 +45,71 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 		}
+		case (Eventos.CERRAR_VENTA): {
+			int id = (int) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			boolean res = saFactura.cerrarVenta(id);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.ANIADIR_VIAJE_A_FACTURA): {
+			TLineaFactura linea = (TLineaFactura) datos;
+			SALineaFactura saLineaFactura = FactoriaAbstractaNegocio.getInstancia().crearSALineaFactura();
+			boolean res = saLineaFactura.createLineaFactura(linea);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ANIADIR_VIAJE_A_FACTURA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ANIADIR_VIAJE_A_FACTURA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.MODIFICAR_FACTURA): {
+			TFactura factura = (TFactura) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			boolean res = saFactura.modificarFactura(factura);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_MODIFICAR_FACTURA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_MODIFICAR_FACTURA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.BUSCAR_FACTURA): {
+			int id = (int) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			TFactura res = saFactura.readFactura(id);
+			if(res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_FACTURA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_FACTURA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.LISTAR_FACTURAS): {
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			List<TFactura> res = saFactura.readAllFactura();
+			if(res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_FACTURAS_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_FACTURAS_ERROR,res);
+				break;
+			}
+		}
+		
 		
 		//Servicio
 		

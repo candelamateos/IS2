@@ -40,15 +40,31 @@ public class SAFacturaImp implements SAFactura{
 	}
 
 	@Override
+	public boolean modificarFactura(TFactura factura) {
+		boolean res = false;
+		DaoFactura d = FactoriaAbstractaIntegracion.getInstancia().crearDaoFactura();
+		DaoCliente c = FactoriaAbstractaIntegracion.getInstancia().crearDaoCliente();
+		DaoTrabajador t = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
+		int idVendedor = factura.getIdVendedor();
+		int idCliente = factura.getIdCliente();
+//		TTrabajador trabajador = t.readTrabajador(idVendedor);
+		TCliente cliente = c.readCliente(idCliente);
+		if(/*trabajador != null && trabajador.isActivo() && trabajador.getTipo().equals("vendedor") &&*/ cliente != null && cliente.getActivo()) {
+			res = d.updateFactura(factura);
+		}
+		return res;
+	}
+
+	@Override
 	public TFactura readFactura(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		DaoFactura d = FactoriaAbstractaIntegracion.getInstancia().crearDaoFactura();
+		return d.readFactura(id);
 	}
 
 	@Override
 	public List<TFactura> readAllFactura() {
-		// TODO Auto-generated method stub
-		return null;
+		DaoFactura d = FactoriaAbstractaIntegracion.getInstancia().crearDaoFactura();
+		return d.readAllFactura();
 	}
 
 }

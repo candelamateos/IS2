@@ -25,14 +25,20 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaListarDepartamento(); }
 		
 		//Factura
-//		case Eventos.FACTURAS:{
-//			return new VistaFacturas();}
-//		case Eventos.ABRIR_VENTA:{
-//			return new VistaAbrirVenta();}
-//		case Eventos.CERRAR_VENTA:{
-//			return new VistaCerrarVenta();}
-//		case Eventos.ANIADIR_VIAJE_A_FACTURA:{
-//			return new VistaAniadirViajeAFactura();}
+		case Eventos.FACTURAS:{
+			return new VistaFacturas();}
+		case Eventos.ABRIR_VENTA:{
+			return new VistaAbrirVenta();}
+		case Eventos.CERRAR_VENTA:{
+			return new VistaCerrarVenta();}
+		case Eventos.ANIADIR_VIAJE_A_FACTURA:{
+			return new VistaAniadirViajeAFactura();}
+		case Eventos.MODIFICAR_FACTURA:{
+			return new VistaModificarFactura();}
+		case Eventos.BUSCAR_FACTURA:{
+			return new VistaBuscarFactura();}
+		case Eventos.LISTAR_FACTURAS:{
+			return new VistaListarFacturas();}
 		
 
 		
