@@ -30,6 +30,8 @@ public class VistaBuscarFactura extends JFrame implements IGUI {
 	
 	private JButton ok;
 	
+	private static final String[] HEADERS = {"Id", "Coste", "Plazas Vendidas", "IdFactura", "IdViaje"};
+	
 	public VistaBuscarFactura() {
 		super("Buscar factura");
 		initGUI();
@@ -89,14 +91,26 @@ public class VistaBuscarFactura extends JFrame implements IGUI {
 		case(Eventos.RES_BUSCAR_FACTURA_OK):
 			TFactura factura = (TFactura) datos;
 			setVisible(false);
-			StringBuilder str = new StringBuilder();
-			str.append("Factura encontrada con datos: ").append(System.lineSeparator());
-			str.append("Id: " + factura.getId()).append(System.lineSeparator());
-			str.append("Coste: " + factura.getCoste()).append(System.lineSeparator());
-			str.append("IdCliente: " + factura.getIdCliente()).append(System.lineSeparator());
-			str.append("IdVendedor: " + factura.getIdVendedor()).append(System.lineSeparator());
-			str.append("Abierta: " + factura.isAbierta()).append(System.lineSeparator());
-			JOptionPane.showMessageDialog(Utils.getWindow(this), str , "Factura encontrada", JOptionPane.INFORMATION_MESSAGE);
+			
+			JPanel mainPanel = new JPanel();
+			mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+			
+			JLabel label1 = new JLabel("Factura encontrada con datos: ");
+			JLabel label2 = new JLabel("Id: " + factura.getId());
+			JLabel label3 = new JLabel("Coste: " + factura.getCoste());
+			JLabel label4 = new JLabel("IdCliente: " + factura.getIdCliente());
+			JLabel label5 = new JLabel("IdVendedor: " + factura.getIdVendedor());
+			JLabel label6 = new JLabel("Abierta: " + factura.isAbierta());
+			mainPanel.add(label1);
+			mainPanel.add(label2);
+			mainPanel.add(label3);
+			mainPanel.add(label4);
+			mainPanel.add(label5);
+			mainPanel.add(label6);
+			
+			
+			
+			JOptionPane.showMessageDialog(Utils.getWindow(this), mainPanel , "Factura encontrada", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		case(Eventos.RES_BUSCAR_FACTURA_ERROR):
