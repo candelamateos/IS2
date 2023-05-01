@@ -241,7 +241,16 @@ public class ControladorImp extends Controlador {
 		}
 		
 		case Eventos.BAJA_SERVICIO:{
-			
+			int id = (int) datos;
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			boolean res = saServicio.deleteServicio(id);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+				.actualizar(Eventos.RES_BAJA_SERVICIO_OK, res);
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BAJA_SERVICIO_ERROR, res);
+			}
 			break;
 		}
 		

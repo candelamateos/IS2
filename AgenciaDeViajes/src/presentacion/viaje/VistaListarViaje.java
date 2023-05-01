@@ -52,7 +52,11 @@ public class VistaListarViaje extends JFrame implements IGUI{
 		JScrollPane scroll = new JScrollPane(tabla);
 		mainPanel.add(scroll);
 		
+		setContentPane(mainPanel);
+		
 		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
 	}
 	
 	@Override
@@ -74,6 +78,8 @@ public class VistaListarViaje extends JFrame implements IGUI{
 		}
 		dataTableModel.fireTableDataChanged();
 		setSize(new Dimension(480,270));
+		setLocationRelativeTo(null);
+		pack();
 		setVisible(true);
 		break;
 		case(Eventos.RES_LISTAR_VIAJE_ERROR):
