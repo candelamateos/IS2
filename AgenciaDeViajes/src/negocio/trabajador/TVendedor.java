@@ -7,8 +7,8 @@ public class TVendedor extends TTrabajador{
 	public TVendedor() {
 	}
 	
-	public TVendedor(String nombre, int sueldo) {
-		super(nombre, sueldo, "Vendedor");
+	public TVendedor(String nombre, int sueldo, int idDepart, String tipo) {
+		super(nombre, sueldo, idDepart, "Vendedor");
 	}
 
 	public int getIdJefe() {
