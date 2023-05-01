@@ -28,7 +28,7 @@ public class VistaServicios extends JFrame implements IGUI{
 	private JButton button_read = new JButton();
 	private JButton button_readAll = new JButton();
 	
-	public static final Color COLOR_FONDO = new Color(204, 243, 170);
+	public static final Color COLOR_FONDO = Color.white;//new Color(204, 243, 170);
 	
 	
 	public VistaServicios() {
