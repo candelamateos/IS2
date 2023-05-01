@@ -19,23 +19,22 @@ import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
-public class VistaModificarFactura extends JFrame implements IGUI {
+public class VistaBuscarFactura extends JFrame implements IGUI {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JTextField tFactura;
-	private JTextField tVendedor;
-	private JTextField tCliente;
+	
 	private JButton ok;
 	
-	public VistaModificarFactura() {
-		super("Modificar factura");
+	public VistaBuscarFactura() {
+		super("Buscar factura");
 		initGUI();
 	}
-
+	
 	private void initGUI() {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -45,12 +44,6 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 		JPanel fila0 = new JPanel();
 		fila0.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila0);
-		JPanel fila1 = new JPanel();
-		fila1.setAlignmentX(CENTER_ALIGNMENT);
-		mainPanel.add(fila1);
-		JPanel fila2 = new JPanel();
-		fila2.setAlignmentX(CENTER_ALIGNMENT);
-		mainPanel.add(fila2);
 		JPanel fila3 = new JPanel();
 		fila3.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila3);
@@ -62,20 +55,6 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 		fila0.add(lFactura);
 		fila0.add(tFactura);
 		
-		JLabel lVendedor = new JLabel("Id del vendedor:");
-		lVendedor.setPreferredSize(new Dimension(100,25));
-		tVendedor = new JTextField(10);
-		tVendedor.setPreferredSize(new Dimension(100,25));
-		fila1.add(lVendedor);
-		fila1.add(tVendedor);
-		
-		JLabel lCliente = new JLabel("Id del cliente:");
-		lCliente.setPreferredSize(new Dimension(100,25));
-		tCliente = new JTextField(10);
-		tCliente.setPreferredSize(new Dimension(100,25));
-		fila2.add(lCliente);
-		fila2.add(tCliente);
-		
 		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 			@Override
@@ -83,32 +62,16 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 				setVisible(false);
 				try {
 					int idFactura;
-					int idVendedor;
-					int idCliente;
 					try{
 						idFactura = Integer.parseInt(tFactura.getText());
 					}catch(NumberFormatException ex) {
 						tFactura.setText("");
 						throw new IllegalArgumentException("El id de la factura debe ser un número", ex);
 					}
-					try{
-						idVendedor = Integer.parseInt(tVendedor.getText());
-					}catch(NumberFormatException ex) {
-						tVendedor.setText("");
-						throw new IllegalArgumentException("El id del vendedor debe ser un número", ex);
-					}
-					try{
-						idCliente = Integer.parseInt(tCliente.getText());
-					}catch(NumberFormatException ex) {
-						tCliente.setText("");
-						throw new IllegalArgumentException("El id del cliente debe ser un número", ex);
-					}
-					TFactura factura =  new TFactura(idCliente,idVendedor);
-					factura.setId(idFactura);
-					Controlador.getInstancia().accion(Eventos.MODIFICAR_FACTURA, factura);
+					Controlador.getInstancia().accion(Eventos.BUSCAR_FACTURA, idFactura);
 				}
 				catch(IllegalArgumentException ex) {
-					JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarFactura.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaBuscarFactura.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}
 			}
@@ -123,14 +86,22 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch(evento) {
-		case(Eventos.RES_MODIFICAR_FACTURA_OK):
+		case(Eventos.RES_BUSCAR_FACTURA_OK):
+			TFactura factura = (TFactura) datos;
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Factura modificada correctamente ", "Factura abierta", JOptionPane.INFORMATION_MESSAGE);
+			StringBuilder str = new StringBuilder();
+			str.append("Factura encontrada con datos: ").append(System.lineSeparator());
+			str.append("Id: " + factura.getId()).append(System.lineSeparator());
+			str.append("Coste: " + factura.getCoste()).append(System.lineSeparator());
+			str.append("IdCliente: " + factura.getIdCliente()).append(System.lineSeparator());
+			str.append("IdVendedor: " + factura.getIdVendedor()).append(System.lineSeparator());
+			str.append("Abierta: " + factura.isAbierta()).append(System.lineSeparator());
+			JOptionPane.showMessageDialog(Utils.getWindow(this), str , "Factura encontrada", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
-		case(Eventos.RES_MODIFICAR_FACTURA_ERROR):
+		case(Eventos.RES_BUSCAR_FACTURA_ERROR):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "El cliente o el vendedor no existen", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo encontrar la factura", "Error", JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
 		}

@@ -29,10 +29,10 @@ public class VistaAniadirViajeAFactura extends JFrame implements IGUI {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	JTextField tFactura;
-	JTextField tViaje;
-	JSpinner sPlazas;
-	JButton ok;
+	private JTextField tFactura;
+	private JTextField tViaje;
+	private JSpinner sPlazas;
+	private JButton ok;
 	
 	public VistaAniadirViajeAFactura() {
 		super("Añadir Viaje");

@@ -25,8 +25,8 @@ public class VistaCerrarVenta extends JFrame implements IGUI {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	JTextField tFactura;
-	JButton ok;
+	private JTextField tFactura;
+	private JButton ok;
 	
 	public VistaCerrarVenta() {
 		super("Abrir Venta");

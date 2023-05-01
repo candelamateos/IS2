@@ -84,6 +84,19 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 		}
+		case (Eventos.BUSCAR_FACTURA): {
+			int id = (int) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			TFactura res = saFactura.readFactura(id);
+			if(res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_FACTURA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_FACTURA_ERROR,res);
+				break;
+			}
+		}
 		
 		//Servicio
 		

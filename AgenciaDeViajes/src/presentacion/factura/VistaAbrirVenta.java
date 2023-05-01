@@ -26,9 +26,9 @@ public class VistaAbrirVenta extends JFrame implements IGUI {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	JTextField tVendedor;
-	JTextField tCliente;
-	JButton ok;
+	private JTextField tVendedor;
+	private JTextField tCliente;
+	private JButton ok;
 	
 	public VistaAbrirVenta() {
 		super("Abrir Venta");
