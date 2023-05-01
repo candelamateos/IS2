@@ -19,11 +19,15 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import negocio.servicio.TActividad;
 import negocio.servicio.TAlojamiento;
+import negocio.servicio.TTransporte;
 import presentacion.IGUI;
+import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
@@ -43,6 +47,12 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 	JComboBox<String> comboBoxEstrellas;
 	Map<String, Integer> convertirEstrellas;
 	JButton buttonGuardar;
+	JTextField textFieldTipoTransporte;
+	JComboBox<String> comboBoxComida;
+	Map<String, Boolean> convertirComida;
+	JTextField textFieldTipoActividad;
+	JComboBox<String> comboBoxColectivo;
+	Map<String, Boolean> convertirColectivo;
 	
 	
 	private final String PANEL_ACTIVIDAD = "actividad";
@@ -111,9 +121,49 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		panelAlojamiento.add(comboBoxEstrellas);
 		
 		//panel transporte
+		panelTransporte.setLayout(new GridLayout(6, 2));
+		textFieldNombre = new JTextField(20);
+		textFieldNumPlazas = new JTextField(20);
+		textFieldPrecio = new JTextField(20);
+		textFieldTipoTransporte = new JTextField(20);
+		convertirComida = new HashMap<String, Boolean>();
+		convertirComida.put("SI", true);
+		convertirComida.put("NO", false);
+		String opcionesComboBoxComida[] = {"SI", "NO"};
+		comboBoxComida = new JComboBox<String>(opcionesComboBoxComida);
+		panelTransporte.add(new JLabel("nombre", JLabel.CENTER));
+		panelTransporte.add(textFieldNombre);
+		panelTransporte.add(new JLabel("nº plazas", JLabel.CENTER));
+		panelTransporte.add(textFieldNumPlazas);
+		panelTransporte.add(new JLabel("precio", JLabel.CENTER));
+		panelTransporte.add(textFieldPrecio);
+		panelTransporte.add(new JLabel("tipo de transporte", JLabel.CENTER));
+		panelTransporte.add(textFieldTipoTransporte);
+		panelTransporte.add(new JLabel("comida incluida", JLabel.CENTER));
+		panelTransporte.add(comboBoxComida);
 		
 		
 		//panel actividad
+		panelActividad.setLayout(new GridLayout(6, 2));
+		textFieldNombre = new JTextField(20);
+		textFieldNumPlazas = new JTextField(20);
+		textFieldPrecio = new JTextField(20);
+		textFieldTipoActividad = new JTextField(20);
+		convertirColectivo = new HashMap<String, Boolean>();
+		convertirColectivo.put("SI", true);
+		convertirColectivo.put("NO", false);
+		String opcionesComboBoxColectivo[] = {"SI", "NO"};
+		comboBoxColectivo = new JComboBox<String>(opcionesComboBoxColectivo);
+		panelActividad.add(new JLabel("nombre", JLabel.CENTER));
+		panelActividad.add(textFieldNombre);
+		panelActividad.add(new JLabel("nº plazas", JLabel.CENTER));
+		panelActividad.add(textFieldNumPlazas);
+		panelActividad.add(new JLabel("precio", JLabel.CENTER));
+		panelActividad.add(textFieldPrecio);
+		panelActividad.add(new JLabel("tipo de actividad", JLabel.CENTER));
+		panelActividad.add(textFieldTipoActividad);
+		panelActividad.add(new JLabel("colectivo", JLabel.CENTER));
+		panelActividad.add(comboBoxComida);
 		
 		
 		buttonGuardar = new JButton("guardar");
@@ -129,7 +179,18 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 
 	@Override
 	public void actualizar(int evento, Object datos) {
-		// TODO Auto-generated method stub
+		switch(evento) {
+		case(Eventos.RES_ALTA_SERVICIO_OK):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "servicio anyadido con id " + datos, "servicio Anyadido", JOptionPane.INFORMATION_MESSAGE);
+			setVisible(true);
+			break;
+		case(Eventos.RES_ALTA_SERVICIO_ERROR):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo anyadir el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+			setVisible(true);
+			break;
+		}
 		
 	}
 	
@@ -139,6 +200,7 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		public void actionPerformed(ActionEvent e) {
 			String panelSeleccionado = (String) comboBox.getSelectedItem();
 			
+			try {
 			switch(panelSeleccionado) {
 			case PANEL_ALOJAMIENTO:{
 				String nombre = textFieldNombre.getText();
@@ -151,8 +213,37 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 				Controlador.getInstancia().accion(Eventos.ALTA_SERVICIO, transfer);
 				break;
 			}
+			
+			case PANEL_TRANSPORTE:{
+				String nombre = textFieldNombre.getText();
+				int numPlazas = Integer.parseInt(textFieldNumPlazas.getText());
+				int precio = Integer.parseInt(textFieldPrecio.getText());
+				String tipoTransporte = textFieldTipoTransporte.getText();
+				boolean comida = convertirComida.get(comboBoxComida.getSelectedItem());
+				setVisible(false);
+				TTransporte transfer = new TTransporte(nombre, numPlazas, precio, tipoTransporte, comida);
+				Controlador.getInstancia().accion(Eventos.ALTA_SERVICIO, transfer);
+				break;
 			}
 			
+			case PANEL_ACTIVIDAD:{
+				String nombre = textFieldNombre.getText();
+				int numPlazas = Integer.parseInt(textFieldNumPlazas.getText());
+				int precio = Integer.parseInt(textFieldPrecio.getText());
+				String tipoActividad = textFieldTipoActividad.getText();
+				boolean colectivo = convertirColectivo.get(comboBoxColectivo.getSelectedItem());
+				setVisible(false);
+				TActividad transfer = new TActividad(nombre, numPlazas, precio, tipoActividad, colectivo);
+				Controlador.getInstancia().accion(Eventos.ALTA_SERVICIO, transfer);
+				break;
+			}
+			}
+			}
+			catch(Exception ex) {
+				setVisible(false);
+				JOptionPane.showMessageDialog(Utils.getWindow(VistaAnyadirServicio.this), "algun parametro es invalido", "Error", JOptionPane.ERROR_MESSAGE);
+				setVisible(true);
+			}
 		}
 		
 	}
