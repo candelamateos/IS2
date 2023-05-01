@@ -1,77 +1,82 @@
 package presentacion.cliente;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.Dimension;
 import java.util.List;
 
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import negocio.cliente.TCliente;
-import negocio.viaje.TViaje;
 import presentacion.IGUI;
 import presentacion.Utils;
-import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
 public class VistaListarCliente extends JFrame implements IGUI {
 
-	private JButton ok;
-	
+	private static final long serialVersionUID = 1L;
+
+	private DefaultTableModel dataTableModel;
+
+	private static final String[] HEADERS = { "Id", "Nombre" };
+
 	public VistaListarCliente() {
-		super("LISTAR CLIENTE");
+		super("Listar Facturas");
 		initGUI();
 	}
-	
-	void initGUI() {
-		JPanel panel = new JPanel();
-		
-		ok = new JButton("OK");
-		ok.addActionListener(new ActionListener() {
+
+	private void initGUI() {
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		setContentPane(mainPanel);
+
+		dataTableModel = new DefaultTableModel() {
+
+			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				Controlador.getInstancia().accion(Eventos.LISTAR_CLIENTE, null);
+			public boolean isCellEditable(int row, int col) {
+				return false;
 			}
-		});
 
-		panel.add(ok);
-		setContentPane(panel);
-		
+		};
+		dataTableModel.setColumnIdentifiers(HEADERS);
+
+		JTable tabla = new JTable(dataTableModel);
+		JScrollPane scroll = new JScrollPane(tabla);
+		mainPanel.add(scroll);
+
 		setLocationRelativeTo(null);
-		pack();
-		setVisible(true);
 	}
 
-	
 	@Override
 	public void actualizar(int evento, Object datos) {
-		switch(evento) {
-		case(Eventos.RES_LISTAR_CLIENTE_OK):
-			setVisible(false);
-			StringBuilder str = new StringBuilder();
-			str.append("Lista de Clientes").append(System.lineSeparator());
-			List<TCliente> lista = (ArrayList<TCliente>) datos;
-			for(TCliente cliente : lista) {
-				str.append("Cliente con nombre: " + cliente.getNombre() + ", con id: " + cliente.getId()).append(System.lineSeparator());
+		switch (evento) {
+		case (Eventos.RES_LISTAR_CLIENTE_OK):
+			setVisible(true);
+			List<TCliente> lista = (List<TCliente>) datos;
+
+			dataTableModel.setNumRows(lista.size());
+			for (int i = 0; i < lista.size(); i++) {
+				TCliente cliente = lista.get(i);
+				dataTableModel.setValueAt(cliente.getId(), i, 0);
+				dataTableModel.setValueAt(cliente.getNombre(), i, 2);
 			}
-			JOptionPane.showMessageDialog(Utils.getWindow(this), str, "Lista de Clientes mostrada", JOptionPane.INFORMATION_MESSAGE);
+
+			setSize(new Dimension(480, 270));
 			setVisible(true);
 			break;
-		case(Eventos.RES_LISTAR_VIAJE_ERROR):
-			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudieron listar los clientes", "Error", JOptionPane.ERROR_MESSAGE);
-			setVisible(true);
+		case (Eventos.RES_LISTAR_CLIENTE_ERROR):
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se han encontrado clientes", "Error",
+					JOptionPane.ERROR_MESSAGE);
 			break;
 		}
-	} 
 
-	
-	
+	}
 }
