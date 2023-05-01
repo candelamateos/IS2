@@ -11,15 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import negocio.cliente.TCliente;
-import negocio.departamento.TDepartamento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.Utils;
 
 public class VistaAniadirCliente extends JFrame implements IGUI{
-	private JLabel lId;
-	private JTextField tId;
 	private JLabel lNombre;
 	private JTextField tNombre;
 	private JButton ok;
@@ -31,7 +28,11 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 	
 	void initGUI() {
 		JPanel panel = new JPanel();
+<<<<<<< Updated upstream
 		lNombre= new JLabel("Nombre:");
+=======
+		lNombre= new JLabel("NOMBRE:");
+>>>>>>> Stashed changes
 		tNombre = new JTextField(5);
 		panel.add(lNombre);
 		panel.add(tNombre);
@@ -41,6 +42,7 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+<<<<<<< Updated upstream
 				try {
 				String nombre = tNombre.getText();
 				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(nombre));
@@ -50,6 +52,10 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 							JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}
+=======
+				String nombre = tNombre.getText();
+				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(nombre));
+>>>>>>> Stashed changes
 			}
 		});
 		panel.add(ok);
