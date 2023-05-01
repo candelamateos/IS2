@@ -49,7 +49,7 @@ public class VistaClientes extends JFrame implements IGUI {
 		fila3.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila3);
 
-		BAniadirCliente = new JButton("A�adir Cliente");
+		BAniadirCliente = new JButton("Anyadir Cliente");
 		BAniadirCliente.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
