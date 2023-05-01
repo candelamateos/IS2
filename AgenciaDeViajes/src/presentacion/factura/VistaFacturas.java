@@ -55,7 +55,7 @@ public class VistaFacturas extends JFrame implements IGUI {
 				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ABRIR_VENTA);
 			}	
 		});
-		BAbrirVenta.setPreferredSize(new Dimension(130,30));
+		BAbrirVenta.setPreferredSize(new Dimension(140,30));
 		fila1.add(BAbrirVenta);
 		
 		BCerrarVenta = new JButton("Cerrar Venta");
@@ -65,7 +65,7 @@ public class VistaFacturas extends JFrame implements IGUI {
 				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.CERRAR_VENTA);
 			}	
 		});
-		BCerrarVenta.setPreferredSize(new Dimension(130,30));
+		BCerrarVenta.setPreferredSize(new Dimension(140,30));
 		fila1.add(BCerrarVenta);
 		
 		BAniadirViaje = new JButton("Añadir Viaje");
@@ -75,7 +75,7 @@ public class VistaFacturas extends JFrame implements IGUI {
 				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ANIADIR_VIAJE_A_FACTURA);
 			}	
 		});
-		BAniadirViaje.setPreferredSize(new Dimension(130,30));
+		BAniadirViaje.setPreferredSize(new Dimension(140,30));
 		fila2.add(BAniadirViaje);
 		
 		BModificarFactura = new JButton("Modificar Factura");
@@ -85,7 +85,7 @@ public class VistaFacturas extends JFrame implements IGUI {
 				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.MODIFICAR_FACTURA);
 			}	
 		});
-		BModificarFactura.setPreferredSize(new Dimension(130,30));
+		BModificarFactura.setPreferredSize(new Dimension(140,30));
 		fila2.add(BModificarFactura);
 		
 		BBuscarFactura = new JButton("Buscar Factura");
@@ -95,7 +95,7 @@ public class VistaFacturas extends JFrame implements IGUI {
 				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.BUSCAR_FACTURA);
 			}	
 		});
-		BBuscarFactura.setPreferredSize(new Dimension(130,30));
+		BBuscarFactura.setPreferredSize(new Dimension(140,30));
 		fila3.add(BBuscarFactura);
 		
 		BListarFacturas = new JButton("Listar Facturas");
@@ -105,7 +105,7 @@ public class VistaFacturas extends JFrame implements IGUI {
 				Controlador.getInstancia().accion(Eventos.LISTAR_FACTURAS, null);
 			}	
 		});
-		BListarFacturas.setPreferredSize(new Dimension(130,30));
+		BListarFacturas.setPreferredSize(new Dimension(140,30));
 		fila3.add(BListarFacturas);
 		
 		setLocationRelativeTo(null);
