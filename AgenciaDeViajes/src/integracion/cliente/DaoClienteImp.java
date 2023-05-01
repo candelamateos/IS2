@@ -168,7 +168,7 @@ public class DaoClienteImp implements DaoCliente {
 	public static void main(String[] args) {
 		DaoCliente d = new DaoClienteImp();
 		TCliente miguel = new TCliente("Miguel");
-		TCliente anto = new TCliente("Antonio");
+		TCliente anto = new TCliente("Barbara");
 		TCliente jose = new TCliente("Jose");
 		TCliente rodr = new TCliente("Rodrigo");
 		d.createCliente(miguel);
