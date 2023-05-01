@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import negocio.cliente.TCliente;
+import negocio.factura.TFactura;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
@@ -66,8 +68,31 @@ public class VistaBuscarCliente extends JFrame implements IGUI {
 
 	@Override
 	public void actualizar(int evento, Object datos) {
-		// TODO Auto-generated method stub
-
+		switch (evento) {
+		case (Eventos.RES_BUSCAR_CLIENTE_OK):
+			TCliente cliente = (TCliente) datos;
+			setVisible(false);
+			StringBuilder str = new StringBuilder();
+			str.append("Cliente encontrado con datos: ").append(System.lineSeparator());
+			str.append("Id: " + cliente.getId()).append(System.lineSeparator());
+			str.append("Nombre: " + cliente.getNombre()).append(System.lineSeparator());
+			if(cliente.getActivo()) {
+				str.append("Cliente activo").append(System.lineSeparator());
+			}
+			else {
+				str.append("Cliente inactivo").append(System.lineSeparator());
+			}
+			JOptionPane.showMessageDialog(Utils.getWindow(this), str, "Cliente encontrado",
+					JOptionPane.INFORMATION_MESSAGE);
+			setVisible(true);
+			break;
+		case (Eventos.RES_BUSCAR_CLIENTE_ERROR):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo encontrar el cliente", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			setVisible(true);
+			break;
+		}
 	}
 
 }

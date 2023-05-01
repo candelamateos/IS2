@@ -16,7 +16,7 @@ import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
-	
+
 	public void accion(int evento, Object datos) {
 		switch (evento) {
 
@@ -210,8 +210,8 @@ public class ControladorImp extends Controlador {
 			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
 			boolean res = saCliente.deleteCliente(id);
 			if (res) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
-				.actualizar(Eventos.RES_BAJA_CLIENTE_OK, res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_CLIENTE_OK,
+						res);
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_BAJA_CLIENTE_ERROR, res);
@@ -228,7 +228,21 @@ public class ControladorImp extends Controlador {
 						.actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR, res);
 			}
 		}
-		
+		case (Eventos.BUSCAR_CLIENTE): {
+			int id = (int) datos;
+			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+			TCliente res = saCliente.readCliente(id);
+			if (res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_CLIENTE_OK, res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_CLIENTE_ERROR, res);
+				break;
+			}
+
+		}
 		}
 	}
 }
