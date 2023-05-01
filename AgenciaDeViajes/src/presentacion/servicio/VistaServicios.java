@@ -15,7 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import integracion.factoria.FactoriaAbstractaIntegracion;
 import presentacion.IGUI;
+import presentacion.controlador.Eventos;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaServicios extends JFrame implements IGUI{
 	
@@ -24,6 +27,8 @@ public class VistaServicios extends JFrame implements IGUI{
 	private JButton button_update = new JButton();
 	private JButton button_read = new JButton();
 	private JButton button_readAll = new JButton();
+	
+	public static final Color COLOR_FONDO = Color.white;//new Color(204, 243, 170);
 	
 	
 	public VistaServicios() {
@@ -36,7 +41,7 @@ public class VistaServicios extends JFrame implements IGUI{
 		JPanel mainPanel = new JPanel();
 		this.setContentPane(mainPanel);
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		mainPanel.setBackground(new Color(46, 139, 87));
+		mainPanel.setBackground(COLOR_FONDO);
 		
 		
 		add(Box.createGlue());
@@ -61,6 +66,18 @@ public class VistaServicios extends JFrame implements IGUI{
 		fila2.add(Box.createGlue());
 		fila2.add(new ButtonPanel(button_readAll, "listar servicios"));
 		fila2.add(Box.createGlue());
+		
+		button_create.setForeground(Color.green);
+		button_create.setText("+");
+		button_create.setFont(new Font("default", Font.BOLD, 100));
+		button_create.setBorder(BorderFactory.createEmptyBorder());
+		button_create.addActionListener(e -> {FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ALTA_SERVICIO);});
+		
+		button_delete.setForeground(Color.red);
+		button_delete.setText("-");
+		button_delete.setFont(new Font("default", Font.BOLD, 100));
+		button_delete.setBorder(BorderFactory.createEmptyBorder());
+		button_delete.addActionListener(e -> {FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.BAJA_SERVICIO);});
 		
 		add(Box.createGlue());
 		setLocationRelativeTo(null);
