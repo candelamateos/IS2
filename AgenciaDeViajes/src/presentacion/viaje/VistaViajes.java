@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import presentacion.IGUI;
+import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -82,7 +83,7 @@ public class VistaViajes extends JFrame implements IGUI {
 		BListarViaje.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.LISTAR_VIAJE);
+				Controlador.getInstancia().accion(Eventos.LISTAR_VIAJE, null);
 			}			
 		});
 		BListarViaje.setPreferredSize(new Dimension(130,30));
