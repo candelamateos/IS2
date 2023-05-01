@@ -1,28 +1,39 @@
 package negocio.viaje;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import integracion.cliente.DaoCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
-import integracion.factura.DaoFactura;
-import integracion.trabajador.DaoTrabajador;
 import integracion.viaje.DaoViaje;
-import negocio.cliente.TCliente;
-import negocio.trabajador.TTrabajador;
+import integracion.servicio.DaoServicio;
+import negocio.servicio.*;
 
 public class SAViajeImp implements SAViaje{
 	
 	private boolean comprobarDatos(TViaje viaje) {
-		return viaje.getPrecio() > 0 && viaje.getActivo() && viaje.getNumPlazas() >= 0 && viaje.getIdActividad() > 0 && viaje.getIdAlojamiento() > 0 && viaje.getIdTransporte() > 0;
+		return viaje.getActivo() && viaje.getNumPlazas() >= 0 && viaje.getIdActividad() > 0 && viaje.getIdAlojamiento() > 0 && viaje.getIdTransporte() > 0;
 	}
 
 	@Override
 	public int createViaje(TViaje Viaje) {
 		int id = -1;
 		DaoViaje d = FactoriaAbstractaIntegracion.getInstancia().crearDaoViaje();
-		if(Viaje != null && comprobarDatos(Viaje)) {
-			id = d.createViaje(Viaje);
+		DaoServicio dServicio = FactoriaAbstractaIntegracion.getInstancia().crearDaoServicio();
+		TActividad tActividad = (TActividad) dServicio.readServicio(Viaje.getIdActividad());
+		TAlojamiento tAlojamiento = (TAlojamiento) dServicio.readServicio(Viaje.getIdAlojamiento());
+		TTransporte tTransporte = (TTransporte) dServicio.readServicio(Viaje.getIdTransporte());
+		if(Viaje != null && comprobarDatos(Viaje) && tActividad != null && tAlojamiento != null && tTransporte != null) {
+			int plazasActividad = tActividad.getNumPlazas() - Viaje.getNumPlazas();
+			int plazasAlojamiento = tAlojamiento.getNumPlazas() - Viaje.getNumPlazas();
+			int plazasTransporte = tTransporte.getNumPlazas() - Viaje.getNumPlazas();
+			if(plazasActividad >= 0 && plazasAlojamiento >= 0 && plazasTransporte >= 0) {
+				Viaje.setPrecio(tActividad.getPrecio() + tAlojamiento.getPrecio() + tTransporte.getPrecio());
+				id = d.createViaje(Viaje);
+				if(id != -1) {
+					tActividad.setNumPlazas(plazasActividad);
+					tAlojamiento.setNumPlazas(plazasAlojamiento);
+					tTransporte.setNumPlazas(plazasTransporte);
+				}
+			}
 		}
 		return id;
 	}
