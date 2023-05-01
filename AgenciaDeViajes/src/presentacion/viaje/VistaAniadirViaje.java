@@ -72,7 +72,13 @@ public class VistaAniadirViaje extends JFrame implements IGUI{
 				int Iprecio = Integer.parseInt(precio);
 				String numPlazas = tNumPlazas.getText();
 				int InumPlazas = Integer.parseInt(numPlazas);
-				Controlador.getInstancia().accion(Eventos.ALTA_VIAJE, new TViaje(Iprecio, InumPlazas));
+				String idActividad = tIdActividad.getText();
+				int IidActividad = Integer.parseInt(idActividad);
+				String idAlojamiento = tIdAlojamiento.getText();
+				int IidAlojamiento = Integer.parseInt(idAlojamiento);
+				String idTransporte = tIdTransporte.getText();
+				int IidTransporte = Integer.parseInt(idTransporte);
+				Controlador.getInstancia().accion(Eventos.ALTA_VIAJE, new TViaje(Iprecio, InumPlazas, IidActividad, IidAlojamiento, IidTransporte));
 			}
 		});
 		panel.add(ok);

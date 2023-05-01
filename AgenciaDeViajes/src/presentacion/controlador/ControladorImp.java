@@ -137,16 +137,16 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_CLIENTE_ERROR,res);
 			}
 		}
-		case(Eventos.LISTAR_CLIENTE): {
-			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
-			List<TCliente> res = saCliente.readAllCliente();
-			if(res != null) {
-			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_OK,res);
-			}
-			else {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR,res);
-			}
-		}
+//		case(Eventos.LISTAR_CLIENTE): {
+//			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+//			List<TCliente> res = saCliente.readAllCliente();
+//			if(res != null) {
+//			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_OK,res);
+//			}
+//			else {
+//				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR,res);
+//			}
+//		}
 		}
 	}
 }

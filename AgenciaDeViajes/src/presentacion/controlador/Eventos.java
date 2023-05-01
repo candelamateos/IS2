@@ -42,7 +42,6 @@ public class Eventos {
 	public static final int RES_LISTAR_FACTURAS_ERROR = 118;
 	
 	//Servicio 2xx
-
 	public static final int SERVICIOS = 200;
 	public static final int ALTA_SERVICIO = 201;
 	public static final int BAJA_SERVICIO = 202;
