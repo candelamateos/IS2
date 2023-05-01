@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import negocio.viaje.TViaje;
 import presentacion.IGUI;
 import presentacion.Utils;
+import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
 public class VistaListarViaje extends JFrame implements IGUI{
@@ -71,7 +72,7 @@ public class VistaListarViaje extends JFrame implements IGUI{
 			dataTableModel.setValueAt(viaje.getIdTransporte(), i, 5);
 			dataTableModel.setValueAt(viaje.getActivo(), i, 6);
 		}
-		
+		dataTableModel.fireTableDataChanged();
 		setSize(new Dimension(480,270));
 		setVisible(true);
 		break;

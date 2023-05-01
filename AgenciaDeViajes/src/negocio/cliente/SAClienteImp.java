@@ -37,7 +37,7 @@ public class SAClienteImp implements SACliente {
 	@Override
 	public boolean deleteCliente(int id) {
 		DaoCliente d = FactoriaAbstractaIntegracion.getInstancia().crearDaoCliente();
-		if (id != 0) {
+		if (id != -1) {
 			return d.deleteCliente(id);
 		}
 		else {
