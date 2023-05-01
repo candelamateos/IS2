@@ -7,6 +7,8 @@ import negocio.cliente.TCliente;
 import negocio.departamento.SADepartamento;
 import negocio.departamento.TDepartamento;
 import negocio.factoria.FactoriaAbstractaNegocio;
+import negocio.factura.SAFactura;
+import negocio.factura.TFactura;
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -28,6 +30,19 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//Factura
+		case (Eventos.ABRIR_VENTA): {
+			TFactura factura = (TFactura) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			int res = saFactura.abrirVenta(factura);
+			if(res != -1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ABRIR_VENTA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ABRIR_VENTA_ERROR,res);
+				break;
+			}
+		}
 		
 		//Servicio
 		
