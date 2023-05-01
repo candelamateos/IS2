@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import presentacion.IGUI;
+import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
@@ -40,7 +42,17 @@ public class VistaEliminarCliente extends JFrame implements IGUI {
 
 	@Override
 	public void actualizar(int evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+		switch(evento) {
+		case(Eventos.RES_BAJA_CLIENTE_OK):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente eliminado con id " + datos, "Cliente Eliminado", JOptionPane.INFORMATION_MESSAGE);
+			setVisible(true);
+			break;
+		case(Eventos.RES_BAJA_CLIENTE_ERROR):
+			setVisible(false);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo eliminar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+			setVisible(true);
+			break;
+		}
 	}
 }

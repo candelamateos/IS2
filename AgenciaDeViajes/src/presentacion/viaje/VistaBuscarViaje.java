@@ -58,8 +58,9 @@ public class VistaBuscarViaje extends JFrame implements IGUI{
 	public void actualizar(int evento, Object datos) {
 		switch(evento) {
 		case(Eventos.RES_BUSCAR_VIAJE_OK):
+			TViaje viaje = (TViaje) datos;
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Viaje encontrado con id " + datos, "Viaje encontrado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Viaje encontrado con id " + viaje.getId(), "Viaje encontrado", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		case(Eventos.RES_BUSCAR_VIAJE_ERROR):

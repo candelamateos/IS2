@@ -4,7 +4,8 @@ import presentacion.IGUI;
 import presentacion.cliente.*;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
-import presentacion.servicio.VistaServicios;
+import presentacion.factura.VistaFacturas;
+//import presentacion.servicio.VistaServicios;
 import presentacion.viaje.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
@@ -24,10 +25,12 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaListarDepartamento(); }
 		
 		//Factura
-		
+//		case Eventos.FACTURAS:
+//			return new VistaFacturas();
+//		
 		//Servicio
-		case Eventos.SERVICIOS:{
-			return new VistaServicios();}
+//		case Eventos.SERVICIOS:{
+//			return new VistaServicios();}
 		case Eventos.ALTA_SERVICIO:{
 			return new VistaAniadirCliente();}
 		case Eventos.BAJA_SERVICIO:{
@@ -43,6 +46,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 		//Trabajador
 		
 		//Viaje
+		case Eventos.VIAJES:{
+			return new VistaViajes(); }
 		case Eventos.ALTA_VIAJE:{
 			return new VistaAniadirViaje(); }
 		case Eventos.BAJA_VIAJE:{

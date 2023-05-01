@@ -59,9 +59,9 @@ public class DaoClienteImp implements DaoCliente {
 			json.put("activo", cliente.getActivo());
 			
 			clientes.put(json.getInt("id"), json);
+			return saveData(data);
 		}
-		
-		return saveData(data);
+		return false;
 	}
 
 	@Override
@@ -179,9 +179,9 @@ public class DaoClienteImp implements DaoCliente {
 		println(d.readCliente(2)); //jose
 		
 		jose = d.readCliente(2);
-		jose.setNombre("José");
+		jose.setNombre("Josï¿½");
 		d.updateCliente(jose);
-		println(d.readCliente(2));//José con tilde
+		println(d.readCliente(2));//Josï¿½ con tilde
 		
 		d.deleteCliente(3); //Eliminamos Rodr
 		println(d.readCliente(3));//error

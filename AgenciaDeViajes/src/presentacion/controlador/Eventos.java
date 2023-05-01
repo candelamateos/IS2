@@ -11,8 +11,8 @@ public class Eventos {
 	public static final int LISTAR_DEPARTAMENTO = 005;
 	public static final int RES_ALTA_DEPARTAMENTO_OK = 006;
 	public static final int RES_ALTA_DEPARTAMENTO_ERROR = 007;
-	public static final int RES_BAJA_DEPARTAMENTO_OK = 008;
-	public static final int RES_BAJA_DEPARTAMENTO_ERROR = 009;
+	public static final int RES_BAJA_DEPARTAMENTO_OK = 006;
+	public static final int RES_BAJA_DEPARTAMENTO_ERROR = 006;
 	public static final int RES_BUSCAR_DEPARTAMENTO_OK = 010;
 	public static final int RES_BUSCAR_DEPARTAMENTO_ERROR = 011;
 	public static final int RES_MODIFICAR_DEPARTAMENTO_OK = 012;
@@ -21,7 +21,7 @@ public class Eventos {
 	public static final int RES_LISTAR_DEPARTAMENTO_ERROR = 015;
 	
 	//Factura 1xx
-	
+	public static final int FACTURAS = 100;
 	//Servicio 2xx
 
 	public static final int SERVICIOS = 200;
@@ -34,6 +34,7 @@ public class Eventos {
 	//Trabajador 3xx
 	
 	//Viaje 4xx
+	public static final int VIAJES = 400;
 	public static final int ALTA_VIAJE = 401;
 	public static final int BAJA_VIAJE = 402;
 	public static final int BUSCAR_VIAJE = 403;
@@ -58,6 +59,6 @@ public class Eventos {
 	public static final int BUSCAR_CLIENTE = 503;
 	public static final int MODIFICAR_CLIENTE = 504;
 	public static final int LISTAR_CLIENTE = 505;
-	
-	
+	public static final int RES_ALTA_CLIENTE_OK = 506;
+	public static final int RES_ALTA_CLIENTE_ERROR = 506;
 }
