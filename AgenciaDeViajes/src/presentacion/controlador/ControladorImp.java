@@ -46,15 +46,41 @@ public class ControladorImp extends Controlador {
 			}
 		}
 		case (Eventos.CERRAR_VENTA): {
-			TLineaFactura linea = (TLineaFactura) datos;
-			SALineaFactura saLineaFactura = FactoriaAbstractaNegocio.getInstancia().crearSALineaFactura();
-			boolean res = saLineaFactura.createLineaFactura(linea);
+			int id = (int) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			boolean res = saFactura.cerrarVenta(id);
 			if(res) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_OK,res);
 				break;
 			}
 			else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.ANIADIR_VIAJE_A_FACTURA): {
+			TLineaFactura linea = (TLineaFactura) datos;
+			SALineaFactura saLineaFactura = FactoriaAbstractaNegocio.getInstancia().crearSALineaFactura();
+			boolean res = saLineaFactura.createLineaFactura(linea);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ANIADIR_VIAJE_A_FACTURA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ANIADIR_VIAJE_A_FACTURA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.MODIFICAR_FACTURA): {
+			TFactura factura = (TFactura) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			boolean res = saFactura.modificarFactura(factura);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_MODIFICAR_FACTURA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_MODIFICAR_FACTURA_ERROR,res);
 				break;
 			}
 		}

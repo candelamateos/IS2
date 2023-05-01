@@ -77,7 +77,12 @@ public class VistaFacturas extends JFrame implements IGUI {
 		fila2.add(BAniadirViaje);
 		
 		BModificarFactura = new JButton("Modificar Factura");
-		BModificarFactura.addActionListener(null);
+		BModificarFactura.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.MODIFICAR_FACTURA);
+			}	
+		});
 		BModificarFactura.setPreferredSize(new Dimension(130,30));
 		fila2.add(BModificarFactura);
 		

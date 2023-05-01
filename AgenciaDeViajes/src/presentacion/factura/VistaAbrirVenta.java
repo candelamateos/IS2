@@ -114,7 +114,6 @@ public class VistaAbrirVenta extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		}
-		
 	}
 	
 
