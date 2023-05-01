@@ -28,6 +28,8 @@ public class VistaServicios extends JFrame implements IGUI{
 	private JButton button_read = new JButton();
 	private JButton button_readAll = new JButton();
 	
+	public static final Color COLOR_FONDO = new Color(204, 243, 170);
+	
 	
 	public VistaServicios() {
 		super("servicios");
@@ -39,7 +41,7 @@ public class VistaServicios extends JFrame implements IGUI{
 		JPanel mainPanel = new JPanel();
 		this.setContentPane(mainPanel);
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		mainPanel.setBackground(new Color(46, 139, 87));
+		mainPanel.setBackground(COLOR_FONDO);
 		
 		
 		add(Box.createGlue());
