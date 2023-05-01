@@ -1,23 +1,15 @@
 package presentacion.viaje;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
-import java.util.ArrayList;
+import java.awt.Dimension;
 import java.util.List;
 
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 
 import negocio.viaje.TViaje;
@@ -27,8 +19,12 @@ import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
 public class VistaListarViaje extends JFrame implements IGUI{
-
-	private JButton ok;
+	
+	private static final long serialVersionUID = 1L;
+	
+	private DefaultTableModel dataTableModel;
+	
+	private static final String[] HEADERS = {"Id", "Precio", "Numero de plazas", "IdActividad", "IdAlojamiento", "IdTransporte"};
 	
 	public VistaListarViaje() {
 		super("LISTAR VIAJE");
@@ -36,79 +32,53 @@ public class VistaListarViaje extends JFrame implements IGUI{
 	}
 	
 	private void initGUI() {
-		JPanel panel = new JPanel();
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		setContentPane(mainPanel);
 		
-		ok = new JButton("OK");
-		ok.addActionListener(new ActionListener() {
-
+		dataTableModel = new DefaultTableModel() {
+			private static final long serialVersionUID = 1L;
+			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				Controlador.getInstancia().accion(Eventos.LISTAR_VIAJE, null);
+			public boolean isCellEditable(int row, int col) {
+				return false;
 			}
-		});
-		panel.add(ok);
-		setContentPane(panel);
+			
+		};
+		dataTableModel.setColumnIdentifiers(HEADERS);
+		
+		JTable tabla = new JTable(dataTableModel);
+		JScrollPane scroll = new JScrollPane(tabla);
+		mainPanel.add(scroll);
 		
 		setLocationRelativeTo(null);
-		pack();
-		setVisible(true);
 	}
 	
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch(evento) {
 		case(Eventos.RES_LISTAR_VIAJE_OK):
-			setVisible(false);
+			List<TViaje> lista = (List<TViaje>) datos;
 		
-			String[] columnas = {"Id", "Precio", "Numero de plazas", "IdActividad", "IdAlojamiento", "IdTransporte"};
-		 	JTable tabla = new JTable();
-	        DefaultTableModel modelo = new DefaultTableModel();
-	        JScrollPane desplazamiento = new JScrollPane(tabla);   
-	        setTitle("Lista de Viajes");
-	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        this.setLayout(new BorderLayout());
-	        
-	        modelo.setColumnIdentifiers(columnas);
-	        
-	        desplazamiento.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	        desplazamiento.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-	        
-	        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-	        tabla.setFillsViewportHeight(true);
-	        
-	        tabla.setModel(modelo);
-	        
-	        modelo.setRowCount(0);
-	        
-	        // Creamos los datos de una fila de la tabla
-	        Object[] datosFila = {"Id", "Precio", "NumPlazas", "IdActividad", "IdAlojamiento", "IdTransporte"};
-	        modelo.addRow(datosFila);
-	        for(TViaje viaje : (ArrayList<TViaje>) datos) {
-	        	datosFila[0] = viaje.getId();
-	        	datosFila[1] = viaje.getPrecio();
-	        	datosFila[2] = viaje.getNumPlazas();
-	        	datosFila[3] = viaje.getIdActividad();
-	        	datosFila[4] = viaje.getIdAlojamiento();
-	        	datosFila[5] = viaje.getIdTransporte();
-	        	
-	        	modelo.addRow(datosFila);
-	        }
-	        
-	        this.getContentPane().add(desplazamiento, BorderLayout.NORTH);
-			
-//	        StringBuilder str = new StringBuilder();
-//			str.append("Lista de Viajes").append(System.lineSeparator());
-//			List<TViaje> lista = (ArrayList<TViaje>) datos;
-//			for(TViaje viaje : lista) {
-//				str.append("Viaje con id: " + viaje.getId() + ", con precio: " + viaje.getPrecio() + " y numero de plazas: " + viaje.getNumPlazas()).append(System.lineSeparator());
-//			}
-			JOptionPane.showMessageDialog(Utils.getWindow(this), tabla, "Lista de Viajes mostrada", JOptionPane.INFORMATION_MESSAGE);
-			setVisible(true);
-			break;
+		dataTableModel.setNumRows(lista.size());
+		for(int i = 0; i < lista.size(); i++) {
+			TViaje viaje = lista.get(i);
+			dataTableModel.setValueAt(viaje.getId(), i, 0);
+			dataTableModel.setValueAt(viaje.getPrecio(), i, 1);
+			dataTableModel.setValueAt(viaje.getNumPlazas(), i, 2);
+			dataTableModel.setValueAt(viaje.getIdActividad(), i, 3);
+			dataTableModel.setValueAt(viaje.getIdAlojamiento(), i, 4);
+			dataTableModel.setValueAt(viaje.getIdTransporte(), i, 5);
+			dataTableModel.setValueAt(viaje.getActivo(), i, 6);
+		}
+		dataTableModel.fireTableDataChanged();
+		setSize(new Dimension(480,270));
+		setVisible(true);
+		break;
 		case(Eventos.RES_LISTAR_VIAJE_ERROR):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudieron listar los viajes", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se han encontrado viajes", "Error", JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
 		}

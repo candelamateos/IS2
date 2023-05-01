@@ -11,6 +11,8 @@ import negocio.factura.SAFactura;
 import negocio.factura.SALineaFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
+import negocio.servicio.SAServicio;
+import negocio.servicio.TServicio;
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -168,8 +170,8 @@ public class ControladorImp extends Controlador {
 			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
 			List<TViaje> res = saViaje.readAllViaje();
 			if (res != null) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_VIAJE_OK,
-						res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_LISTAR_VIAJE_OK,	res);
 				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
@@ -227,6 +229,35 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR, res);
 			}
+		}
+		
+		case Eventos.ALTA_SERVICIO:{
+			TServicio t = (TServicio) datos;
+			SAServicio sa = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			int id = sa.createServicio(t);
+			if(id != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_OK, id);
+			else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_ERROR, id);
+			break;
+		}
+		
+		case Eventos.BAJA_SERVICIO:{
+			
+			break;
+		}
+		
+		case Eventos.BUSCAR_SERVICIO:{
+			
+			break;
+		}
+		
+		case Eventos.LISTAR_SERVICIO:{
+			
+			break;
+		}
+		
+		case Eventos.MODIFICAR_SERVICIO:{
+			
+			break;
 		}
 		}
 	}

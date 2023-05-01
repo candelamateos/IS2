@@ -4,8 +4,17 @@ import presentacion.IGUI;
 import presentacion.cliente.*;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
+import presentacion.factura.VistaAbrirVenta;
+import presentacion.factura.VistaAniadirViajeAFactura;
+import presentacion.factura.VistaCerrarVenta;
+import presentacion.factura.VistaFacturas;
+import presentacion.servicio.VistaAnyadirServicio;
+import presentacion.servicio.VistaBuscarServicio;
+import presentacion.servicio.VistaEliminarServicio;
+import presentacion.servicio.VistaListarServicios;
+import presentacion.servicio.VistaModificarServicio;
+import presentacion.servicio.VistaServicios;
 import presentacion.factura.*;
-//import presentacion.servicio.VistaServicios;
 import presentacion.viaje.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
@@ -25,36 +34,36 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaListarDepartamento(); }
 		
 		//Factura
-		case Eventos.FACTURAS:{
-			return new VistaFacturas();}
-		case Eventos.ABRIR_VENTA:{
-			return new VistaAbrirVenta();}
-		case Eventos.CERRAR_VENTA:{
-			return new VistaCerrarVenta();}
-		case Eventos.ANIADIR_VIAJE_A_FACTURA:{
-			return new VistaAniadirViajeAFactura();}
-		case Eventos.MODIFICAR_FACTURA:{
-			return new VistaModificarFactura();}
-		case Eventos.BUSCAR_FACTURA:{
-			return new VistaBuscarFactura();}
-		case Eventos.LISTAR_FACTURAS:{
-			return new VistaListarFacturas();}
+//		case Eventos.FACTURAS:{
+//			return new VistaFacturas();}
+//		case Eventos.ABRIR_VENTA:{
+//			return new VistaAbrirVenta();}
+//		case Eventos.CERRAR_VENTA:{
+//			return new VistaCerrarVenta();}
+//		case Eventos.ANIADIR_VIAJE_A_FACTURA:{
+//			return new VistaAniadirViajeAFactura();}
+//		case Eventos.MODIFICAR_FACTURA:{
+//			return new VistaModificarFactura();}
+//		case Eventos.BUSCAR_FACTURA:{
+//			return new VistaBuscarFactura();}
+//		case Eventos.LISTAR_FACTURAS:{
+//			return new VistaListarFacturas();}
 		
 
 		
 		//Servicio
-//		case Eventos.SERVICIOS:{
-//			return new VistaServicios();}
+		case Eventos.SERVICIOS:{
+			return new VistaServicios();}
 		case Eventos.ALTA_SERVICIO:{
-			return new VistaAniadirCliente();}
+			return new VistaAnyadirServicio();}
 		case Eventos.BAJA_SERVICIO:{
-			return new VistaEliminarCliente(); }
+			return new VistaEliminarServicio(); }
 		case Eventos.BUSCAR_SERVICIO:{
-			return new VistaBuscarCliente(); }
+			return new VistaBuscarServicio(); }
 		case Eventos.MODIFICAR_SERVICIO:{
-			return new VistaModificarCliente(); }
+			return new VistaModificarServicio(); }
 		case Eventos.LISTAR_SERVICIO:{
-			return new VistaListarCliente(); }
+			return new VistaListarServicios(); }
 		
 		
 		//Trabajador

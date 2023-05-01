@@ -25,6 +25,8 @@ public class Eventos {
 	public static final int ABRIR_VENTA = 101;
 	public static final int CERRAR_VENTA = 102;
 	public static final int ANIADIR_VIAJE_A_FACTURA = 103;
+
+	
 	public static final int MODIFICAR_FACTURA = 104;
 	public static final int BUSCAR_FACTURA = 105;
 	public static final int LISTAR_FACTURAS = 106;
@@ -41,6 +43,7 @@ public class Eventos {
 	public static final int RES_LISTAR_FACTURAS_OK = 117;
 	public static final int RES_LISTAR_FACTURAS_ERROR = 118;
 	
+	
 	//Servicio 2xx
 	public static final int SERVICIOS = 200;
 	public static final int ALTA_SERVICIO = 201;
@@ -48,6 +51,9 @@ public class Eventos {
 	public static final int BUSCAR_SERVICIO = 203;
 	public static final int MODIFICAR_SERVICIO = 204;
 	public static final int LISTAR_SERVICIO = 205;
+	public static final int RES_ALTA_SERVICIO_OK = 206;
+	public static final int RES_ALTA_SERVICIO_ERROR = 207;
+
 	
 	//Trabajador 3xx
 	
