@@ -1,17 +1,21 @@
 package presentacion.departamento;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import negocio.departamento.TDepartamento;
-import negocio.viaje.TViaje;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
@@ -19,7 +23,9 @@ import presentacion.controlador.Eventos;
 
 public class VistaListarDepartamento extends JFrame implements IGUI {
 
-	private JButton ok;
+	private DefaultTableModel dataTableModel;
+
+	private static final String[] HEADERS = { "Id", "Nombre", "Numero de empleados" };
 
 	public VistaListarDepartamento() {
 		setTitle("LISTAR DEPARTAMENTO");
@@ -27,38 +33,42 @@ public class VistaListarDepartamento extends JFrame implements IGUI {
 	}
 
 	private void initGUI() {
-		JPanel panel = new JPanel();
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		setContentPane(mainPanel);
 
-		ok = new JButton("OK");
-		ok.addActionListener(new ActionListener() {
+		dataTableModel = new DefaultTableModel() {
+			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				Controlador.getInstancia().accion(Eventos.LISTAR_DEPARTAMENTO, null);
+			public boolean isCellEditable(int row, int col) {
+				return false;
 			}
-		});
-		panel.add(ok);
-		setContentPane(panel);
+
+		};
+		dataTableModel.setColumnIdentifiers(HEADERS);
+
+		JTable tabla = new JTable(dataTableModel);
+		JScrollPane scroll = new JScrollPane(tabla);
+		mainPanel.add(scroll);
 
 		setLocationRelativeTo(null);
-		pack();
-		setVisible(true);
 	}
 
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch (evento) {
 		case (Eventos.RES_LISTAR_DEPARTAMENTO_OK):
-			setVisible(false);
-			StringBuilder str = new StringBuilder();
-			str.append("Lista de Departamentos").append(System.lineSeparator());
 			List<TDepartamento> lista = (ArrayList<TDepartamento>) datos;
-			for(TDepartamento departamento : lista) {
-				str.append("Departamento con id: " + departamento.getId() + ", con nombre: " + departamento.getNombre() + " y numero de empleados: " + departamento.getNumEmpleados()).append(System.lineSeparator());
+			for (int i = 0; i < lista.size(); i++) {
+				TDepartamento departamento = lista.get(i);
+				dataTableModel.setValueAt(departamento.getId(), i, 0);
+				dataTableModel.setValueAt(departamento.getNombre(), i, 1);
+				dataTableModel.setValueAt(departamento.getNumEmpleados(), i, 2);
 			}
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Lista de Departamentos",
-					"Lista de Departamentos mostrada", JOptionPane.INFORMATION_MESSAGE);
+			dataTableModel.fireTableDataChanged();
+			setSize(new Dimension(480, 270));
 			setVisible(true);
 			break;
 		case (Eventos.RES_LISTAR_DEPARTAMENTO_ERROR):

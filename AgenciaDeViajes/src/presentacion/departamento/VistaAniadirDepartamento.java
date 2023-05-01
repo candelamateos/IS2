@@ -1,8 +1,11 @@
 package presentacion.departamento;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,17 +25,28 @@ public class VistaAniadirDepartamento extends JFrame implements IGUI {
 	private JButton ok;
 
 	public VistaAniadirDepartamento() {
-		super("Añadir Cliente");
+		super("Aï¿½adir Cliente");
 		initGUI();
 	}
 
 	private void initGUI() {
-		JPanel panel = new JPanel();
-
-		lNombre = new JLabel("PRECIO:");
-		tNombre = new JTextField(5);
-		panel.add(lNombre);
-		panel.add(tNombre);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		setContentPane(mainPanel);
+		
+		JPanel fila1 = new JPanel();
+		fila1.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(fila1);
+		JPanel fila2 = new JPanel();
+		fila2.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(fila2);
+				
+		lNombre = new JLabel("NOMBRE:");
+		lNombre.setPreferredSize(new Dimension(100, 25));
+		tNombre = new JTextField(10);
+		fila1.add(lNombre);
+		fila1.add(tNombre);
 
 		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
@@ -40,12 +54,23 @@ public class VistaAniadirDepartamento extends JFrame implements IGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String nombre = tNombre.getText();
-				Controlador.getInstancia().accion(Eventos.ALTA_DEPARTAMENTO, new TDepartamento(nombre));
+				try {
+					String Snombre;
+					try{
+						Snombre = tNombre.getText();
+					}catch(NullPointerException  ex) {
+						throw new IllegalArgumentException("El nombre no puede estar vacÃ­o", ex);
+					}
+					
+					Controlador.getInstancia().accion(Eventos.ALTA_DEPARTAMENTO, new TDepartamento(Snombre));
+				}catch(IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaAniadirDepartamento.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					setVisible(true);
+				}
+				
 			}
 		});
-		panel.add(ok);
-		setContentPane(panel);
+		fila2.add(ok);
 
 		setLocationRelativeTo(null);
 		pack();
@@ -57,13 +82,13 @@ public class VistaAniadirDepartamento extends JFrame implements IGUI {
 		switch (evento) {
 		case (Eventos.RES_ALTA_DEPARTAMENTO_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento añadido con id " + datos,
-					"Departamento añadido", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento aï¿½adido con id " + datos,
+					"Departamento aï¿½adido", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		case (Eventos.RES_ALTA_DEPARTAMENTO_ERROR):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo añadir el departamento", "Error",
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo aï¿½adir el departamento", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
