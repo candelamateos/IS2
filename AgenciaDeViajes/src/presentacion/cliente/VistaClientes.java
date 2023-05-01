@@ -27,18 +27,18 @@ public class VistaClientes extends JFrame implements IGUI {
 	private JButton BEliminarCliente;
 	private JButton BListarCliente;
 	private JButton BModificarCliente;
-	
+
 	public VistaClientes() {
 		super("Clientes");
 		initGUI();
 	}
-	
+
 	private void initGUI() {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setContentPane(mainPanel);
-		
+
 		JPanel fila1 = new JPanel();
 		fila1.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila1);
@@ -48,43 +48,60 @@ public class VistaClientes extends JFrame implements IGUI {
 		JPanel fila3 = new JPanel();
 		fila3.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila3);
-		
+
 		BAniadirCliente = new JButton("A�adir Cliente");
 		BAniadirCliente.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.ALTA_CLIENTE);
-			}	
+			}
 		});
-		BAniadirCliente.setPreferredSize(new Dimension(130,30));
+		BAniadirCliente.setPreferredSize(new Dimension(130, 30));
 		fila1.add(BAniadirCliente);
-		
+
 		BBuscarCliente = new JButton("Buscar Cliente");
 		BBuscarCliente.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.BAJA_CLIENTE);
-			}	
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.BUSCAR_CLIENTE);
+			}
 		});
-		BBuscarCliente.setPreferredSize(new Dimension(130,30));
+		BBuscarCliente.setPreferredSize(new Dimension(130, 30));
 		fila1.add(BBuscarCliente);
-		
+
 		BEliminarCliente = new JButton("Eliminar Cliente");
-		BEliminarCliente.addActionListener(null);
-		BEliminarCliente.setPreferredSize(new Dimension(130,30));
+		BEliminarCliente.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.BAJA_CLIENTE);
+			}
+			});
+		
+		BEliminarCliente.setPreferredSize(new Dimension(130, 30));
 		fila2.add(BEliminarCliente);
-		
+
 		BListarCliente = new JButton("Listar Clientes");
-		BListarCliente.addActionListener(null);
-		BListarCliente.setPreferredSize(new Dimension(130,30));
+		BListarCliente.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.LISTAR_CLIENTE);
+			}
+		});
+		BListarCliente.setPreferredSize(new Dimension(130, 30));
 		fila2.add(BListarCliente);
-		
+
 		BModificarCliente = new JButton("Modificar Cliente");
-		BModificarCliente.addActionListener(null);
-		BModificarCliente.setPreferredSize(new Dimension(130,30));
+		BModificarCliente.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.MODIFICAR_CLIENTE);
+			}
+		});
+		BModificarCliente.setPreferredSize(new Dimension(130, 30));
 		fila3.add(BModificarCliente);
-		
+
 		setLocationRelativeTo(null);
 		pack();
 		setVisible(true);

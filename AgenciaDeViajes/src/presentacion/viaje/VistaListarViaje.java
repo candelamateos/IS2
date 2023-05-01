@@ -2,6 +2,10 @@ package presentacion.viaje;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 import negocio.viaje.TViaje;
 import presentacion.IGUI;
@@ -27,6 +33,7 @@ public class VistaListarViaje extends JFrame implements IGUI{
 	
 	private void initGUI() {
 		JPanel panel = new JPanel();
+		
 		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 

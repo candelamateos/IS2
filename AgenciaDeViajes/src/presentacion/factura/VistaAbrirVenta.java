@@ -76,18 +76,18 @@ public class VistaAbrirVenta extends JFrame implements IGUI {
 					try{
 						idVendedor = Integer.parseInt(tVendedor.getText());
 					}catch(NumberFormatException ex) {
+						tVendedor.setText("");
 						throw new IllegalArgumentException("El id del vendedor debe ser un número", ex);
 					}
 					try{
 						idCliente = Integer.parseInt(tCliente.getText());
 					}catch(NumberFormatException ex) {
+						tCliente.setText("");
 						throw new IllegalArgumentException("El id del cliente debe ser un número", ex);
 					}
 					Controlador.getInstancia().accion(Eventos.ABRIR_VENTA, new TFactura(idVendedor,idCliente));
 				}
 				catch(IllegalArgumentException ex) {
-					tVendedor.setText("");
-					tCliente.setText("");
 					JOptionPane.showMessageDialog(Utils.getWindow(VistaAbrirVenta.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}

@@ -15,25 +15,25 @@ import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
-public class VistaEliminarDepartamento extends JFrame implements IGUI{
-	
+public class VistaEliminarDepartamento extends JFrame implements IGUI {
+
 	private JLabel lId;
 	private JTextField tId;
 	private JButton ok;
-	
+
 	public VistaEliminarDepartamento() {
 		super("ELIMINAR DEPARTAMENTO");
 		initGUI();
 	}
-	
+
 	private void initGUI() {
 		JPanel panel = new JPanel();
-		
-		lId= new JLabel("ID:");
+
+		lId = new JLabel("ID:");
 		tId = new JTextField(5);
 		panel.add(lId);
 		panel.add(tId);
-		
+
 		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 
@@ -47,12 +47,12 @@ public class VistaEliminarDepartamento extends JFrame implements IGUI{
 		});
 		panel.add(ok);
 		setContentPane(panel);
-		
+
 		setLocationRelativeTo(null);
 		pack();
 		setVisible(true);
 	}
-	
+
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch (evento) {

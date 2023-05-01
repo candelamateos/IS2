@@ -21,7 +21,11 @@ public class VistaEliminarCliente extends JFrame implements IGUI {
 	JTextField tId;
 	JButton ok;
 	public VistaEliminarCliente() {
-		setTitle("ELIMINAR CLIENTE");
+		super("ELIMINAR CLIENTE");
+		initGUI();
+	}
+	
+	void initGUI() {
 		JPanel panel = new JPanel();
 		lId = new JLabel("ID:");
 		tId = new JTextField(5);
@@ -38,14 +42,20 @@ public class VistaEliminarCliente extends JFrame implements IGUI {
 				Controlador.getInstancia().accion(Eventos.BAJA_CLIENTE, Iid);
 			}
 		});
-	}
-
+			panel.add(ok);
+			setContentPane(panel);
+			
+			setLocationRelativeTo(null);
+			pack();
+			setVisible(true);
+		}
+	
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch(evento) {
 		case(Eventos.RES_BAJA_CLIENTE_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente eliminado con id " + datos, "Cliente Eliminado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente eliminado ", "Cliente Eliminado", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		case(Eventos.RES_BAJA_CLIENTE_ERROR):

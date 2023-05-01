@@ -20,12 +20,18 @@ public class VistaBuscarCliente extends JFrame implements IGUI {
 	private JButton ok;
 	
 	public VistaBuscarCliente() {
-		setTitle("BUSCAR CLIENTE");
+		super("BUSCAR CLIENTE");
+		initGUI();
+	}
+	
+	private void initGUI() {
 		JPanel panel = new JPanel();
-		lId = new JLabel("ID:");
+		
+		lId= new JLabel("ID:");
 		tId = new JTextField(5);
 		panel.add(lId);
 		panel.add(tId);
+		
 		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 
@@ -37,7 +43,14 @@ public class VistaBuscarCliente extends JFrame implements IGUI {
 				Controlador.getInstancia().accion(Eventos.BUSCAR_CLIENTE, Iid);
 			}
 		});
+		panel.add(ok);
+		setContentPane(panel);
+		
+		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
 	}
+	
 	@Override
 	public void actualizar(int evento, Object datos) {
 		// TODO Auto-generated method stub

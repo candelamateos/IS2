@@ -58,12 +58,12 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 		switch(evento) {
 		case(Eventos.RES_ALTA_CLIENTE_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente a�adido con id " + datos, "Cliente A�adido", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente anyadido con id " + datos, "Cliente Anyadido", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		case(Eventos.RES_ALTA_CLIENTE_ERROR):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo a�adir el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo anyadir el cliente", "Error", JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
 		}
