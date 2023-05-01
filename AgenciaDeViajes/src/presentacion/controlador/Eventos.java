@@ -25,8 +25,26 @@ public class Eventos {
 	public static final int ABRIR_VENTA = 101;
 	public static final int CERRAR_VENTA = 102;
 	public static final int ANIADIR_VIAJE_A_FACTURA = 103;
-	//Servicio 2xx
 
+	
+	public static final int MODIFICAR_FACTURA = 104;
+	public static final int BUSCAR_FACTURA = 105;
+	public static final int LISTAR_FACTURAS = 106;
+	public static final int RES_ABRIR_VENTA_OK = 107;
+	public static final int RES_ABRIR_VENTA_ERROR = 108;
+	public static final int RES_CERRAR_VENTA_OK = 109;
+	public static final int RES_CERRAR_VENTA_ERROR = 110;
+	public static final int RES_ANIADIR_VIAJE_A_FACTURA_OK = 111;
+	public static final int RES_ANIADIR_VIAJE_A_FACTURA_ERROR = 112;
+	public static final int RES_MODIFICAR_FACTURA_OK = 113;
+	public static final int RES_MODIFICAR_FACTURA_ERROR = 114;
+	public static final int RES_BUSCAR_FACTURA_OK = 115;
+	public static final int RES_BUSCAR_FACTURA_ERROR = 116;
+	public static final int RES_LISTAR_FACTURAS_OK = 117;
+	public static final int RES_LISTAR_FACTURAS_ERROR = 118;
+	
+	
+	//Servicio 2xx
 	public static final int SERVICIOS = 200;
 	public static final int ALTA_SERVICIO = 201;
 	public static final int BAJA_SERVICIO = 202;
@@ -64,6 +82,12 @@ public class Eventos {
 	public static final int LISTAR_CLIENTE = 505;
 	public static final int RES_ALTA_CLIENTE_OK = 506;
 	public static final int RES_ALTA_CLIENTE_ERROR = 507;
-	public static final int RES_BAJA_CLIENTE_OK = 509;
+	public static final int RES_BAJA_CLIENTE_OK = 508;
 	public static final int RES_BAJA_CLIENTE_ERROR = 509;
+	public static final int RES_BUSCAR_CLIENTE_OK = 510;
+	public static final int RES_BUSCAR_CLIENTE_ERROR = 511;
+	public static final int RES_MODIFICAR_CLIENTE_OK = 512;
+	public static final int RES_MODIFICAR_CLIENTE_ERROR = 513;
+	public static final int RES_LISTAR_CLIENTE_OK = 514;
+	public static final int RES_LISTAR_CLIENTE_ERROR = 515;
 }

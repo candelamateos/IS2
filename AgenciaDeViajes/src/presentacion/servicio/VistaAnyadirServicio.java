@@ -1,5 +1,15 @@
 package presentacion.servicio;
 
-public class VistaAnyadirServicio {
+import javax.swing.JFrame;
+
+import presentacion.IGUI;
+
+public class VistaAnyadirServicio extends JFrame implements IGUI{
+
+	@Override
+	public void actualizar(int evento, Object datos) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

@@ -7,6 +7,10 @@ import negocio.cliente.TCliente;
 import negocio.departamento.SADepartamento;
 import negocio.departamento.TDepartamento;
 import negocio.factoria.FactoriaAbstractaNegocio;
+import negocio.factura.SAFactura;
+import negocio.factura.SALineaFactura;
+import negocio.factura.TFactura;
+import negocio.factura.TLineaFactura;
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -28,6 +32,32 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//Factura
+		case (Eventos.ABRIR_VENTA): {
+			TFactura factura = (TFactura) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			int res = saFactura.abrirVenta(factura);
+			if(res != -1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ABRIR_VENTA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ABRIR_VENTA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.CERRAR_VENTA): {
+			TLineaFactura linea = (TLineaFactura) datos;
+			SALineaFactura saLineaFactura = FactoriaAbstractaNegocio.getInstancia().crearSALineaFactura();
+			boolean res = saLineaFactura.createLineaFactura(linea);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_ERROR,res);
+				break;
+			}
+		}
 		
 		//Servicio
 		
@@ -122,16 +152,16 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_CLIENTE_ERROR,res);
 			}
 		}
-		case(Eventos.LISTAR_CLIENTE): {
-			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
-			List<TCliente> res = saCliente.readAllCliente();
-			if(res != null) {
-			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_OK,res);
-			}
-			else {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR,res);
-			}
-		}
+//		case(Eventos.LISTAR_CLIENTE): {
+//			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+//			List<TCliente> res = saCliente.readAllCliente();
+//			if(res != null) {
+//			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_OK,res);
+//			}
+//			else {
+//				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR,res);
+//			}
+//		}
 		}
 	}
 }

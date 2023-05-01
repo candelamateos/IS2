@@ -13,9 +13,13 @@ public class TViaje {
 	public TViaje() {
 	}
 	
-	public TViaje(int precio, int numPlazas) {
+	public TViaje(int precio, int numPlazas, int idActividad, int idAlojamiento, int idTransporte) {
 		this.precio = precio;
 		this.numPlazas = numPlazas;
+		this.idActividad = idActividad;
+		this.idAlojamiento = idAlojamiento;
+		this.idTransporte = idTransporte;
+		this.activo = true;
 	}
 
 	public int getId() {
