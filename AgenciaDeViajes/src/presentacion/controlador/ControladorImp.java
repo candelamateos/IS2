@@ -138,7 +138,11 @@ public class ControladorImp extends Controlador {
 			
 			break;
 		}
+<<<<<<< Updated upstream
 		case (Eventos.BAJA_TRABAJADOR):{
+=======
+		case Eventos.BAJA_TRABAJADOR:{
+>>>>>>> Stashed changes
 			int id = (int) datos;
 			SATrabajador saTrabajador = FactoriaAbstractaNegocio.getInstancia().crearSATrabajador();
 			boolean res = saTrabajador.deleteTrabajador(id);
