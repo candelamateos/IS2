@@ -242,6 +242,7 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 		}
+<<<<<<< HEAD
 		case (Eventos.MODIFICAR_CLIENTE): {
 			TCliente cliente = (TCliente) datos;
 			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
@@ -256,6 +257,36 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 
+=======
+		
+		case Eventos.BAJA_SERVICIO:{
+			int id = (int) datos;
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			boolean res = saServicio.deleteServicio(id);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+				.actualizar(Eventos.RES_BAJA_SERVICIO_OK, res);
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BAJA_SERVICIO_ERROR, res);
+			}
+			break;
+		}
+		
+		case Eventos.BUSCAR_SERVICIO:{
+			
+			break;
+		}
+		
+		case Eventos.LISTAR_SERVICIO:{
+			
+			break;
+		}
+		
+		case Eventos.MODIFICAR_SERVICIO:{
+			
+			break;
+>>>>>>> 209db773ae03ec18c4283b3f9197705855bd8c82
 		}
 		}
 	}

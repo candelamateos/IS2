@@ -23,7 +23,7 @@ import presentacion.factura.VistaModificarFactura;
 
 public class VistaModificarCliente extends JFrame implements IGUI{
 
-	
+	private JTextField tCliente;
 	
 	VistaModificarCliente() {
 		super("Modificar Cliente");
@@ -52,9 +52,9 @@ public class VistaModificarCliente extends JFrame implements IGUI{
 		JLabel lId = new JLabel("Id del cliente: ");
 		lId.setPreferredSize(new Dimension(100,25));
 		tCliente = new JTextField(10);
-		tFactura.setPreferredSize(new Dimension(100,25));
-		fila0.add(lFactura);
-		fila0.add(tFactura);
+		tCliente.setPreferredSize(new Dimension(100,25));
+		fila0.add(lId);
+		fila0.add(lId);
 	}
 	/*
 	

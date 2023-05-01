@@ -9,10 +9,10 @@ public class Eventos {
 	public static final int BUSCAR_DEPARTAMENTO = 003;
 	public static final int MODIFICAR_DEPARTAMENTO = 004;
 	public static final int LISTAR_DEPARTAMENTO = 005;
-	public static final int RES_ALTA_DEPARTAMENTO_OK = 016;
-	public static final int RES_ALTA_DEPARTAMENTO_ERROR = 017;
-	public static final int RES_BAJA_DEPARTAMENTO_OK = 006;
-	public static final int RES_BAJA_DEPARTAMENTO_ERROR = 006;
+	public static final int RES_ALTA_DEPARTAMENTO_OK = 006;
+	public static final int RES_ALTA_DEPARTAMENTO_ERROR = 007;
+	public static final int RES_BAJA_DEPARTAMENTO_OK = 017;
+	public static final int RES_BAJA_DEPARTAMENTO_ERROR = 020;
 	public static final int RES_BUSCAR_DEPARTAMENTO_OK = 010;
 	public static final int RES_BUSCAR_DEPARTAMENTO_ERROR = 011;
 	public static final int RES_MODIFICAR_DEPARTAMENTO_OK = 012;
@@ -53,6 +53,8 @@ public class Eventos {
 	public static final int LISTAR_SERVICIO = 205;
 	public static final int RES_ALTA_SERVICIO_OK = 206;
 	public static final int RES_ALTA_SERVICIO_ERROR = 207;
+	public static final int RES_BAJA_SERVICIO_OK = 208;
+	public static final int RES_BAJA_SERVICIO_ERROR = 209;
 
 	
 	//Trabajador 3xx

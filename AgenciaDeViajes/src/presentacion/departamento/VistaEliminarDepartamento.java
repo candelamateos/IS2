@@ -56,7 +56,7 @@ public class VistaEliminarDepartamento extends JFrame implements IGUI {
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch (evento) {
-		case (Eventos.RES_BAJA_DEPARTAMENTO_OK):
+		case(Eventos.RES_BAJA_DEPARTAMENTO_OK):
 			setVisible(false);
 			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento eliminado con id " + datos,
 					"Departamento eliminado", JOptionPane.INFORMATION_MESSAGE);

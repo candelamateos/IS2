@@ -59,8 +59,13 @@ public class VistaBuscarDepartamento extends JFrame implements IGUI {
 		case (Eventos.RES_BUSCAR_DEPARTAMENTO_OK):
 			setVisible(false);
 			TDepartamento departamento = (TDepartamento) datos;
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento encontrado con id " + departamento.getId(),
-					"Departamento encontrado", JOptionPane.INFORMATION_MESSAGE);
+			StringBuilder str = new StringBuilder();
+			str.append("Departamento encontrado con datos: ").append(System.lineSeparator());
+			str.append("Id: " + departamento.getId()).append(System.lineSeparator());
+			str.append("Nombre: " + departamento.getNombre()).append(System.lineSeparator());
+			str.append("Numero de empleados: " + departamento.getNumEmpleados()).append(System.lineSeparator());
+			JOptionPane.showMessageDialog(Utils.getWindow(this), str, "Departamento encontrado",
+					JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		case (Eventos.RES_BUSCAR_DEPARTAMENTO_ERROR):
