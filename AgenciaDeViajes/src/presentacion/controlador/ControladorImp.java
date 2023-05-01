@@ -8,7 +8,9 @@ import negocio.departamento.SADepartamento;
 import negocio.departamento.TDepartamento;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
+import negocio.factura.SALineaFactura;
 import negocio.factura.TFactura;
+import negocio.factura.TLineaFactura;
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -40,6 +42,19 @@ public class ControladorImp extends Controlador {
 			}
 			else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ABRIR_VENTA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.CERRAR_VENTA): {
+			TLineaFactura linea = (TLineaFactura) datos;
+			SALineaFactura saLineaFactura = FactoriaAbstractaNegocio.getInstancia().crearSALineaFactura();
+			boolean res = saLineaFactura.createLineaFactura(linea);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_ERROR,res);
 				break;
 			}
 		}

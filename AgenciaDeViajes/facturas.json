@@ -1,1 +1,1 @@
-{"facturas":[{"idCliente":11,"idVendedor":123,"id":0,"abierta":true,"coste":0,"activo":true}],"proximo id lineaFactura":0,"proximo id factura":1,"lineasFactura":[]}
+{"facturas":[{"idCliente":11,"idVendedor":123432,"id":0,"abierta":true,"coste":0,"activo":true}],"proximo id lineaFactura":0,"proximo id factura":1,"lineasFactura":[]}

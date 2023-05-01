@@ -6,6 +6,7 @@ import negocio.departamento.SADepartamento;
 import negocio.departamento.SADepartamentoImp;
 import negocio.factura.SAFactura;
 import negocio.factura.SAFacturaImp;
+import negocio.factura.SALineaFacturaImp;
 import negocio.servicio.SAServicio;
 import negocio.servicio.SAServicioImp;
 import negocio.trabajador.SATrabajador;
@@ -33,6 +34,11 @@ public class FactoriaNegocio extends FactoriaAbstractaNegocio {
 	@Override
 	public SAFactura crearSAFactura() {
 		return new SAFacturaImp();
+	}
+
+	@Override
+	public SALineaFacturaImp crearSALineaFactura() {
+		return new SALineaFacturaImp();
 	}
 
 	@Override
