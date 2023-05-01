@@ -22,17 +22,13 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 	private JButton ok;
 	
 	public VistaAniadirCliente() {
-		super("A�ADIR CLIENTE");
+		super("ANYADIR CLIENTE");
 		initGUI();
 	}
 	
 	void initGUI() {
 		JPanel panel = new JPanel();
-<<<<<<< Updated upstream
 		lNombre= new JLabel("Nombre:");
-=======
-		lNombre= new JLabel("NOMBRE:");
->>>>>>> Stashed changes
 		tNombre = new JTextField(5);
 		panel.add(lNombre);
 		panel.add(tNombre);
@@ -42,7 +38,6 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-<<<<<<< Updated upstream
 				try {
 				String nombre = tNombre.getText();
 				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(nombre));
@@ -52,10 +47,8 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 							JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}
-=======
 				String nombre = tNombre.getText();
 				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(nombre));
->>>>>>> Stashed changes
 			}
 		});
 		panel.add(ok);

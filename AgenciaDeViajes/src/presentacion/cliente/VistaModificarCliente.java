@@ -25,7 +25,7 @@ public class VistaModificarCliente extends JFrame implements IGUI{
 
 	private JTextField tCliente;
 	
-	VistaModificarCliente() {
+	public VistaModificarCliente() {
 		super("Modificar Cliente");
 		initGUI();
 	}
