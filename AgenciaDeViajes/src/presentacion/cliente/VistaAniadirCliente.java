@@ -41,8 +41,15 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				try {
 				String nombre = tNombre.getText();
 				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(nombre));
+				}
+				catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaAniadirCliente.this), ex.getMessage(), "Error", 
+							JOptionPane.ERROR_MESSAGE);
+					setVisible(true);
+				}
 			}
 		});
 		panel.add(ok);
