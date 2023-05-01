@@ -9,8 +9,8 @@ public class Eventos {
 	public static final int BUSCAR_DEPARTAMENTO = 003;
 	public static final int MODIFICAR_DEPARTAMENTO = 004;
 	public static final int LISTAR_DEPARTAMENTO = 005;
-	public static final int RES_ALTA_DEPARTAMENTO_OK = 006;
-	public static final int RES_ALTA_DEPARTAMENTO_ERROR = 007;
+	public static final int RES_ALTA_DEPARTAMENTO_OK = 016;
+	public static final int RES_ALTA_DEPARTAMENTO_ERROR = 017;
 	public static final int RES_BAJA_DEPARTAMENTO_OK = 006;
 	public static final int RES_BAJA_DEPARTAMENTO_ERROR = 006;
 	public static final int RES_BUSCAR_DEPARTAMENTO_OK = 010;
