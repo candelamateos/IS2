@@ -104,6 +104,34 @@ public class DaoFacturaImp implements DaoFactura {
 	}
 
 	@Override
+	public List<TLineaFactura> readAllLineaFactura() {
+		List<TLineaFactura> lista = new ArrayList<>();
+
+		JSONObject data = loadData();
+		JSONArray facturas = data.getJSONArray("lineasFactura");
+
+		for (int i = 0; i < data.getInt("proximo id lineaFactura"); i++) {
+			JSONObject json = facturas.getJSONObject(i);
+			if (!json.has("id") || !json.has("coste") || !json.has("plazasVendidas") || !json.has("idFactura")
+					|| !json.has("idViaje") || !json.has("activo")) {
+				return null;
+			}
+			if (json.getBoolean("activo")) {
+				TLineaFactura f = new TLineaFactura();
+				f.setId(json.getInt("id"));
+				f.setCoste(json.getInt("coste"));
+				f.setPlazasVendidas(json.getInt("plazasVendidas"));
+				f.setIdFactura(json.getInt("idFactura"));
+				f.setIdViaje(json.getInt("idViaje"));
+				f.setActivo(json.getBoolean("activo"));
+
+				lista.add(f);
+			}
+		}
+		return lista;
+	}
+
+	@Override
 	public int addViaje(TLineaFactura lfactura) {
 		int id = -1;
 
@@ -198,6 +226,6 @@ public class DaoFacturaImp implements DaoFactura {
 	
 	public static void main(String[] args) {
 		DaoFactura d= new DaoFacturaImp();
-		d.cerrarFactura(3);
+		d.readAllLineaFactura();
 	}
 }

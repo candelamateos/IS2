@@ -18,4 +18,6 @@ public interface DaoFactura {
 	public TFactura readFactura(int id);
 	
 	public List<TFactura> readAllFactura();
+	
+	public List<TLineaFactura> readAllLineaFactura();
 }

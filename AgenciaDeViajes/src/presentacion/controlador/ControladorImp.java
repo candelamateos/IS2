@@ -16,7 +16,12 @@ import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
+<<<<<<< HEAD
 
+=======
+	
+	
+>>>>>>> 06074ce638a9ebd609950a456fcfd00148828bc5
 	public void accion(int evento, Object datos) {
 		switch (evento) {
 

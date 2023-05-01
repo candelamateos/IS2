@@ -64,7 +64,6 @@ public class VistaListarFacturas extends JFrame implements IGUI {
 	public void actualizar(int evento, Object datos) {
 		switch(evento) {
 		case(Eventos.RES_LISTAR_FACTURAS_OK):
-			setVisible(true);
 			List<TFactura> lista = (List<TFactura>) datos;
 			
 			dataTableModel.setNumRows(lista.size());
