@@ -2,6 +2,8 @@ package presentacion.viaje;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -60,7 +62,15 @@ public class VistaBuscarViaje extends JFrame implements IGUI{
 		case(Eventos.RES_BUSCAR_VIAJE_OK):
 			TViaje viaje = (TViaje) datos;
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Viaje encontrado con id " + viaje.getId(), "Viaje encontrado", JOptionPane.INFORMATION_MESSAGE);
+			StringBuilder str = new StringBuilder();
+			str.append("Viaje encontrado con datos: ").append(System.lineSeparator());
+			str.append("Id: " + viaje.getId()).append(System.lineSeparator());
+			str.append("Precio: " + viaje.getPrecio()).append(System.lineSeparator());
+			str.append("Numero de plazas: " + viaje.getNumPlazas()).append(System.lineSeparator());
+			str.append("IdActividad: " + viaje.getIdActividad()).append(System.lineSeparator());
+			str.append("IdAlojamiento: " + viaje.getIdAlojamiento()).append(System.lineSeparator());
+			str.append("IdTransporte: " + viaje.getIdTransporte()).append(System.lineSeparator());
+			JOptionPane.showMessageDialog(Utils.getWindow(this), str , "Viaje encontrado", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		case(Eventos.RES_BUSCAR_VIAJE_ERROR):
