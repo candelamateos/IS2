@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 import presentacion.IGUI;
 
-public class VistaAniadirServicio extends JFrame implements IGUI {
+public class VistaModificarServicio extends JFrame implements IGUI{
 
 	@Override
 	public void actualizar(int evento, Object datos) {

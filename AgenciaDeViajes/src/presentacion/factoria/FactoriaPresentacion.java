@@ -8,6 +8,12 @@ import presentacion.factura.VistaAbrirVenta;
 import presentacion.factura.VistaAniadirViajeAFactura;
 import presentacion.factura.VistaCerrarVenta;
 import presentacion.factura.VistaFacturas;
+import presentacion.servicio.VistaAnyadirServicio;
+import presentacion.servicio.VistaBuscarServicio;
+import presentacion.servicio.VistaEliminarServicio;
+import presentacion.servicio.VistaListarServicios;
+import presentacion.servicio.VistaModificarServicio;
+import presentacion.servicio.VistaServicios;
 //import presentacion.servicio.VistaServicios;
 import presentacion.viaje.*;
 
@@ -40,18 +46,18 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 
 		
 		//Servicio
-//		case Eventos.SERVICIOS:{
-//			return new VistaServicios();}
+		case Eventos.SERVICIOS:{
+			return new VistaServicios();}
 		case Eventos.ALTA_SERVICIO:{
-			return new VistaAniadirCliente();}
+			return new VistaAnyadirServicio();}
 		case Eventos.BAJA_SERVICIO:{
-			return new VistaEliminarCliente(); }
+			return new VistaEliminarServicio(); }
 		case Eventos.BUSCAR_SERVICIO:{
-			return new VistaBuscarCliente(); }
+			return new VistaBuscarServicio(); }
 		case Eventos.MODIFICAR_SERVICIO:{
-			return new VistaModificarCliente(); }
+			return new VistaModificarServicio(); }
 		case Eventos.LISTAR_SERVICIO:{
-			return new VistaListarCliente(); }
+			return new VistaListarServicios(); }
 		
 		
 		//Trabajador
