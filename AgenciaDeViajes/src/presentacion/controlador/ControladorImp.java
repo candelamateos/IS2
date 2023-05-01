@@ -18,6 +18,8 @@ import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
+	
+	
 	public void accion(int evento, Object datos) {
 		switch (evento) {
 		
@@ -48,9 +50,9 @@ public class ControladorImp extends Controlador {
 			}
 		}
 		case (Eventos.CERRAR_VENTA): {
-			TLineaFactura linea = (TLineaFactura) datos;
-			SALineaFactura saLineaFactura = FactoriaAbstractaNegocio.getInstancia().crearSALineaFactura();
-			boolean res = saLineaFactura.createLineaFactura(linea);
+			int id = (int) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			boolean res = saFactura.cerrarVenta(id);
 			if(res) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_CERRAR_VENTA_OK,res);
 				break;
@@ -60,6 +62,58 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 		}
+		case (Eventos.ANIADIR_VIAJE_A_FACTURA): {
+			TLineaFactura linea = (TLineaFactura) datos;
+			SALineaFactura saLineaFactura = FactoriaAbstractaNegocio.getInstancia().crearSALineaFactura();
+			boolean res = saLineaFactura.createLineaFactura(linea);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ANIADIR_VIAJE_A_FACTURA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ANIADIR_VIAJE_A_FACTURA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.MODIFICAR_FACTURA): {
+			TFactura factura = (TFactura) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			boolean res = saFactura.modificarFactura(factura);
+			if(res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_MODIFICAR_FACTURA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_MODIFICAR_FACTURA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.BUSCAR_FACTURA): {
+			int id = (int) datos;
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			TFactura res = saFactura.readFactura(id);
+			if(res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_FACTURA_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_FACTURA_ERROR,res);
+				break;
+			}
+		}
+		case (Eventos.LISTAR_FACTURAS): {
+			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
+			List<TFactura> res = saFactura.readAllFactura();
+			if(res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_FACTURAS_OK,res);
+				break;
+			}
+			else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_FACTURAS_ERROR,res);
+				break;
+			}
+		}
+		
 		
 		//Servicio
 		
@@ -169,7 +223,7 @@ public class ControladorImp extends Controlador {
 			TServicio t = (TServicio) datos;
 			SAServicio sa = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
 			int id = sa.createServicio(t);
-			if(id != -1) FactoriaAbstractaPresentacion.getInstance().createVista(id)
+			//if(id != -1) FactoriaAbstractaPresentacion.getInstance().createVista(id);
 			break;
 		}
 		

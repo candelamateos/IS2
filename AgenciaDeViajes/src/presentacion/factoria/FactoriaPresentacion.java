@@ -42,6 +42,12 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaCerrarVenta();}
 		case Eventos.ANIADIR_VIAJE_A_FACTURA:{
 			return new VistaAniadirViajeAFactura();}
+		case Eventos.MODIFICAR_FACTURA:{
+			return new VistaModificarFactura();}
+		case Eventos.BUSCAR_FACTURA:{
+			return new VistaBuscarFactura();}
+		case Eventos.LISTAR_FACTURAS:{
+			return new VistaListarFacturas();}
 		
 
 		
