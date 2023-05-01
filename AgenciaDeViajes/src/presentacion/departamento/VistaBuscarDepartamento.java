@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import negocio.departamento.TDepartamento;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
@@ -57,7 +58,8 @@ public class VistaBuscarDepartamento extends JFrame implements IGUI {
 		switch (evento) {
 		case (Eventos.RES_BUSCAR_DEPARTAMENTO_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento encontrado con id " + datos,
+			TDepartamento departamento = (TDepartamento) datos;
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento encontrado con id " + departamento.getId(),
 					"Departamento encontrado", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
