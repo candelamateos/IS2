@@ -16,15 +16,16 @@ import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
 public class VistaEliminarCliente extends JFrame implements IGUI {
-	
+
 	JLabel lId;
 	JTextField tId;
 	JButton ok;
+
 	public VistaEliminarCliente() {
 		super("ELIMINAR CLIENTE");
 		initGUI();
 	}
-	
+
 	void initGUI() {
 		JPanel panel = new JPanel();
 		lId = new JLabel("ID:");
@@ -37,30 +38,44 @@ public class VistaEliminarCliente extends JFrame implements IGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String id = tId.getText();
-				int Iid = Integer.parseInt(id);
-				Controlador.getInstancia().accion(Eventos.BAJA_CLIENTE, Iid);
+				try {
+					int idCliente;
+					try {
+						idCliente = Integer.parseInt(tId.getText());
+					} catch (NumberFormatException ex) {
+						tId.setText("");
+						throw new IllegalArgumentException("El id debe ser un numero", ex);
+					}
+					Controlador.getInstancia().accion(Eventos.BAJA_CLIENTE, idCliente);
+				} catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaEliminarCliente.this), ex.getMessage(), "Error", 
+							JOptionPane.ERROR_MESSAGE);
+					setVisible(true);
+				}
+
 			}
 		});
-			panel.add(ok);
-			setContentPane(panel);
-			
-			setLocationRelativeTo(null);
-			pack();
-			setVisible(true);
-		}
-	
+		panel.add(ok);
+		setContentPane(panel);
+
+		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
+	}
+
 	@Override
 	public void actualizar(int evento, Object datos) {
-		switch(evento) {
-		case(Eventos.RES_BAJA_CLIENTE_OK):
+		switch (evento) {
+		case (Eventos.RES_BAJA_CLIENTE_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente eliminado ", "Cliente Eliminado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente eliminado ", "Cliente Eliminado",
+					JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
-		case(Eventos.RES_BAJA_CLIENTE_ERROR):
+		case (Eventos.RES_BAJA_CLIENTE_ERROR):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo eliminar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo eliminar el cliente", "Error",
+					JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
 		}

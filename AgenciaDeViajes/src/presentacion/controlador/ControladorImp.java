@@ -11,8 +11,6 @@ import negocio.factura.SAFactura;
 import negocio.factura.SALineaFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
-import negocio.servicio.SAServicio;
-import negocio.servicio.TServicio;
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -24,14 +22,73 @@ public class ControladorImp extends Controlador {
 
 		// Departamento
 		case (Eventos.ALTA_DEPARTAMENTO): {
-			TDepartamento tDepartamento = (TDepartamento) datos;
+			TDepartamento tdepartamento = (TDepartamento) datos;
 			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
-//			int res = saDepartamento.createDepartamento(tDepartamento);
-			// TODO segun el valor de res, se actualiza la vista de una manera u otra.
-			// Si todo ok el aspecto es este(falta el else)
-//			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
-			// ...
-			// break;} }
+			int res = saDepartamento.createDepartamento(tdepartamento);
+			if (res != -1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_ERROR,
+						res);
+				break;
+			}
+		}
+		case (Eventos.BAJA_DEPARTAMENTO): {
+			int id = (int) datos;
+			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
+			boolean res = saDepartamento.deleteDepartamento(id);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_DEPARTAMENTO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_DEPARTAMENTO_ERROR,
+						res);
+				break;
+			}
+		}
+		case (Eventos.BUSCAR_DEPARTAMENTO): {
+			int id = (int) datos;
+			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
+			TDepartamento res = saDepartamento.readDepartamento(id);
+			if (res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_DEPARTAMENTO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_DEPARTAMENTO_ERROR, res);
+				break;
+			}
+		}
+		case (Eventos.LISTAR_DEPARTAMENTO): {
+			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
+			List<TDepartamento> res = saDepartamento.readAllDepartamento();
+			if (res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_LISTAR_DEPARTAMENTO_OK,	res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_LISTAR_DEPARTAMENTO_ERROR, res);
+				break;
+			}
+		}
+		case (Eventos.MODIFICAR_DEPARTAMENTO): {
+			int id = (int) datos;
+			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
+			boolean res = saDepartamento.updateDepartamento(saDepartamento.readDepartamento(id));
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_DEPARTAMENTO_OK, res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_DEPARTAMENTO_ERROR, res);
+				break;
+			}
 		}
 
 		// Factura
@@ -170,8 +227,8 @@ public class ControladorImp extends Controlador {
 			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
 			List<TViaje> res = saViaje.readAllViaje();
 			if (res != null) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
-						.actualizar(Eventos.RES_LISTAR_VIAJE_OK,	res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_VIAJE_OK,
+						res);
 				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
@@ -212,8 +269,8 @@ public class ControladorImp extends Controlador {
 			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
 			boolean res = saCliente.deleteCliente(id);
 			if (res) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
-				.actualizar(Eventos.RES_BAJA_CLIENTE_OK, res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_CLIENTE_OK,
+						res);
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_BAJA_CLIENTE_ERROR, res);
@@ -230,15 +287,36 @@ public class ControladorImp extends Controlador {
 						.actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR, res);
 			}
 		}
-		
-		case Eventos.ALTA_SERVICIO:{
-			TServicio t = (TServicio) datos;
-			SAServicio sa = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
-			int id = sa.createServicio(t);
-			if(id != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_OK, id);
-			else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_ERROR, id);
-			break;
+		case (Eventos.BUSCAR_CLIENTE): {
+			int id = (int) datos;
+			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+			TCliente res = saCliente.readCliente(id);
+			if (res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_CLIENTE_OK, res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_CLIENTE_ERROR, res);
+				break;
+			}
 		}
+<<<<<<< HEAD
+		case (Eventos.MODIFICAR_CLIENTE): {
+			TCliente cliente = (TCliente) datos;
+			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+			boolean res = saCliente.updateCliente(cliente);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_CLIENTE_OK, res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_CLIENTE_ERROR, res);
+				break;
+			}
+
+=======
 		
 		case Eventos.BAJA_SERVICIO:{
 			int id = (int) datos;
@@ -267,6 +345,7 @@ public class ControladorImp extends Controlador {
 		case Eventos.MODIFICAR_SERVICIO:{
 			
 			break;
+>>>>>>> 209db773ae03ec18c4283b3f9197705855bd8c82
 		}
 		}
 	}

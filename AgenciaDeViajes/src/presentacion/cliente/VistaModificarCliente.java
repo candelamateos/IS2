@@ -1,50 +1,144 @@
 package presentacion.cliente;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import negocio.cliente.TCliente;
+import negocio.factura.TFactura;
 import presentacion.IGUI;
+import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.factura.VistaModificarFactura;
 
 public class VistaModificarCliente extends JFrame implements IGUI{
 
-	private JLabel lId;
-	private JTextField tId;
-	private JButton ok;
+	private JTextField tCliente;
 	
-	public VistaModificarCliente() {
-		setTitle("MODIFICAR CLIENTE");
-		JPanel panel = new JPanel();
-		lId = new JLabel("ID:");
-		tId = new JTextField(5);
-		panel.add(lId);
-		panel.add(tId);
-		ok = new JButton("OK");
-		ok.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				String id = tId.getText();
-				int Iid = Integer.parseInt(id);
-				Controlador.getInstancia().accion(Eventos.MODIFICAR_CLIENTE, Iid);
-			}
-		});
+	VistaModificarCliente() {
+		super("Modificar Cliente");
+		initGUI();
 	}
 	
-	@Override
-	public void actualizar(int evento, Object datos) {
-		// TODO Auto-generated method stub
+	void initGUI() {
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		setContentPane(mainPanel);
 		
+		JPanel fila0 = new JPanel();
+		fila0.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(fila0);
+		JPanel fila1 = new JPanel();
+		fila1.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(fila1);
+		JPanel fila2 = new JPanel();
+		fila2.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(fila2);
+		JPanel fila3 = new JPanel();
+		fila3.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(fila3);
+		
+		JLabel lId = new JLabel("Id del cliente: ");
+		lId.setPreferredSize(new Dimension(100,25));
+		tCliente = new JTextField(10);
+		tCliente.setPreferredSize(new Dimension(100,25));
+		fila0.add(lId);
+		fila0.add(lId);
 	}
+	/*
+	
 
+	
+	JLabel lFactura = new JLabel("Id de la factura:");
+	lFactura.setPreferredSize(new Dimension(100,25));
+	tFactura = new JTextField(10);
+	tFactura.setPreferredSize(new Dimension(100,25));
+	fila0.add(lFactura);
+	fila0.add(tFactura);
+	
+	JLabel lVendedor = new JLabel("Id del vendedor:");
+	lVendedor.setPreferredSize(new Dimension(100,25));
+	tVendedor = new JTextField(10);
+	tVendedor.setPreferredSize(new Dimension(100,25));
+	fila1.add(lVendedor);
+	fila1.add(tVendedor);
+	
+	JLabel lCliente = new JLabel("Id del cliente:");
+	lCliente.setPreferredSize(new Dimension(100,25));
+	tCliente = new JTextField(10);
+	tCliente.setPreferredSize(new Dimension(100,25));
+	fila2.add(lCliente);
+	fila2.add(tCliente);
+	
+	ok = new JButton("OK");
+	ok.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+			try {
+				int idFactura;
+				int idVendedor;
+				int idCliente;
+				try{
+					idFactura = Integer.parseInt(tFactura.getText());
+				}catch(NumberFormatException ex) {
+					tFactura.setText("");
+					throw new IllegalArgumentException("El id de la factura debe ser un número", ex);
+				}
+				try{
+					idVendedor = Integer.parseInt(tVendedor.getText());
+				}catch(NumberFormatException ex) {
+					tVendedor.setText("");
+					throw new IllegalArgumentException("El id del vendedor debe ser un número", ex);
+				}
+				try{
+					idCliente = Integer.parseInt(tCliente.getText());
+				}catch(NumberFormatException ex) {
+					tCliente.setText("");
+					throw new IllegalArgumentException("El id del cliente debe ser un número", ex);
+				}
+				TFactura factura =  new TFactura(idCliente,idVendedor);
+				factura.setId(idFactura);
+				Controlador.getInstancia().accion(Eventos.MODIFICAR_FACTURA, factura);
+			}
+			catch(IllegalArgumentException ex) {
+				JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarFactura.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				setVisible(true);
+			}
+		}
+	});
+	fila3.add(ok);
+	
+	setLocationRelativeTo(null);
+	pack();
+	setVisible(true);
+}*/
+
+@Override
+public void actualizar(int evento, Object datos) {
+	switch(evento) {
+	case(Eventos.RES_MODIFICAR_CLIENTE_OK):
+		setVisible(false);
+		JOptionPane.showMessageDialog(Utils.getWindow(this), "Cliente modificado correctamente", "Cliente modificado", JOptionPane.INFORMATION_MESSAGE);
+		setVisible(true);
+		break;
+	case(Eventos.RES_MODIFICAR_FACTURA_ERROR):
+		setVisible(false);
+		JOptionPane.showMessageDialog(Utils.getWindow(this), "El cliente no existe", "Error", JOptionPane.ERROR_MESSAGE);
+		setVisible(true);
+		break;
+	}
+}
 	
 }
