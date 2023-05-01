@@ -287,6 +287,7 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR, res);
 			}
+			break;
 		}
 		case (Eventos.BUSCAR_CLIENTE): {
 			int id = (int) datos;
