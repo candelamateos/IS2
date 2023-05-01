@@ -1,17 +1,11 @@
 package negocio.viaje;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import integracion.cliente.DaoCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
-import integracion.factura.DaoFactura;
-import integracion.trabajador.DaoTrabajador;
 import integracion.viaje.DaoViaje;
 import integracion.servicio.DaoServicio;
-import negocio.cliente.TCliente;
 import negocio.servicio.*;
-import negocio.trabajador.TTrabajador;
 
 public class SAViajeImp implements SAViaje{
 	

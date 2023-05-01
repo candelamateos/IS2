@@ -21,8 +21,7 @@ import presentacion.controlador.Eventos;
 import presentacion.factura.VistaAbrirVenta;
 
 public class VistaAniadirViaje extends JFrame implements IGUI{
-	private JLabel lPrecio;
-	private JTextField tPrecio;
+	
 	private JLabel lNumPlazas;
 	private JTextField tNumPlazas;
 	private JLabel lIdActividad;

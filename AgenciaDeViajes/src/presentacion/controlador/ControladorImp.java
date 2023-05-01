@@ -170,8 +170,8 @@ public class ControladorImp extends Controlador {
 			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
 			List<TViaje> res = saViaje.readAllViaje();
 			if (res != null) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_VIAJE_OK,
-						res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_LISTAR_VIAJE_OK,	res);
 				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
@@ -230,16 +230,6 @@ public class ControladorImp extends Controlador {
 						.actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR, res);
 			}
 		}
-//		case(Eventos.LISTAR_CLIENTE): {
-//			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
-//			List<TCliente> res = saCliente.readAllCliente();
-//			if(res != null) {
-//			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_OK,res);
-//			}
-//			else {
-//				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR,res);
-//			}
-//		}
 		
 		case Eventos.ALTA_SERVICIO:{
 			TServicio t = (TServicio) datos;
