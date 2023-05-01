@@ -22,14 +22,73 @@ public class ControladorImp extends Controlador {
 
 		// Departamento
 		case (Eventos.ALTA_DEPARTAMENTO): {
-			TDepartamento tDepartamento = (TDepartamento) datos;
+			TDepartamento tdepartamento = (TDepartamento) datos;
 			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
-//			int res = saDepartamento.createDepartamento(tDepartamento);
-			// TODO segun el valor de res, se actualiza la vista de una manera u otra.
-			// Si todo ok el aspecto es este(falta el else)
-//			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
-			// ...
-			// break;} }
+			int res = saDepartamento.createDepartamento(tdepartamento);
+			if (res != -1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_ERROR,
+						res);
+				break;
+			}
+		}
+		case (Eventos.BAJA_DEPARTAMENTO): {
+			int id = (int) datos;
+			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
+			boolean res = saDepartamento.deleteDepartamento(id);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_DEPARTAMENTO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_DEPARTAMENTO_ERROR,
+						res);
+				break;
+			}
+		}
+		case (Eventos.BUSCAR_DEPARTAMENTO): {
+			int id = (int) datos;
+			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
+			TDepartamento res = saDepartamento.readDepartamento(id);
+			if (res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BUSCAR_DEPARTAMENTO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_DEPARTAMENTO_ERROR, res);
+				break;
+			}
+		}
+		case (Eventos.LISTAR_DEPARTAMENTO): {
+			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
+			List<TDepartamento> res = saDepartamento.readAllDepartamento();
+			if (res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_LISTAR_DEPARTAMENTO_OK,	res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_LISTAR_DEPARTAMENTO_ERROR, res);
+				break;
+			}
+		}
+		case (Eventos.MODIFICAR_DEPARTAMENTO): {
+			int id = (int) datos;
+			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
+			boolean res = saDepartamento.updateDepartamento(saDepartamento.readDepartamento(id));
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_DEPARTAMENTO_OK, res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_DEPARTAMENTO_ERROR, res);
+				break;
+			}
 		}
 
 		// Factura
