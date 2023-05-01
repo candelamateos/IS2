@@ -37,6 +37,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return new VistaModificarFactura();}
 		case Eventos.BUSCAR_FACTURA:{
 			return new VistaBuscarFactura();}
+		case Eventos.LISTAR_FACTURAS:{
+			return new VistaListarFacturas();}
 		
 
 		

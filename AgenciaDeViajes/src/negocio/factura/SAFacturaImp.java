@@ -63,8 +63,8 @@ public class SAFacturaImp implements SAFactura{
 
 	@Override
 	public List<TFactura> readAllFactura() {
-		// TODO Auto-generated method stub
-		return null;
+		DaoFactura d = FactoriaAbstractaIntegracion.getInstancia().crearDaoFactura();
+		return d.readAllFactura();
 	}
 
 }
