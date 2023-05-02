@@ -5,6 +5,7 @@ import java.util.List;
 import integracion.departamento.DaoDepartamento;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.trabajador.DaoTrabajador;
+import negocio.departamento.TDepartamento;
 
 public class SATrabajadorImp implements SATrabajador {
 
@@ -19,6 +20,7 @@ public class SATrabajadorImp implements SATrabajador {
 		DaoDepartamento departamento = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
 		DaoTrabajador d = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
 
+		TDepartamento dep = departamento.readDepartamento(trabajador.getIdDepart());
 		if (trabajador.getNombre() == null || trabajador.getNombre().equals("") || trabajador.getSueldo() == 0
 				|| departamento.readDepartamento(trabajador.getIdDepart()) == null || trabajador.getTipo().equals("")) {
 			return -1;
