@@ -23,17 +23,8 @@ public class SATrabajadorImp implements SATrabajador {
 				|| departamento.readDepartamento(trabajador.getId()) == null || trabajador.getTipo().equals("")) {
 			return -1;
 		} else {
-			if (trabajador.getTipo().equals("jefe")) {
-				departamento.readDepartamento(trabajador.getIdDepart()).setNumEmpleados(departamento.readDepartamento(trabajador.getIdDepart()).getNumEmpleados() + 1);
-				return d.createTrabajador(trabajador);
-			} else {
-				if (((TVendedor) trabajador).getIdJefe() == 0) {
-					return -1;
-				} else {
-					departamento.readDepartamento(trabajador.getIdDepart()).setNumEmpleados(departamento.readDepartamento(trabajador.getIdDepart()).getNumEmpleados() + 1);
-					return d.createTrabajador(trabajador);
-				}
-			}
+			departamento.readDepartamento(trabajador.getIdDepart()).setNumEmpleados(departamento.readDepartamento(trabajador.getIdDepart()).getNumEmpleados() + 1);
+			return d.createTrabajador(trabajador);
 		}
 	}
 
@@ -46,8 +37,9 @@ public class SATrabajadorImp implements SATrabajador {
 
 		if (trabajador.getId() == -1 || trabajador.getNombre() == null || trabajador.getNombre().equals("")
 				|| trabajador.getSueldo() == 0 || departamento.readDepartamento(trabajador.getId()) == null
-				|| trabajador.getTipo().equals("")) {
-
+				|| trabajador.getTipo().equals("") || trabajador.getIdJefe() == -1) {
+			return false;
+		}else {
 			TTrabajador trab_buscado = d.readTrabajador(trabajador.getId());
 			if (trab_buscado != null) {
 				update = d.updateTrabajador(trabajador);

@@ -41,6 +41,9 @@ public class DaoTrabajadorImp implements DaoTrabajador{
 			TVendedor aux = (TVendedor) trabajador;
 			json.put("idJefe", aux.getIdJefe());
 		}
+		else {
+			json.put("idJefe", 0);
+		}
 		
 		JSONArray trabajadores = data.getJSONArray("trabajadores");
 		trabajadores.put(json.getInt("id"), json);
@@ -69,9 +72,11 @@ public class DaoTrabajadorImp implements DaoTrabajador{
 			json.put("tipo", trabajador.getTipo());
 			json.put("idDepart", trabajador.getIdDepart());
 			
-			if (trabajador.getTipo().equals("vendedor")) {
+			if (trabajador.getTipo().equals("vendedor") || json.getString("tipo").equals("Vendedor")) {
 				TVendedor aux = (TVendedor) trabajador;
 				json.put("idJefe", aux.getIdJefe());
+			}else {
+				json.put("idJefe", 0);
 			}
 			
 			trabajadores.put(json.getInt("id"), json);
@@ -89,12 +94,9 @@ public class DaoTrabajadorImp implements DaoTrabajador{
 			JSONObject json = trabajadores.getJSONObject(id);
 			
 			if (!json.has("id") || !json.has("nombre") || !json.has("activo")
-					|| !json.has("sueldo") || !json.has("tipo") || !json.has("idDepart")) {
+					|| !json.has("sueldo") || !json.has("tipo") || !json.has("idDepart")
+					|| !json.has("idJefe")) {
 				return false;
-			}else {
-				if (json.getString("tipo").equals("vendedor") && !json.has("idJefe")) {
-					return false;
-				}
 			}
 			
 			if(!json.getBoolean("activo")) {
@@ -123,12 +125,13 @@ public class DaoTrabajadorImp implements DaoTrabajador{
 				return null;
 			}
 			else {
-				if (json.getString("tipo").equals("jefe")) {
+				if (json.getString("tipo").equals("jefe") || json.getString("tipo").equals("Jefe")) {
 					transfer.setId(json.getInt("id"));
 					transfer.setNombre(json.getString("nombre"));
 					transfer.setActivo(json.getBoolean("activo"));
 					transfer.setSueldo(json.getInt("sueldo"));
 					transfer.setTipo(json.getString("tipo"));
+					transfer.setIdJefe(json.getInt("idjefe"));
 				}
 				else {
 					if (!json.has("idJefe")) {

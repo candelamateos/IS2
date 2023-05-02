@@ -100,7 +100,14 @@ public class MainWindow extends JFrame implements IGUI {
 		contentPanel.add(BServicio);
 		
 		BTrabajador = new JButton("Trabajadores");
-		BTrabajador.addActionListener(null);
+		BTrabajador.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.TRABAJADORES);
+			}
+			
+		});
 		contentPanel.add(BTrabajador);
 		
 		BViaje = new JButton("Viajes");
