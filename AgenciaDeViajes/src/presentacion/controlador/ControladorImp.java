@@ -183,8 +183,6 @@ public class ControladorImp extends Controlador {
 			}
 		}
 
-		// Servicio
-
 		// Trabajador
 		case (Eventos.ALTA_TRABAJADOR):{
 			TTrabajador tTrabajador = (TTrabajador) datos;
@@ -314,9 +312,9 @@ public class ControladorImp extends Controlador {
 			}
 		}
 		case (Eventos.MODIFICAR_VIAJE): {
-			int id = (int) datos;
+			TViaje viaje = (TViaje) datos;
 			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
-			boolean res = saViaje.updateViaje(saViaje.readViaje(id));
+			boolean res = saViaje.updateViaje(viaje);
 			if (res) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_MODIFICAR_VIAJE_OK, res);
@@ -401,7 +399,8 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 		}
-//Servicios
+		
+		//Servicios
 		case (Eventos.ALTA_SERVICIO): {
 			TServicio tServicio = (TServicio) datos;
 			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
@@ -417,9 +416,6 @@ public class ControladorImp extends Controlador {
 			}
 			
 		}
-
-		
-		//Servicios
 
 		case Eventos.BAJA_SERVICIO:{
 			int id = (int) datos;

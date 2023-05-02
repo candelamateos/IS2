@@ -123,12 +123,11 @@ public class SAViajeImp implements SAViaje{
 		List<TLineaFactura> listaFacturas = dFactura.readAllLineaFactura();
 		boolean anterior = false;
 		for(TLineaFactura lf : listaFacturas) {
-			if(lf.getIdViaje() == Viaje.getId()) anterior = true;			
+			if(lf.getIdViaje() == Viaje.getId()) anterior = true;	/*Si el viaje ya esta dentro de una factura, no se puede modificar ni eliminar*/
 		}
 		
 		if(!anterior) {			
 			TViaje tViaje = d.readViaje(Viaje.getId());
-			
 			if(Viaje != null && comprobarDatosActualizados(Viaje, tViaje)) {
 				update = d.updateViaje(Viaje);
 			}
@@ -145,12 +144,15 @@ public class SAViajeImp implements SAViaje{
 		List<TLineaFactura> listaFacturas = dFactura.readAllLineaFactura();
 		boolean anterior = false;
 		for(TLineaFactura lf : listaFacturas) {
-			if(lf.getIdViaje() == id) anterior = true;			
+			if(lf.getIdViaje() == id) anterior = true;	/*Si el viaje ya esta dentro de una factura, no se puede modificar ni eliminar*/	
 		}
-		TViaje tViaje = d.readViaje(id);
-		if(!anterior && tViaje != null && tViaje.getActivo()) {
-			delete = d.deleteViaje(id);
+		if(!anterior) {
+			TViaje tViaje = d.readViaje(id);
+			if(tViaje != null && tViaje.getActivo()) {
+				delete = d.deleteViaje(id);
+			}
 		}
+		
 		return delete;
 	}
 
