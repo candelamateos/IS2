@@ -77,7 +77,7 @@ public class MainWindow extends JFrame implements IGUI {
 		BDepartamento.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.CLIENTES);
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.DEPARTAMENTO);
 			}
 		});
 		contentPanel.add(BDepartamento);

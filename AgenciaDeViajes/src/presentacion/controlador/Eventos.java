@@ -1,9 +1,10 @@
 package presentacion.controlador;
 
 public class Eventos {
-	//Todos los codigos deben ser diferentes
-	
-	//Departamento 0xx
+	// Todos los codigos deben ser diferentes
+
+	// Departamento 0xx
+	public static final int DEPARTAMENTO = 000;
 	public static final int ALTA_DEPARTAMENTO = 001;
 	public static final int BAJA_DEPARTAMENTO = 002;
 	public static final int BUSCAR_DEPARTAMENTO = 003;
@@ -19,14 +20,13 @@ public class Eventos {
 	public static final int RES_MODIFICAR_DEPARTAMENTO_ERROR = 013;
 	public static final int RES_LISTAR_DEPARTAMENTO_OK = 014;
 	public static final int RES_LISTAR_DEPARTAMENTO_ERROR = 015;
-	
-	//Factura 1xx
+
+	// Factura 1xx
 	public static final int FACTURAS = 100;
 	public static final int ABRIR_VENTA = 101;
 	public static final int CERRAR_VENTA = 102;
 	public static final int ANIADIR_VIAJE_A_FACTURA = 103;
 
-	
 	public static final int MODIFICAR_FACTURA = 104;
 	public static final int BUSCAR_FACTURA = 105;
 	public static final int LISTAR_FACTURAS = 106;
@@ -42,9 +42,8 @@ public class Eventos {
 	public static final int RES_BUSCAR_FACTURA_ERROR = 116;
 	public static final int RES_LISTAR_FACTURAS_OK = 117;
 	public static final int RES_LISTAR_FACTURAS_ERROR = 118;
-	
-	
-	//Servicio 2xx
+
+	// Servicio 2xx
 	public static final int SERVICIOS = 200;
 	public static final int ALTA_SERVICIO = 201;
 	public static final int BAJA_SERVICIO = 202;
@@ -56,10 +55,9 @@ public class Eventos {
 	public static final int RES_BAJA_SERVICIO_OK = 208;
 	public static final int RES_BAJA_SERVICIO_ERROR = 209;
 
-	
-	//Trabajador 3xx
-	
-	//Viaje 4xx
+	// Trabajador 3xx
+
+	// Viaje 4xx
 	public static final int VIAJES = 400;
 	public static final int ALTA_VIAJE = 401;
 	public static final int BAJA_VIAJE = 402;
@@ -76,9 +74,8 @@ public class Eventos {
 	public static final int RES_MODIFICAR_VIAJE_ERROR = 413;
 	public static final int RES_LISTAR_VIAJE_OK = 414;
 	public static final int RES_LISTAR_VIAJE_ERROR = 415;
-	
-	
-	//Cliente 5xx
+
+	// Cliente 5xx
 	public static final int CLIENTES = 500;
 	public static final int ALTA_CLIENTE = 501;
 	public static final int BAJA_CLIENTE = 502;
