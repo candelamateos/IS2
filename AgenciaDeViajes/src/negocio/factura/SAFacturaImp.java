@@ -20,9 +20,9 @@ public class SAFacturaImp implements SAFactura{
 		DaoTrabajador t = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
 		int idVendedor = Factura.getIdVendedor();
 		int idCliente = Factura.getIdCliente();
-//		TTrabajador trabajador = t.readTrabajador(idVendedor);
+		TTrabajador trabajador = t.readTrabajador(idVendedor);
 		TCliente cliente = c.readCliente(idCliente);
-		if(/*trabajador != null && trabajador.isActivo() && trabajador.getTipo().equals("vendedor") &&*/ cliente != null && cliente.getActivo()) {
+		if(trabajador != null && trabajador.isActivo() && trabajador.getTipo().equals("vendedor") && cliente != null && cliente.getActivo()) {
 			return d.abrirFactura(Factura);
 		}
 		else return -1;
