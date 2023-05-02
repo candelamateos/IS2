@@ -3,17 +3,24 @@ package presentacion.factura;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import negocio.factura.TFactura;
+import negocio.factura.TFacturaConLineas;
+import negocio.factura.TLineaFactura;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
@@ -89,7 +96,9 @@ public class VistaBuscarFactura extends JFrame implements IGUI {
 	public void actualizar(int evento, Object datos) {
 		switch(evento) {
 		case(Eventos.RES_BUSCAR_FACTURA_OK):
-			TFactura factura = (TFactura) datos;
+			TFacturaConLineas facturaConLineas = (TFacturaConLineas) datos;
+			TFactura factura = facturaConLineas.getFactura();
+			List<TLineaFactura> lista = facturaConLineas.getLineas();
 			setVisible(false);
 			
 			JPanel mainPanel = new JPanel();
@@ -107,8 +116,35 @@ public class VistaBuscarFactura extends JFrame implements IGUI {
 			mainPanel.add(label4);
 			mainPanel.add(label5);
 			mainPanel.add(label6);
+			mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 			
+			DefaultTableModel dataTableModel = new DefaultTableModel() {
+
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				
+				@Override
+				public boolean isCellEditable(int row, int col) {
+					return false;
+				}
+				
+			};
+			dataTableModel.setColumnIdentifiers(HEADERS);
+			dataTableModel.setNumRows(lista.size());
+			for(int i = 0; i < lista.size(); i++) {
+				TLineaFactura linea = lista.get(i);
+				dataTableModel.setValueAt(linea.getId(), i, 0);
+				dataTableModel.setValueAt(linea.getCoste(), i, 1);
+				dataTableModel.setValueAt(linea.getPlazasVendidas(), i, 2);
+				dataTableModel.setValueAt(linea.getIdFactura(), i, 3);
+				dataTableModel.setValueAt(linea.getIdViaje(), i, 4);
+			}
 			
+			JTable table = new JTable(dataTableModel);
+			JScrollPane scroll = new JScrollPane(table);
+			mainPanel.add(scroll);
 			
 			JOptionPane.showMessageDialog(Utils.getWindow(this), mainPanel , "Factura encontrada", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);

@@ -7,6 +7,7 @@ import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.factura.DaoFactura;
 import integracion.trabajador.DaoTrabajador;
 import negocio.cliente.TCliente;
+import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.trabajador.TTrabajador;
 
 public class SAFacturaImp implements SAFactura{
@@ -49,15 +50,17 @@ public class SAFacturaImp implements SAFactura{
 		int idCliente = factura.getIdCliente();
 //		TTrabajador trabajador = t.readTrabajador(idVendedor);
 		TCliente cliente = c.readCliente(idCliente);
-		if(/*trabajador != null && trabajador.isActivo() && trabajador.getTipo().equals("vendedor") &&*/ cliente != null && cliente.getActivo()) {
+		TFactura aux = d.readFactura(factura.getId());
+		if(/*trabajador != null && trabajador.isActivo() && trabajador.getTipo().equals("vendedor") &&*/ cliente != null && cliente.getActivo() && aux != null) {
+			factura.setCoste(aux.getCoste());
 			res = d.updateFactura(factura);
 		}
 		return res;
 	}
 
 	@Override
-	public TFactura readFactura(int id) {
-		DaoFactura d = FactoriaAbstractaIntegracion.getInstancia().crearDaoFactura();
+	public TFacturaConLineas readFactura(int id) {
+		ToaFactura d = FactoriaAbstractaNegocio.getInstancia().crearToaFactura();
 		return d.readFactura(id);
 	}
 

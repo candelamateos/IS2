@@ -10,7 +10,7 @@ public interface SAFactura {
 	
 	public boolean modificarFactura(TFactura factura);
 	
-	public TFactura readFactura(int id);
+	public TFacturaConLineas readFactura(int id);
 	
 	public List<TFactura> readAllFactura();
 }

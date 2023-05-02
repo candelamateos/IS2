@@ -24,12 +24,15 @@ public class SATrabajadorImp implements SATrabajador {
 			return -1;
 		} else {
 			if (trabajador.getTipo().equals("jefe")) {
+				departamento.readDepartamento(trabajador.getIdDepart()).setNumEmpleados(departamento.readDepartamento(trabajador.getIdDepart()).getNumEmpleados() + 1);
 				return d.createTrabajador(trabajador);
 			} else {
 				if (((TVendedor) trabajador).getIdJefe() == 0) {
 					return -1;
-				} else
+				} else {
+					departamento.readDepartamento(trabajador.getIdDepart()).setNumEmpleados(departamento.readDepartamento(trabajador.getIdDepart()).getNumEmpleados() + 1);
 					return d.createTrabajador(trabajador);
+				}
 			}
 		}
 	}
@@ -56,6 +59,7 @@ public class SATrabajadorImp implements SATrabajador {
 	@Override
 	public boolean deleteTrabajador(int id) {
 		DaoTrabajador d = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
+		DaoDepartamento departamento = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
 
 		if (id != -1) {
 			// compruebo, en caso de ser jefe, que no tiene ningún vendedor asociado
@@ -71,10 +75,12 @@ public class SATrabajadorImp implements SATrabajador {
 				if (encontrado) {
 					return false;
 				} else {
+					departamento.readDepartamento(d.readTrabajador(id).getIdDepart()).setNumEmpleados(departamento.readDepartamento(d.readTrabajador(id).getIdDepart()).getNumEmpleados() - 1);
 					return d.deleteTrabajador(id);
 				}
 				
 			}else {
+				departamento.readDepartamento(d.readTrabajador(id).getIdDepart()).setNumEmpleados(departamento.readDepartamento(d.readTrabajador(id).getIdDepart()).getNumEmpleados() - 1);
 				return d.deleteTrabajador(id);
 			}
 
