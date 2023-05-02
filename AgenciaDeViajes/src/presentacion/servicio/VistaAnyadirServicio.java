@@ -163,7 +163,7 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		panelActividad.add(new JLabel("tipo de actividad", JLabel.CENTER));
 		panelActividad.add(textFieldTipoActividad);
 		panelActividad.add(new JLabel("colectivo", JLabel.CENTER));
-		panelActividad.add(comboBoxComida);
+		panelActividad.add(comboBoxColectivo);
 		
 		
 		buttonGuardar = new JButton("guardar");

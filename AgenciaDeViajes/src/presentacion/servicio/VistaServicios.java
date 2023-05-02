@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import presentacion.IGUI;
+import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -78,6 +79,13 @@ public class VistaServicios extends JFrame implements IGUI{
 		button_delete.setFont(new Font("default", Font.BOLD, 100));
 		button_delete.setBorder(BorderFactory.createEmptyBorder());
 		button_delete.addActionListener(e -> {FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.BAJA_SERVICIO);});
+		
+		button_read.addActionListener(e -> {FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.BUSCAR_SERVICIO);});
+		
+		button_update.addActionListener(e -> {FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.MODIFICAR_SERVICIO);});
+
+		button_readAll.addActionListener(e -> {Controlador.getInstancia().accion(Eventos.LISTAR_SERVICIO, null);});
+
 		
 		add(Box.createGlue());
 		setLocationRelativeTo(null);
