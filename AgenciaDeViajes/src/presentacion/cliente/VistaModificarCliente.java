@@ -14,16 +14,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import negocio.cliente.TCliente;
-import negocio.factura.TFactura;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.factura.VistaModificarFactura;
 
 public class VistaModificarCliente extends JFrame implements IGUI{
-
-	private JTextField tCliente;
+	
+	private JButton ok;
+	private JTextField tId;
+	private JTextField tNombre;
 	
 	public VistaModificarCliente() {
 		super("Modificar Cliente");
@@ -45,85 +45,53 @@ public class VistaModificarCliente extends JFrame implements IGUI{
 		JPanel fila2 = new JPanel();
 		fila2.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila2);
-		JPanel fila3 = new JPanel();
-		fila3.setAlignmentX(CENTER_ALIGNMENT);
-		mainPanel.add(fila3);
 		
 		JLabel lId = new JLabel("Id del cliente: ");
-		lId.setPreferredSize(new Dimension(100,25));
-		tCliente = new JTextField(10);
-		tCliente.setPreferredSize(new Dimension(100,25));
+		lId.setPreferredSize(new Dimension(120,25));
+		tId = new JTextField(10);
+		tId.setPreferredSize(new Dimension(100,25));
 		fila0.add(lId);
-		fila0.add(lId);
+		fila0.add(tId);
+		
+		JLabel lNombre = new JLabel("Nombre del cliente: ");
+		lNombre.setPreferredSize(new Dimension(120,25));
+		tNombre = new JTextField(10);
+		tNombre.setPreferredSize(new Dimension(100, 25));
+		fila1.add(lNombre);
+		fila1.add(tNombre);
+		
+		ok = new JButton("OK");
+		ok.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				try {
+					int idCliente;
+					String nCliente;
+					try{
+						idCliente = Integer.parseInt(tId.getText());
+					}catch(NumberFormatException ex) {
+						tId.setText("");
+						throw new IllegalArgumentException("El id del clilente debe ser un número", ex);
+					}
+					TCliente cliente =  new TCliente();
+					cliente.setId(idCliente);
+					nCliente = tNombre.getText();
+					cliente.setNombre(nCliente);
+					cliente.setActivo(true);
+					Controlador.getInstancia().accion(Eventos.MODIFICAR_CLIENTE, cliente);
+				}
+				catch(IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarCliente.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					setVisible(true);
+				}
+			}
+		});
+		fila2.add(ok);
+		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
 	}
-	/*
-	
-
-	
-	JLabel lFactura = new JLabel("Id de la factura:");
-	lFactura.setPreferredSize(new Dimension(100,25));
-	tFactura = new JTextField(10);
-	tFactura.setPreferredSize(new Dimension(100,25));
-	fila0.add(lFactura);
-	fila0.add(tFactura);
-	
-	JLabel lVendedor = new JLabel("Id del vendedor:");
-	lVendedor.setPreferredSize(new Dimension(100,25));
-	tVendedor = new JTextField(10);
-	tVendedor.setPreferredSize(new Dimension(100,25));
-	fila1.add(lVendedor);
-	fila1.add(tVendedor);
-	
-	JLabel lCliente = new JLabel("Id del cliente:");
-	lCliente.setPreferredSize(new Dimension(100,25));
-	tCliente = new JTextField(10);
-	tCliente.setPreferredSize(new Dimension(100,25));
-	fila2.add(lCliente);
-	fila2.add(tCliente);
-	
-	ok = new JButton("OK");
-	ok.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			setVisible(false);
-			try {
-				int idFactura;
-				int idVendedor;
-				int idCliente;
-				try{
-					idFactura = Integer.parseInt(tFactura.getText());
-				}catch(NumberFormatException ex) {
-					tFactura.setText("");
-					throw new IllegalArgumentException("El id de la factura debe ser un número", ex);
-				}
-				try{
-					idVendedor = Integer.parseInt(tVendedor.getText());
-				}catch(NumberFormatException ex) {
-					tVendedor.setText("");
-					throw new IllegalArgumentException("El id del vendedor debe ser un número", ex);
-				}
-				try{
-					idCliente = Integer.parseInt(tCliente.getText());
-				}catch(NumberFormatException ex) {
-					tCliente.setText("");
-					throw new IllegalArgumentException("El id del cliente debe ser un número", ex);
-				}
-				TFactura factura =  new TFactura(idCliente,idVendedor);
-				factura.setId(idFactura);
-				Controlador.getInstancia().accion(Eventos.MODIFICAR_FACTURA, factura);
-			}
-			catch(IllegalArgumentException ex) {
-				JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarFactura.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-				setVisible(true);
-			}
-		}
-	});
-	fila3.add(ok);
-	
-	setLocationRelativeTo(null);
-	pack();
-	setVisible(true);
-}*/
 
 @Override
 public void actualizar(int evento, Object datos) {

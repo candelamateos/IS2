@@ -260,10 +260,13 @@ public class ControladorImp extends Controlador {
 			if (res != -1) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_CLIENTE_OK,
 						res);
+				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_ALTA_CLIENTE_ERROR, res);
+				break;
 			}
+			
 		}
 		case (Eventos.BAJA_CLIENTE): {
 			int id = (int) datos;
@@ -272,9 +275,11 @@ public class ControladorImp extends Controlador {
 			if (res) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_CLIENTE_OK,
 						res);
+				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_BAJA_CLIENTE_ERROR, res);
+				break;
 			}
 		}
 		case (Eventos.LISTAR_CLIENTE): {
@@ -283,11 +288,13 @@ public class ControladorImp extends Controlador {
 			if (res != null) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_LISTAR_CLIENTE_OK, res);
+				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR, res);
+				break;
 			}
-			break;
+			
 		}
 		case (Eventos.BUSCAR_CLIENTE): {
 			int id = (int) datos;
