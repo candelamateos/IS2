@@ -6,6 +6,12 @@ import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
 import presentacion.factura.*;
 import presentacion.servicio.*;
+import presentacion.trabajador.VistaAniadirTrabajador;
+import presentacion.trabajador.VistaBuscarTrabajador;
+import presentacion.trabajador.VistaEliminarTrabajador;
+import presentacion.trabajador.VistaListarTrabajador;
+import presentacion.trabajador.VistaModificarTrabajador;
+import presentacion.trabajador.VistaTrabajadores;
 import presentacion.viaje.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
@@ -69,6 +75,24 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		}
 
 		// Trabajador
+		case Eventos.TRABAJADORES: {
+			return new VistaTrabajadores();
+		}
+		case Eventos.ALTA_TRABAJADOR: {
+			return new VistaAniadirTrabajador();
+		}
+		case Eventos.BAJA_TRABAJADOR: {
+			return new VistaEliminarTrabajador();
+		}
+		case Eventos.BUSCAR_TRABAJADOR: {
+			return new VistaBuscarTrabajador();
+		}
+		case Eventos.MODIFICAR_TRABAJADOR: {
+			return new VistaModificarTrabajador();
+		}
+		case Eventos.LISTAR_TRABAJADOR: {
+			return new VistaListarTrabajador();
+		}
 
 		// Viaje
 		case Eventos.VIAJES: {

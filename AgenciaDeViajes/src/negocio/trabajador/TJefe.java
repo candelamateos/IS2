@@ -6,8 +6,7 @@ public class TJefe extends TTrabajador{
 		
 	}
 	
-	public TJefe(String nombre, int sueldo, int idDepart, String tipo) {
-		super(nombre, sueldo, idDepart, "Jefe");
+	public TJefe(String nombre, int sueldo, int idDepart, String tipo, int idJefe) {
+		super(nombre, sueldo, idDepart, "Jefe", 0);
 	}
-
 }

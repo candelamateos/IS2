@@ -14,17 +14,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import negocio.trabajador.TTrabajador;
+import negocio.viaje.TViaje;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
-public class VistaAniadirTrabajador extends JFrame implements IGUI{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class VistaModificarTrabajador extends JFrame implements IGUI{
+private static final long serialVersionUID = 1L;
 	
+	private JLabel lId;
+	private JTextField tId;
 	private JLabel lNombre;
 	private JTextField tNombre;
 	private JLabel lSueldo;
@@ -35,21 +35,22 @@ public class VistaAniadirTrabajador extends JFrame implements IGUI{
 	private JTextField tTipo;
 	private JLabel lIdJefe;
 	private JTextField tIdJefe;
-
 	private JButton ok;
 	
-	public VistaAniadirTrabajador() {
-		super("ANYADIR TRABAJADOR");
+	public VistaModificarTrabajador() {
+		super("Modificar Trabajador");
 		initGUI();
 	}
 	
-	void initGUI() {
-		
+	private void initGUI() {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		setContentPane(mainPanel);
 		
+		JPanel fila0 = new JPanel();
+		fila0.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(fila0);
 		JPanel fila1 = new JPanel();
 		fila1.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila1);
@@ -66,9 +67,15 @@ public class VistaAniadirTrabajador extends JFrame implements IGUI{
 		fila5.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila5);
 		JPanel fila6 = new JPanel();
-		fila6.setAlignmentX(CENTER_ALIGNMENT);
+		fila5.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila6);
 		
+		
+		lId= new JLabel("Id del viaje:");
+		lId.setPreferredSize(new Dimension(100, 25));
+		tId = new JTextField(10);
+		fila0.add(lId);
+		fila0.add(tId);
 		
 		lNombre = new JLabel("Nombre:");
 		lNombre.setPreferredSize(new Dimension(100, 25));
@@ -76,38 +83,39 @@ public class VistaAniadirTrabajador extends JFrame implements IGUI{
 		fila1.add(lNombre);
 		fila1.add(tNombre);
 		
-		lSueldo = new JLabel("Sueldo:");
+		lSueldo= new JLabel("Sueldo:");
 		lSueldo.setPreferredSize(new Dimension(100, 25));
 		tSueldo = new JTextField(10);
 		fila2.add(lSueldo);
 		fila2.add(tSueldo);
 		
-		lIdDepart = new JLabel("Id Departamento:");
+		lIdDepart = new JLabel("Id del departamento:");
 		lIdDepart.setPreferredSize(new Dimension(100, 25));
 		tIdDepart = new JTextField(10);
 		fila3.add(lIdDepart);
 		fila3.add(tIdDepart);
 		
-		lTipo= new JLabel("Tipo:");
+		lTipo = new JLabel("Tipo:");
 		lTipo.setPreferredSize(new Dimension(100, 25));
 		tTipo = new JTextField(10);
 		fila4.add(lTipo);
 		fila4.add(tTipo);
 		
-		lIdJefe= new JLabel("IdJefe:");
+		lIdJefe = new JLabel("Id del jefe:");
 		lIdJefe.setPreferredSize(new Dimension(100, 25));
 		tIdJefe = new JTextField(10);
 		fila5.add(lIdJefe);
 		fila5.add(tIdJefe);
 		
-		
 		ok = new JButton("OK");
+		mainPanel.add(ok);
 		ok.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				try {
+					int Iid;
 					String Inombre;
 					int Isueldo;
 					int IidDepart;
@@ -115,27 +123,33 @@ public class VistaAniadirTrabajador extends JFrame implements IGUI{
 					int IidJefe;
 					
 					try{
+						Iid = Integer.parseInt(tId.getText());
+					}catch(NumberFormatException ex) {
+						throw new IllegalArgumentException("El id del viaje debe ser un numero", ex);
+					}
+					
+					try{
 						Inombre = tNombre.getText();
-					}catch(Exception ex) {
-						throw new IllegalArgumentException("Nombre no válido", ex);
+					}catch(NumberFormatException ex) {
+						throw new IllegalArgumentException("El numero de plazas debe ser un entero", ex);
 					}
 					
 					try {
 						Isueldo = Integer.parseInt(tSueldo.getText());
 					}catch(NumberFormatException ex) {
-						throw new IllegalArgumentException("El sueldo del trabajador debe ser un entero", ex);
+						throw new IllegalArgumentException("El id de la actividad debe ser un numero", ex);
 					}
 					
 					try {
 						IidDepart = Integer.parseInt(tIdDepart.getText());
 					}catch(NumberFormatException ex) {
-						throw new IllegalArgumentException("El id del departamento debe ser un entero", ex);
+						throw new IllegalArgumentException("El id del alojamiento debe ser un numero", ex);
 					}
 					
 					try {
 						Itipo = tTipo.getText();
-					}catch(Exception ex) {
-						throw new IllegalArgumentException("Tipo no válido", ex);
+					}catch(NumberFormatException ex) {
+						throw new IllegalArgumentException("El id del transporte debe ser un numero", ex);
 					}
 					
 					if (Itipo.equals("Vendedor") || Itipo.equals("vendedor")) {
@@ -148,36 +162,41 @@ public class VistaAniadirTrabajador extends JFrame implements IGUI{
 					else {
 						IidJefe = 0;
 					}
-
-					Controlador.getInstancia().accion(Eventos.ALTA_TRABAJADOR, new TTrabajador(Inombre, Isueldo, IidDepart, Itipo, IidJefe));
+					
+					TTrabajador trabajador = new TTrabajador(Inombre, Isueldo, IidDepart, Itipo, IidJefe);
+					trabajador.setId(Iid);
+					Controlador.getInstancia().accion(Eventos.MODIFICAR_VIAJE, trabajador);
 				}catch(IllegalArgumentException ex) {
-					JOptionPane.showMessageDialog(Utils.getWindow(VistaAniadirTrabajador.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarTrabajador.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}
+				
 			}
 		});
 		fila6.add(ok);
+		
 		setLocationRelativeTo(null);
 		pack();
 		setVisible(true);
-}
-
-
+	}
+	
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch(evento) {
-		case(Eventos.RES_ALTA_TRABAJADOR_OK):{
+		case(Eventos.RES_MODIFICAR_TRABAJADOR_OK):{
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Trabajador a�adido con id " + datos, "Trabajador A�adido", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Trabajador modificado con id " + datos, "Trabajador modificado", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		}
-		case(Eventos.RES_ALTA_TRABAJADOR_ERROR):{
+		case(Eventos.RES_MODIFICAR_TRABAJADOR_ERROR):{
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo a�adir el trabajador", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo modificar al trabajador", "Error", JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
 		}
-	   }
 	}
+		
+	}
+
 }
