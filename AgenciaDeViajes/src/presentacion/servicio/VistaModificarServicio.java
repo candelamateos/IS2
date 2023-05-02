@@ -2,6 +2,7 @@ package presentacion.servicio;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import java.awt.event.ItemListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -17,14 +19,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
+import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.servicio.TActividad;
 import negocio.servicio.TAlojamiento;
+import negocio.servicio.TServicio;
 import negocio.servicio.TTransporte;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.servicio.VistaAnyadirServicio.AccionGuardar;
 
 public class VistaModificarServicio extends JFrame implements IGUI{
@@ -33,11 +40,15 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 	JPanel panelTransporte;
 	JPanel panelAlojamiento;
 	JPanel mainPanel;
-	JPanel comboBoxPanel;
-	JComboBox<String> comboBox;
-	JTextField textFieldNombre;
-	JTextField textFieldPrecio;
-	JTextField textFieldNumPlazas;
+	JTextField tfNombreAlo;
+	JTextField tfPrecioAlo;
+	JTextField tfPlazasAlo;
+	JTextField tfNombreAct;
+	JTextField tfPrecioAct;
+	JTextField tfPlazasAct;
+	JTextField tfNombreTrans;
+	JTextField tfPrecioTrans;
+	JTextField tfPlazasTrans;
 	JTextField textFieldRegimen;
 	JComboBox<String> comboBoxEstrellas;
 	Map<String, Integer> convertirEstrellas;
@@ -48,7 +59,10 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 	JTextField textFieldTipoActividad;
 	JComboBox<String> comboBoxColectivo;
 	Map<String, Boolean> convertirColectivo;
-	JTextField tfId;
+	TfId tfId;
+	JPanel idPanel;
+	String panelActual;
+	JLabel lServicioNoEncontrado;
 	
 	
 	private final String PANEL_ACTIVIDAD = "actividad";
@@ -64,10 +78,18 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 	private void initGUI() {
 		
 		cards = new JPanel(new CardLayout());
-		comboBoxPanel = new JPanel();
+		idPanel = new JPanel();
 		mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(comboBoxPanel, BorderLayout.NORTH);
+		mainPanel.add(idPanel, BorderLayout.NORTH);
 		mainPanel.add(cards, BorderLayout.CENTER);
+		idPanel.add(new JLabel("Introduce el ID: "));
+		tfId = new TfId();
+		idPanel.add(tfId);
+		lServicioNoEncontrado = new JLabel("Servicio no encontrado");
+		lServicioNoEncontrado.setForeground(Color.red);
+		lServicioNoEncontrado.setVisible(false);
+		idPanel.add(lServicioNoEncontrado);
+
 		
 		panelActividad = new JPanel();
 		panelTransporte = new JPanel();
@@ -77,26 +99,13 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 		cards.add(panelAlojamiento, PANEL_ALOJAMIENTO);
 		
 		String opciones[] = {PANEL_ACTIVIDAD, PANEL_TRANSPORTE, PANEL_ALOJAMIENTO};
-		comboBox = new JComboBox<>(opciones);
-		comboBoxPanel.add(comboBox);
-		comboBox.setEditable(false);
-		comboBoxPanel.setOpaque(false);
-		comboBox.addItemListener(new ItemListener() {
-
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-			    CardLayout cl = (CardLayout)(cards.getLayout());
-			    cl.show(cards, (String)e.getItem());
-			}
-			
-		});
+		
 		
 		//panel alojamiento
-		panelAlojamiento.setLayout(new GridLayout(7, 2));
-		textFieldNombre = new JTextField(20);
-		textFieldNumPlazas = new JTextField(20);
-		textFieldPrecio = new JTextField(20);
-		tfId = new JTextField(5);
+		panelAlojamiento.setLayout(new GridLayout(6, 2));
+		tfNombreAlo = new JTextField(20);
+		tfPlazasAlo = new JTextField(20);
+		tfPrecioAlo = new JTextField(20);
 		textFieldRegimen = new JTextField(20);
 		String opcionesEstrellas[] = {"*", "**", "***", "****", "*****"};
 		convertirEstrellas = new HashMap<String, Integer>();
@@ -106,39 +115,34 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 		convertirEstrellas.put("****", 4);
 		convertirEstrellas.put("*****", 5);
 		comboBoxEstrellas = new JComboBox<>(opcionesEstrellas);
-		panelAlojamiento.add(new JLabel("ID ", JLabel.CENTER));
-		panelAlojamiento.add(tfId);
 		panelAlojamiento.add(new JLabel("nombre", JLabel.CENTER));
-		panelAlojamiento.add(textFieldNombre);
+		panelAlojamiento.add(tfNombreAlo);
 		panelAlojamiento.add(new JLabel("nº plazas", JLabel.CENTER));
-		panelAlojamiento.add(textFieldNumPlazas);
+		panelAlojamiento.add(tfPlazasAlo);
 		panelAlojamiento.add(new JLabel("precio", JLabel.CENTER));
-		panelAlojamiento.add(textFieldPrecio);
+		panelAlojamiento.add(tfPrecioAlo);
 		panelAlojamiento.add(new JLabel("Régimen", JLabel.CENTER));
 		panelAlojamiento.add(textFieldRegimen);
 		panelAlojamiento.add(new JLabel("nº estrellas", JLabel.CENTER));
 		panelAlojamiento.add(comboBoxEstrellas);
 		
 		//panel transporte
-		panelTransporte.setLayout(new GridLayout(7, 2));
-		textFieldNombre = new JTextField(20);
-		textFieldNumPlazas = new JTextField(20);
-		textFieldPrecio = new JTextField(20);
-		tfId = new JTextField(5);
+		panelTransporte.setLayout(new GridLayout(6, 2));
+		tfNombreTrans = new JTextField(20);
+		tfPlazasTrans = new JTextField(20);
+		tfPrecioTrans = new JTextField(20);
 		textFieldTipoTransporte = new JTextField(20);
 		convertirComida = new HashMap<String, Boolean>();
 		convertirComida.put("SI", true);
 		convertirComida.put("NO", false);
 		String opcionesComboBoxComida[] = {"SI", "NO"};
 		comboBoxComida = new JComboBox<String>(opcionesComboBoxComida);
-		panelTransporte.add(new JLabel("ID ", JLabel.CENTER));
-		panelTransporte.add(tfId);
 		panelTransporte.add(new JLabel("nombre", JLabel.CENTER));
-		panelTransporte.add(textFieldNombre);
+		panelTransporte.add(tfNombreTrans);
 		panelTransporte.add(new JLabel("nº plazas", JLabel.CENTER));
-		panelTransporte.add(textFieldNumPlazas);
+		panelTransporte.add(tfPlazasTrans);
 		panelTransporte.add(new JLabel("precio", JLabel.CENTER));
-		panelTransporte.add(textFieldPrecio);
+		panelTransporte.add(tfPrecioTrans);
 		panelTransporte.add(new JLabel("tipo de transporte", JLabel.CENTER));
 		panelTransporte.add(textFieldTipoTransporte);
 		panelTransporte.add(new JLabel("comida incluida", JLabel.CENTER));
@@ -146,25 +150,22 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 		
 		
 		//panel actividad
-		panelActividad.setLayout(new GridLayout(7, 2));
-		textFieldNombre = new JTextField(20);
-		textFieldNumPlazas = new JTextField(20);
-		textFieldPrecio = new JTextField(20);
-		tfId = new JTextField(5);
+		panelActividad.setLayout(new GridLayout(6, 2));
+		tfNombreAct = new JTextField(20);
+		tfPlazasAct = new JTextField(20);
+		tfPrecioAct = new JTextField(20);
 		textFieldTipoActividad = new JTextField(20);
 		convertirColectivo = new HashMap<String, Boolean>();
 		convertirColectivo.put("SI", true);
 		convertirColectivo.put("NO", false);
 		String opcionesComboBoxColectivo[] = {"SI", "NO"};
 		comboBoxColectivo = new JComboBox<String>(opcionesComboBoxColectivo);
-		panelActividad.add(new JLabel("ID ", JLabel.CENTER));
-		panelActividad.add(tfId);
 		panelActividad.add(new JLabel("nombre", JLabel.CENTER));
-		panelActividad.add(textFieldNombre);
+		panelActividad.add(tfNombreAct);
 		panelActividad.add(new JLabel("nº plazas", JLabel.CENTER));
-		panelActividad.add(textFieldNumPlazas);
+		panelActividad.add(tfPlazasAct);
 		panelActividad.add(new JLabel("precio", JLabel.CENTER));
-		panelActividad.add(textFieldPrecio);
+		panelActividad.add(tfPrecioAct);
 		panelActividad.add(new JLabel("tipo de actividad", JLabel.CENTER));
 		panelActividad.add(textFieldTipoActividad);
 		panelActividad.add(new JLabel("colectivo", JLabel.CENTER));
@@ -203,14 +204,13 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String panelSeleccionado = (String) comboBox.getSelectedItem();
 			
 			try {
-			switch(panelSeleccionado) {
+			switch(panelActual) {
 			case PANEL_ALOJAMIENTO:{
-				String nombre = textFieldNombre.getText();
-				int numPlazas = Integer.parseInt(textFieldNumPlazas.getText());
-				int precio = Integer.parseInt(textFieldPrecio.getText());
+				String nombre = tfNombreAlo.getText();
+				int numPlazas = Integer.parseInt(tfPlazasAlo.getText());
+				int precio = Integer.parseInt(tfPrecioAlo.getText());
 				String regimen = textFieldRegimen.getText();
 				int estrellas = convertirEstrellas.get((String) comboBoxEstrellas.getSelectedItem());
 				setVisible(false);
@@ -221,9 +221,9 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 			}
 			
 			case PANEL_TRANSPORTE:{
-				String nombre = textFieldNombre.getText();
-				int numPlazas = Integer.parseInt(textFieldNumPlazas.getText());
-				int precio = Integer.parseInt(textFieldPrecio.getText());
+				String nombre = tfNombreTrans.getText();
+				int numPlazas = Integer.parseInt(tfPlazasTrans.getText());
+				int precio = Integer.parseInt(tfPrecioTrans.getText());
 				String tipoTransporte = textFieldTipoTransporte.getText();
 				boolean comida = convertirComida.get(comboBoxComida.getSelectedItem());
 				setVisible(false);
@@ -234,9 +234,9 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 			}
 			
 			case PANEL_ACTIVIDAD:{
-				String nombre = textFieldNombre.getText();
-				int numPlazas = Integer.parseInt(textFieldNumPlazas.getText());
-				int precio = Integer.parseInt(textFieldPrecio.getText());
+				String nombre = tfNombreAct.getText();
+				int numPlazas = Integer.parseInt(tfPlazasAct.getText());
+				int precio = Integer.parseInt(tfPrecioAct.getText());
 				String tipoActividad = textFieldTipoActividad.getText();
 				boolean colectivo = convertirColectivo.get(comboBoxColectivo.getSelectedItem());
 				setVisible(false);
@@ -252,6 +252,79 @@ public class VistaModificarServicio extends JFrame implements IGUI{
 				JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarServicio.this), "algun parametro es invalido", "Error", JOptionPane.ERROR_MESSAGE);
 				setVisible(true);
 			}
+		}
+		
+	}
+	
+	
+	class TfId extends JTextField{
+		
+		TfId(){
+			super(10);
+			getDocument().addDocumentListener(new DocumentListener() {
+				  public void changedUpdate(DocumentEvent e) {
+				    warn();
+				  }
+				  public void removeUpdate(DocumentEvent e) {
+				    warn();
+				  }
+				  public void insertUpdate(DocumentEvent e) {
+				    warn();
+				  }
+
+				  public void warn() {
+					 try {
+					 int id = Integer.parseInt(getText());
+					 TServicio t = FactoriaAbstractaNegocio.getInstancia().crearSAServicio().readServicio(id);
+				     
+					 if (t == null){
+				       setBorder(BorderFactory.createLineBorder(Color.red));
+				       lServicioNoEncontrado.setVisible(true);
+					 }
+				     else {
+				    	 setBorder(BorderFactory.createLineBorder(Color.green));
+				    	 lServicioNoEncontrado.setVisible(false);
+				    	 if(t instanceof TTransporte) {
+							 CardLayout cl = (CardLayout)(cards.getLayout());
+							 cl.show(cards, PANEL_TRANSPORTE);
+							 panelActual = PANEL_TRANSPORTE;
+							 tfNombreTrans.setText(t.getNombre());
+							 tfPlazasTrans.setText(Integer.toString(t.getNumPlazas()));
+							 tfPrecioTrans.setText(Integer.toString(t.getPrecio()));
+							 textFieldTipoTransporte.setText(((TTransporte) t).getTipoTransporte());
+							 boolean bComida = ((TTransporte) t).isComida();
+							 comboBoxComida.setSelectedIndex(bComida? 0 : 1);	 
+							 
+				    	 }
+				    	 else if(t instanceof TActividad) {
+							 CardLayout cl = (CardLayout)(cards.getLayout());
+							 cl.show(cards, PANEL_ACTIVIDAD);
+							 panelActual = PANEL_ACTIVIDAD;
+							 tfNombreAct.setText(t.getNombre());
+							 tfPlazasAct.setText(Integer.toString(t.getNumPlazas()));
+							 tfPrecioAct.setText(Integer.toString(t.getPrecio()));
+							 textFieldTipoActividad.setText(((TActividad) t).getTipoActividad());
+							 boolean bColectivo = ((TActividad) t).isColectivo();
+							 comboBoxColectivo.setSelectedIndex(bColectivo? 0 : 1);	 
+				    	 }
+				    	 else if(t instanceof TAlojamiento) {
+				    		 CardLayout cl = (CardLayout)(cards.getLayout());
+							 cl.show(cards, PANEL_ALOJAMIENTO);
+							 panelActual = PANEL_ALOJAMIENTO;
+							 tfNombreAlo.setText(t.getNombre());
+							 tfPlazasAlo.setText(Integer.toString(t.getNumPlazas()));
+							 tfPrecioAlo.setText(Integer.toString(t.getPrecio()));
+							 comboBoxEstrellas.setSelectedIndex(((TAlojamiento) t).getEstrellas() - 1);
+							 textFieldRegimen.setText(((TAlojamiento) t).getRegimen());
+				    	 }
+				     }
+					 }
+					 catch(Exception ex) {
+						 
+					 }
+				  }
+				});
+			
 		}
 		
 	}
