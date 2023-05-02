@@ -4,17 +4,8 @@ import presentacion.IGUI;
 import presentacion.cliente.*;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
-import presentacion.factura.VistaAbrirVenta;
-import presentacion.factura.VistaAniadirViajeAFactura;
-import presentacion.factura.VistaCerrarVenta;
-import presentacion.factura.VistaFacturas;
-import presentacion.servicio.VistaAnyadirServicio;
-import presentacion.servicio.VistaBuscarServicio;
-import presentacion.servicio.VistaEliminarServicio;
-import presentacion.servicio.VistaListarServicios;
-import presentacion.servicio.VistaModificarServicio;
-import presentacion.servicio.VistaServicios;
 import presentacion.factura.*;
+import presentacion.servicio.*;
 import presentacion.viaje.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
