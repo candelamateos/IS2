@@ -327,6 +327,21 @@ public class ControladorImp extends Controlador {
 			}
 		}
 //Servicios
+		case (Eventos.ALTA_SERVICIO): {
+			TServicio tServicio = (TServicio) datos;
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			int res = saServicio.createServicio(tServicio);
+			if (res != -1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_ALTA_SERVICIO_ERROR, res);
+				break;
+			}
+			
+		}
 		case Eventos.BAJA_SERVICIO:{
 			int id = (int) datos;
 			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
