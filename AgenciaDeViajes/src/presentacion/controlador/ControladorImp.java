@@ -79,9 +79,9 @@ public class ControladorImp extends Controlador {
 			}
 		}
 		case (Eventos.MODIFICAR_DEPARTAMENTO): {
-			int id = (int) datos;
+			TDepartamento departamento = (TDepartamento) datos;
 			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
-			boolean res = saDepartamento.updateDepartamento(saDepartamento.readDepartamento(id));
+			boolean res = saDepartamento.updateDepartamento(departamento);
 			if (res) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_MODIFICAR_DEPARTAMENTO_OK, res);

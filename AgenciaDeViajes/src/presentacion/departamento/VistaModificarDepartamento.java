@@ -89,8 +89,7 @@ public class VistaModificarDepartamento extends JFrame implements IGUI {
 						throw new IllegalArgumentException("El id debe ser un numero entero", ex);
 					}
 					try {
-						Snombre = tNombre.getText();					
-						Controlador.getInstancia().accion(Eventos.MODIFICAR_DEPARTAMENTO, new TDepartamento(Snombre));
+						Snombre = tNombre.getText();	
 					}catch(IllegalArgumentException ex) {
 						tNombre.setText("");
 						JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarDepartamento.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -105,7 +104,6 @@ public class VistaModificarDepartamento extends JFrame implements IGUI {
 					TDepartamento departamento = new TDepartamento(Snombre);
 					departamento.setId(Iid);
 					departamento.setNumEmpleados(InumEmpleados);
-					departamento.setActivo(true);
 					Controlador.getInstancia().accion(Eventos.MODIFICAR_DEPARTAMENTO, departamento);
 				} catch (IllegalArgumentException ex) {
 					JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarDepartamento.this), ex.getMessage(),
@@ -126,7 +124,7 @@ public class VistaModificarDepartamento extends JFrame implements IGUI {
 		switch (evento) {
 		case (Eventos.RES_MODIFICAR_DEPARTAMENTO_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento modificado con id " + datos,
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento modificado correctamente",
 					"Departamento modificado", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
