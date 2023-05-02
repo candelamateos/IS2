@@ -10,6 +10,7 @@ import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.SALineaFactura;
 import negocio.factura.TFactura;
+import negocio.factura.TFacturaConLineas;
 import negocio.factura.TLineaFactura;
 import negocio.servicio.SAServicio;
 <<<<<<< HEAD
@@ -171,7 +172,7 @@ public class ControladorImp extends Controlador {
 		case (Eventos.BUSCAR_FACTURA): {
 			int id = (int) datos;
 			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
-			TFactura res = saFactura.readFactura(id);
+			TFacturaConLineas res = saFactura.readFactura(id);
 			if (res != null) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_BUSCAR_FACTURA_OK, res);

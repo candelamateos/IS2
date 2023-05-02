@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -105,7 +106,7 @@ public class DaoFacturaImp implements DaoFactura {
 
 	@Override
 	public List<TLineaFactura> readAllLineaFactura() {
-		List<TLineaFactura> lista = new ArrayList<>();
+		List<TLineaFactura> lista = new LinkedList<>();
 
 		JSONObject data = loadData();
 		JSONArray facturas = data.getJSONArray("lineasFactura");
@@ -222,10 +223,5 @@ public class DaoFacturaImp implements DaoFactura {
 			return false;
 		}
 		return true;
-	}
-	
-	public static void main(String[] args) {
-		DaoFactura d= new DaoFacturaImp();
-		d.readAllLineaFactura();
 	}
 }
