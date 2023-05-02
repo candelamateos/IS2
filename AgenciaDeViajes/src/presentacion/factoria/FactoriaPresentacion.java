@@ -4,17 +4,8 @@ import presentacion.IGUI;
 import presentacion.cliente.*;
 import presentacion.controlador.Eventos;
 import presentacion.departamento.*;
-import presentacion.factura.VistaAbrirVenta;
-import presentacion.factura.VistaAniadirViajeAFactura;
-import presentacion.factura.VistaCerrarVenta;
-import presentacion.factura.VistaFacturas;
-import presentacion.servicio.VistaAnyadirServicio;
-import presentacion.servicio.VistaBuscarServicio;
-import presentacion.servicio.VistaEliminarServicio;
-import presentacion.servicio.VistaListarServicios;
-import presentacion.servicio.VistaModificarServicio;
-import presentacion.servicio.VistaServicios;
 import presentacion.factura.*;
+import presentacion.servicio.*;
 import presentacion.viaje.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
@@ -42,20 +33,20 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		}
 
 		// Factura
-//		case Eventos.FACTURAS:{
-//			return new VistaFacturas();}
-//		case Eventos.ABRIR_VENTA:{
-//			return new VistaAbrirVenta();}
-//		case Eventos.CERRAR_VENTA:{
-//			return new VistaCerrarVenta();}
-//		case Eventos.ANIADIR_VIAJE_A_FACTURA:{
-//			return new VistaAniadirViajeAFactura();}
-//		case Eventos.MODIFICAR_FACTURA:{
-//			return new VistaModificarFactura();}
-//		case Eventos.BUSCAR_FACTURA:{
-//			return new VistaBuscarFactura();}
-//		case Eventos.LISTAR_FACTURAS:{
-//			return new VistaListarFacturas();}
+		case Eventos.FACTURAS:{
+			return new VistaFacturas();}
+		case Eventos.ABRIR_VENTA:{
+			return new VistaAbrirVenta();}
+		case Eventos.CERRAR_VENTA:{
+			return new VistaCerrarVenta();}
+		case Eventos.ANIADIR_VIAJE_A_FACTURA:{
+			return new VistaAniadirViajeAFactura();}
+		case Eventos.MODIFICAR_FACTURA:{
+			return new VistaModificarFactura();}
+		case Eventos.BUSCAR_FACTURA:{
+			return new VistaBuscarFactura();}
+		case Eventos.LISTAR_FACTURAS:{
+			return new VistaListarFacturas();}
 
 		// Servicio
 		case Eventos.SERVICIOS: {
