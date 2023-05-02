@@ -25,7 +25,7 @@ public class VistaAniadirDepartamento extends JFrame implements IGUI {
 	private JButton ok;
 
 	public VistaAniadirDepartamento() {
-		super("Añadir Cliente");
+		super("AÑADIR DEPARTAMENTO");
 		initGUI();
 	}
 

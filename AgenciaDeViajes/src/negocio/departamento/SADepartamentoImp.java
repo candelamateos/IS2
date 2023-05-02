@@ -11,7 +11,8 @@ public class SADepartamentoImp implements SADepartamento {
 	}
 
 	private boolean comprobarDatos(TDepartamento departamento) {
-		return departamento.getActivo() && departamento.getNumEmpleados() >= 0 && departamento.getNombre() != "" && departamento.getNombre() != null;
+		return departamento.getActivo() && departamento.getNumEmpleados() >= 0 && departamento.getNombre() != ""
+				&& departamento.getNombre() != null;
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class SADepartamentoImp implements SADepartamento {
 		boolean delete = false;
 		DaoDepartamento d = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
 		TDepartamento existe = d.readDepartamento(id);
-		if (existe != null && comprobarDatos(existe)) {
+		if (existe != null && comprobarDatos(existe) && existe.getNumEmpleados() == 0) {
 			delete = d.deleteDepartamento(id);
 		}
 		return delete;
