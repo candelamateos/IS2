@@ -15,7 +15,7 @@ import negocio.factura.TLineaFactura;
 import negocio.servicio.SAServicio;
 import negocio.servicio.TServicio;
 import negocio.trabajador.SATrabajador;
-import negocio.trabajador.TTrabajador
+import negocio.trabajador.TTrabajador;
 import negocio.servicio.TServicio;
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
@@ -249,7 +249,6 @@ public class ControladorImp extends Controlador {
 						.actualizar(Eventos.RES_BUSCAR_TRABAJADOR_ERROR, res);
 				break;
 			}
-			break;
 		}
 		case (Eventos.MODIFICAR_TRABAJADOR): {
 			TTrabajador trabajador = (TTrabajador) datos;
@@ -351,7 +350,6 @@ public class ControladorImp extends Controlador {
 						.actualizar(Eventos.RES_ALTA_CLIENTE_ERROR, res);
 				break;
 			}
-			break;
 		}
 		case (Eventos.BAJA_CLIENTE): {
 			int id = (int) datos;
@@ -367,7 +365,6 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 			
-			break;
 		}
 		case (Eventos.LISTAR_CLIENTE): {
 			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
@@ -396,8 +393,6 @@ public class ControladorImp extends Controlador {
 						.actualizar(Eventos.RES_BUSCAR_CLIENTE_ERROR, res);
 				break;
 			}
-			
-			break;
 		}
 		
 		case (Eventos.MODIFICAR_CLIENTE): {
