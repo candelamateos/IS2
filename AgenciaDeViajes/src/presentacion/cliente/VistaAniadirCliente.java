@@ -11,21 +11,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import negocio.cliente.TCliente;
-import negocio.departamento.TDepartamento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.Utils;
 
 public class VistaAniadirCliente extends JFrame implements IGUI{
-	private JLabel lId;
-	private JTextField tId;
 	private JLabel lNombre;
 	private JTextField tNombre;
 	private JButton ok;
 	
 	public VistaAniadirCliente() {
-		super("A�ADIR CLIENTE");
+		super("ANYADIR CLIENTE");
 		initGUI();
 	}
 	
@@ -41,6 +38,15 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				try {
+				String nombre = tNombre.getText();
+				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(nombre));
+				}
+				catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaAniadirCliente.this), ex.getMessage(), "Error", 
+							JOptionPane.ERROR_MESSAGE);
+					setVisible(true);
+				}
 				String nombre = tNombre.getText();
 				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(nombre));
 			}

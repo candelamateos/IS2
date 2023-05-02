@@ -24,7 +24,7 @@ public class VistaListarViaje extends JFrame implements IGUI{
 	
 	private DefaultTableModel dataTableModel;
 	
-	private static final String[] HEADERS = {"Id", "Precio", "Numero de plazas", "IdActividad", "IdAlojamiento", "IdTransporte"};
+	private static final String[] HEADERS = {"Id", "Precio", "Numero de plazas", "IdActividad", "IdAlojamiento", "IdTransporte", "Activo"};
 	
 	public VistaListarViaje() {
 		super("LISTAR VIAJE");
@@ -50,6 +50,7 @@ public class VistaListarViaje extends JFrame implements IGUI{
 		
 		JTable tabla = new JTable(dataTableModel);
 		JScrollPane scroll = new JScrollPane(tabla);
+		
 		mainPanel.add(scroll);
 		
 		setContentPane(mainPanel);
@@ -65,23 +66,20 @@ public class VistaListarViaje extends JFrame implements IGUI{
 		case(Eventos.RES_LISTAR_VIAJE_OK):
 			List<TViaje> lista = (List<TViaje>) datos;
 		
-		dataTableModel.setNumRows(lista.size());
-		for(int i = 0; i < lista.size(); i++) {
-			TViaje viaje = lista.get(i);
-			dataTableModel.setValueAt(viaje.getId(), i, 0);
-			dataTableModel.setValueAt(viaje.getPrecio(), i, 1);
-			dataTableModel.setValueAt(viaje.getNumPlazas(), i, 2);
-			dataTableModel.setValueAt(viaje.getIdActividad(), i, 3);
-			dataTableModel.setValueAt(viaje.getIdAlojamiento(), i, 4);
-			dataTableModel.setValueAt(viaje.getIdTransporte(), i, 5);
-			dataTableModel.setValueAt(viaje.getActivo(), i, 6);
-		}
-		dataTableModel.fireTableDataChanged();
-		setSize(new Dimension(480,270));
-		setLocationRelativeTo(null);
-		pack();
-		setVisible(true);
-		break;
+			dataTableModel.setNumRows(lista.size());
+			for(int i = 0; i < lista.size(); i++) {
+				TViaje viaje = lista.get(i);
+				dataTableModel.setValueAt(viaje.getId(), i, 0);
+				dataTableModel.setValueAt(viaje.getPrecio(), i, 1);
+				dataTableModel.setValueAt(viaje.getNumPlazas(), i, 2);
+				dataTableModel.setValueAt(viaje.getIdActividad(), i, 3);
+				dataTableModel.setValueAt(viaje.getIdAlojamiento(), i, 4);
+				dataTableModel.setValueAt(viaje.getIdTransporte(), i, 5);
+				dataTableModel.setValueAt(viaje.getActivo(), i, 6);
+			}
+			setSize(new Dimension(480,270));
+			setVisible(true);
+			break;
 		case(Eventos.RES_LISTAR_VIAJE_ERROR):
 			setVisible(false);
 			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se han encontrado viajes", "Error", JOptionPane.ERROR_MESSAGE);

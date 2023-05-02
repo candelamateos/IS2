@@ -12,9 +12,12 @@ import negocio.factura.SALineaFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import negocio.servicio.SAServicio;
+<<<<<<< HEAD
 import negocio.servicio.TServicio;
 import negocio.trabajador.SATrabajador;
 import negocio.trabajador.TTrabajador;
+=======
+>>>>>>> 72f307e4a54569b22034ca2673429bbd7f3b2ab1
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -138,11 +141,8 @@ public class ControladorImp extends Controlador {
 			
 			break;
 		}
-<<<<<<< Updated upstream
 		case (Eventos.BAJA_TRABAJADOR):{
-=======
-		case Eventos.BAJA_TRABAJADOR:{
->>>>>>> Stashed changes
+
 			int id = (int) datos;
 			SATrabajador saTrabajador = FactoriaAbstractaNegocio.getInstancia().crearSATrabajador();
 			boolean res = saTrabajador.deleteTrabajador(id);
@@ -246,8 +246,8 @@ public class ControladorImp extends Controlador {
 			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
 			List<TViaje> res = saViaje.readAllViaje();
 			if (res != null) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
-						.actualizar(Eventos.RES_LISTAR_VIAJE_OK,	res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_LISTAR_VIAJE_OK,
+						res);
 				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
@@ -278,11 +278,12 @@ public class ControladorImp extends Controlador {
 			if (res != -1) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_CLIENTE_OK,
 						res);
+				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_ALTA_CLIENTE_ERROR, res);
+				break;
 			}
-			
 			break;
 		}
 		case (Eventos.BAJA_CLIENTE): {
@@ -290,11 +291,13 @@ public class ControladorImp extends Controlador {
 			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
 			boolean res = saCliente.deleteCliente(id);
 			if (res) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
-				.actualizar(Eventos.RES_BAJA_CLIENTE_OK, res);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_CLIENTE_OK,
+						res);
+				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_BAJA_CLIENTE_ERROR, res);
+				break;
 			}
 			
 			break;
@@ -305,23 +308,46 @@ public class ControladorImp extends Controlador {
 			if (res != null) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_LISTAR_CLIENTE_OK, res);
+				break;
 			} else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_LISTAR_CLIENTE_ERROR, res);
+				break;
+			}
+			
+		}
+		case (Eventos.BUSCAR_CLIENTE): {
+			int id = (int) datos;
+			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+			TCliente res = saCliente.readCliente(id);
+			if (res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_CLIENTE_OK, res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_CLIENTE_ERROR, res);
+				break;
 			}
 			
 			break;
 		}
 		
-		case Eventos.ALTA_SERVICIO:{
-			TServicio t = (TServicio) datos;
-			SAServicio sa = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
-			int id = sa.createServicio(t);
-			if(id != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_OK, id);
-			else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_ERROR, id);
-			break;
+		case (Eventos.MODIFICAR_CLIENTE): {
+			TCliente cliente = (TCliente) datos;
+			SACliente saCliente = FactoriaAbstractaNegocio.getInstancia().crearSACliente();
+			boolean res = saCliente.updateCliente(cliente);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_CLIENTE_OK, res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_CLIENTE_ERROR, res);
+				break;
+			}
 		}
-		
+//Servicios
 		case Eventos.BAJA_SERVICIO:{
 			
 			break;

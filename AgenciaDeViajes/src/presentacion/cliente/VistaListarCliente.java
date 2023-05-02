@@ -26,7 +26,7 @@ public class VistaListarCliente extends JFrame implements IGUI {
 	private static final String[] HEADERS = { "Id", "Nombre" };
 
 	public VistaListarCliente() {
-		super("Listar Facturas");
+		super("Listar Clientes");
 		initGUI();
 	}
 
@@ -66,7 +66,7 @@ public class VistaListarCliente extends JFrame implements IGUI {
 			for (int i = 0; i < lista.size(); i++) {
 				TCliente cliente = lista.get(i);
 				dataTableModel.setValueAt(cliente.getId(), i, 0);
-				dataTableModel.setValueAt(cliente.getNombre(), i, 2);
+				dataTableModel.setValueAt(cliente.getNombre(), i, 1);
 			}
 
 			setSize(new Dimension(480, 270));

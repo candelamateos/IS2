@@ -3,12 +3,15 @@ package negocio.viaje;
 import java.util.List;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
+import integracion.factura.DaoFactura;
 import integracion.viaje.DaoViaje;
 import integracion.servicio.DaoServicio;
+import negocio.factura.TFactura;
+import negocio.factura.TLineaFactura;
 import negocio.servicio.*;
 
 public class SAViajeImp implements SAViaje{
-	
+		
 	private boolean comprobarDatos(TViaje viaje) {
 		return viaje.getActivo() && viaje.getNumPlazas() >= 0 && viaje.getIdActividad() > 0 && viaje.getIdAlojamiento() > 0 && viaje.getIdTransporte() > 0;
 	}
@@ -38,14 +41,69 @@ public class SAViajeImp implements SAViaje{
 		return id;
 	}
 
+	private boolean comprobarDatosActualizados(TViaje nuevo, TViaje antiguo) {
+		boolean correcto = false;
+		DaoServicio dServicio = FactoriaAbstractaIntegracion.getInstancia().crearDaoServicio();
+		TActividad tActividadNuevo = (TActividad) dServicio.readServicio(nuevo.getIdActividad());
+		TAlojamiento tAlojamientoNuevo = (TAlojamiento) dServicio.readServicio(nuevo.getIdAlojamiento());
+		TTransporte tTransporteNuevo = (TTransporte) dServicio.readServicio(nuevo.getIdTransporte());
+		
+		TActividad tActividadAntiguo = (TActividad) dServicio.readServicio(antiguo.getIdActividad());
+		TAlojamiento tAlojamientoAntiguo = (TAlojamiento) dServicio.readServicio(antiguo.getIdAlojamiento());
+		TTransporte tTransporteAntiguo = (TTransporte) dServicio.readServicio(antiguo.getIdTransporte());
+		
+		int antiguasPlazasActividad = tActividadAntiguo.getNumPlazas();
+		int nuevasPlazasActividad = tActividadNuevo.getNumPlazas();
+		int antiguasPlazasAlojamiento = tAlojamientoAntiguo.getNumPlazas();
+		int nuevasPlazasAlojamiento = tAlojamientoNuevo.getNumPlazas();
+		int antiguasPlazasTransporte = tTransporteAntiguo.getNumPlazas();
+		int nuevasPlazasTransporte = tTransporteNuevo.getNumPlazas();
+		
+		if(tActividadNuevo.getId() != tActividadAntiguo.getId()) {
+			antiguasPlazasActividad += antiguo.getNumPlazas();
+			nuevasPlazasActividad -= nuevo.getNumPlazas();
+		}
+		if(tAlojamientoNuevo.getId() != tAlojamientoAntiguo.getId()) {
+			antiguasPlazasAlojamiento += antiguo.getNumPlazas();
+			nuevasPlazasAlojamiento -= nuevo.getNumPlazas();
+		}
+		if(tTransporteNuevo.getId() != tTransporteAntiguo.getId()) {
+			antiguasPlazasTransporte += antiguo.getNumPlazas();
+			nuevasPlazasTransporte -= nuevo.getNumPlazas();
+		}
+		
+		if(nuevasPlazasActividad >= 0 && nuevasPlazasAlojamiento >= 0 && nuevasPlazasTransporte >= 0) {
+			correcto = true;
+			tActividadAntiguo.setNumPlazas(antiguasPlazasActividad);
+			tAlojamientoAntiguo.setNumPlazas(antiguasPlazasAlojamiento);
+			tTransporteAntiguo.setNumPlazas(antiguasPlazasTransporte);
+			
+			tActividadNuevo.setNumPlazas(nuevasPlazasActividad);
+			tAlojamientoNuevo.setNumPlazas(nuevasPlazasAlojamiento);
+			tTransporteNuevo.setNumPlazas(nuevasPlazasTransporte);
+		}		
+		return correcto;
+	}
+	
 	@Override
 	public boolean updateViaje(TViaje Viaje) {
 		boolean update = false;
 		DaoViaje d = FactoriaAbstractaIntegracion.getInstancia().crearDaoViaje();
-		TViaje tViaje = d.readViaje(Viaje.getId());
-		if(tViaje != null && comprobarDatos(tViaje)) {
-			update = d.updateViaje(Viaje);
+		
+		DaoFactura dFactura = FactoriaAbstractaIntegracion.getInstancia().crearDaoFactura();
+		List<TLineaFactura> listaFacturas = dFactura.readAllLineaFactura();
+		boolean anterior = false;
+		for(TLineaFactura lf : listaFacturas) {
+			if(lf.getIdViaje() == Viaje.getId()) anterior = true;			
 		}
+		
+		if(!anterior) {			
+			TViaje tViaje = d.readViaje(Viaje.getId());
+			
+			if(Viaje != null && comprobarDatosActualizados(Viaje, tViaje)) {
+				update = d.updateViaje(Viaje);
+			}
+		}	
 		return update;
 	}
 
@@ -53,8 +111,15 @@ public class SAViajeImp implements SAViaje{
 	public boolean deleteViaje(int id) {
 		boolean delete = false;
 		DaoViaje d = FactoriaAbstractaIntegracion.getInstancia().crearDaoViaje();
+		
+		DaoFactura dFactura = FactoriaAbstractaIntegracion.getInstancia().crearDaoFactura();
+		List<TLineaFactura> listaFacturas = dFactura.readAllLineaFactura();
+		boolean anterior = false;
+		for(TLineaFactura lf : listaFacturas) {
+			if(lf.getIdViaje() == id) anterior = true;			
+		}
 		TViaje tViaje = d.readViaje(id);
-		if(tViaje != null && tViaje.getActivo()) {
+		if(!anterior && tViaje != null && tViaje.getActivo()) {
 			delete = d.deleteViaje(id);
 		}
 		return delete;
@@ -63,26 +128,13 @@ public class SAViajeImp implements SAViaje{
 	@Override
 	public TViaje readViaje(int id) {
 		DaoViaje d = FactoriaAbstractaIntegracion.getInstancia().crearDaoViaje();
-		TViaje tViaje = d.readViaje(id);
-		if(tViaje != null && comprobarDatos(tViaje)) {
-			return tViaje;
-		}
-		else return null;
+		return d.readViaje(id);
 	}
 
 	@Override
 	public List<TViaje> readAllViaje() {
 		DaoViaje d = FactoriaAbstractaIntegracion.getInstancia().crearDaoViaje();
-		List<TViaje> lista = d.readAllViaje();
-		boolean datosCorrectos = true;
-		if(lista != null) {
-			for(TViaje viaje : lista) {
-				if(viaje == null || !comprobarDatos(viaje)) datosCorrectos = false;
-			}
-			if(datosCorrectos) return lista;
-			else return null;
-		}
-		else return null;
+		return d.readAllViaje();
 	}
 
 }

@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-{"proximo id":6,"viajes":[{"precio":100,"idActividad":102,"numPlazas":98,"idTransporte":104,"id":0,"idAlojamiento":103,"activo":true},{"precio":200,"idActividad":202,"numPlazas":201,"idTransporte":204,"id":1,"idAlojamiento":203,"activo":true},{"precio":300,"idActividad":302,"numPlazas":298,"idTransporte":304,"id":2,"idAlojamiento":303,"activo":true},{"precio":400,"idActividad":402,"numPlazas":401,"idTransporte":404,"id":3,"idAlojamiento":403,"activo":false},{"precio":500,"idActividad":502,"numPlazas":500,"idTransporte":504,"id":4,"idAlojamiento":503,"activo":true},{"precio":45,"idActividad":24,"numPlazas":2,"idTransporte":54,"id":5,"idAlojamiento":43,"activo":true}]}
-=======
 {
   "proximo id": 5,
   "viajes": [
@@ -51,4 +48,3 @@
     }
   ]
 }
->>>>>>> Stashed changes
