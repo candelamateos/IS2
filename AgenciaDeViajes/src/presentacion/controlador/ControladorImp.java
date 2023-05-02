@@ -187,7 +187,6 @@ public class ControladorImp extends Controlador {
 			}
 		}
 
-		// Servicio
 
 		// Trabajador
 		case (Eventos.ALTA_TRABAJADOR):{
@@ -404,10 +403,34 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 		}
-//Servicios
+   //Servicios
+		case (Eventos.ALTA_SERVICIO): {
+			TServicio tServicio = (TServicio) datos;
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			int res = saServicio.createServicio(tServicio);
+			if (res != -1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_ALTA_SERVICIO_ERROR, res);
+				break;
+			}
+		}
 		case Eventos.BAJA_SERVICIO:{
-			
-			break;
+			int id = (int) datos;
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			boolean res = saServicio.deleteServicio(id);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_SERVICIO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BAJA_SERVICIO_ERROR, res);
+				break;
+			}
 		}
 		
 		case Eventos.BUSCAR_SERVICIO:{
