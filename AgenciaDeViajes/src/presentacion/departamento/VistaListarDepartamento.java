@@ -67,8 +67,8 @@ public class VistaListarDepartamento extends JFrame implements IGUI {
 	public void actualizar(int evento, Object datos) {
 		switch (evento) {
 		case (Eventos.RES_LISTAR_DEPARTAMENTO_OK):
+			setVisible(true);
 			List<TDepartamento> lista = (List<TDepartamento>) datos;
-
 			dataTableModel.setNumRows(lista.size());
 			for (int i = 0; i < lista.size(); i++) {
 				TDepartamento departamento = lista.get(i);
