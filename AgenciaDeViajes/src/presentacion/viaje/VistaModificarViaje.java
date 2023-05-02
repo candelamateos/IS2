@@ -20,6 +20,9 @@ import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
 public class VistaModificarViaje extends JFrame implements IGUI{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel lId;
 	private JTextField tId;
 	private JLabel lNumPlazas;
@@ -33,7 +36,7 @@ public class VistaModificarViaje extends JFrame implements IGUI{
 	private JButton ok;
 	
 	public VistaModificarViaje() {
-		super("MODIFICAR VIAJE");
+		super("Modificar Viaje");
 		initGUI();
 	}
 	
@@ -108,7 +111,7 @@ public class VistaModificarViaje extends JFrame implements IGUI{
 					try{
 						Iid = Integer.parseInt(tId.getText());
 					}catch(NumberFormatException ex) {
-						throw new IllegalArgumentException("El id debe ser un numero", ex);
+						throw new IllegalArgumentException("El id del viaje debe ser un numero", ex);
 					}
 					
 					try{
