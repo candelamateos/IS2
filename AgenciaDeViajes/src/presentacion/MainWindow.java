@@ -119,7 +119,6 @@ public class MainWindow extends JFrame implements IGUI {
 		});
 		contentPanel.add(BViaje);
 		
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);

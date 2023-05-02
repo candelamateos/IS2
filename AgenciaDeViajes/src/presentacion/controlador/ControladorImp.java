@@ -10,6 +10,7 @@ import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.SALineaFactura;
 import negocio.factura.TFactura;
+import negocio.factura.TFacturaConLineas;
 import negocio.factura.TLineaFactura;
 import negocio.servicio.SAServicio;
 import negocio.servicio.TServicio;
@@ -29,12 +30,6 @@ public class ControladorImp extends Controlador {
 		case (Eventos.ALTA_DEPARTAMENTO): {
 			TDepartamento tDepartamento = (TDepartamento) datos;
 			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
-//			int res = saDepartamento.createDepartamento(tDepartamento);
-			// TODO segun el valor de res, se actualiza la vista de una manera u otra.
-			// Si todo ok el aspecto es este(falta el else)
-//			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
-			// ...
-			// break;} }
 			int res = saDepartamento.createDepartamento(tDepartamento);
 			if (res != -1) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,
@@ -162,7 +157,7 @@ public class ControladorImp extends Controlador {
 		case (Eventos.BUSCAR_FACTURA): {
 			int id = (int) datos;
 			SAFactura saFactura = FactoriaAbstractaNegocio.getInstancia().crearSAFactura();
-			TFactura res = saFactura.readFactura(id);
+			TFacturaConLineas res = saFactura.readFactura(id);
 			if (res != null) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_BUSCAR_FACTURA_OK, res);
@@ -186,8 +181,6 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 		}
-
-		// Servicio
 
 		// Trabajador
 		case (Eventos.ALTA_TRABAJADOR):{
@@ -318,9 +311,9 @@ public class ControladorImp extends Controlador {
 			}
 		}
 		case (Eventos.MODIFICAR_VIAJE): {
-			int id = (int) datos;
+			TViaje tViaje = (TViaje) datos;
 			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
-			boolean res = saViaje.updateViaje(saViaje.readViaje(id));
+			boolean res = saViaje.updateViaje(tViaje);
 			if (res) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_MODIFICAR_VIAJE_OK, res);
@@ -404,10 +397,35 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 		}
-//Servicios
-		case Eventos.BAJA_SERVICIO:{
-			
-			break;
+		
+		//Servicios
+		case (Eventos.ALTA_SERVICIO): {
+			TServicio tServicio = (TServicio) datos;
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			int res = saServicio.createServicio(tServicio);
+			if (res != -1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_SERVICIO_ERROR,
+						res);
+				break;
+			}
+		}
+		case (Eventos.BAJA_SERVICIO): {
+			int id = (int) datos;
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			boolean res = saServicio.deleteServicio(id);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_SERVICIO_OK,
+						res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_BAJA_SERVICIO_ERROR,
+						res);
+				break;
+			}
 		}
 		
 		case Eventos.BUSCAR_SERVICIO:{
