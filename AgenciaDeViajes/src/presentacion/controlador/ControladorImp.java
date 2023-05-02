@@ -13,16 +13,10 @@ import negocio.factura.TFactura;
 import negocio.factura.TFacturaConLineas;
 import negocio.factura.TLineaFactura;
 import negocio.servicio.SAServicio;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import negocio.servicio.TServicio;
 import negocio.trabajador.SATrabajador;
-import negocio.trabajador.TTrabajador;
-=======
->>>>>>> 72f307e4a54569b22034ca2673429bbd7f3b2ab1
-=======
+import negocio.trabajador.TTrabajador
 import negocio.servicio.TServicio;
->>>>>>> 53d93184041a14a08db328f2e1e945162f6fb6b6
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -36,15 +30,15 @@ public class ControladorImp extends Controlador {
 		case (Eventos.ALTA_DEPARTAMENTO): {
 			TDepartamento tDepartamento = (TDepartamento) datos;
 			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
-<<<<<<< HEAD
+
 //			int res = saDepartamento.createDepartamento(tDepartamento);
 			// TODO segun el valor de res, se actualiza la vista de una manera u otra.
 			// Si todo ok el aspecto es este(falta el else)
 //			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
 			// ...
 			// break;} }
-=======
-			int res = saDepartamento.createDepartamento(tdepartamento);
+
+			int res = saDepartamento.createDepartamento(tDepartamento);
 			if (res != -1) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,
 						res);
@@ -109,7 +103,7 @@ public class ControladorImp extends Controlador {
 						.actualizar(Eventos.RES_MODIFICAR_DEPARTAMENTO_ERROR, res);
 				break;
 			}
->>>>>>> 53d93184041a14a08db328f2e1e945162f6fb6b6
+
 		}
 
 		// Factura
@@ -469,7 +463,7 @@ public class ControladorImp extends Controlador {
 		}
 		
 		
-		 
+		}
 		
 	}
 }

@@ -61,7 +61,7 @@ public class Eventos {
 	public static final int RES_LISTAR_SERVICIO_OK = 214;
 	public static final int RES_LISTAR_SERVICIO_ERROR = 215;
 
-<<<<<<< HEAD
+
 	
 	//Trabajador 3xx
 	public static final int TRABAJADORES = 300;
@@ -82,11 +82,11 @@ public class Eventos {
 	public static final int RES_LISTAR_TRABAJADOR_ERROR = 315;
 	
 	//Viaje 4xx
-=======
+
 	// Trabajador 3xx
 
 	// Viaje 4xx
->>>>>>> 53d93184041a14a08db328f2e1e945162f6fb6b6
+
 	public static final int VIAJES = 400;
 	public static final int ALTA_VIAJE = 401;
 	public static final int BAJA_VIAJE = 402;
