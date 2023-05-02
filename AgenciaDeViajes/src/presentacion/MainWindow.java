@@ -57,7 +57,8 @@ public class MainWindow extends JFrame implements IGUI {
 		JButton foto = new JButton();
 		foto.setPreferredSize(new Dimension(300, 130));
 		foto.setAlignmentX(CENTER_ALIGNMENT);
-		foto.setIcon(loadImage("lib/IMG-0902 (1).jpg"));
+		foto.setIcon(loadImage("lib/TITULO.JPG.png"
+				+ ""));
 		cabecera.add(foto);
 		
 		/*JLabel titulo = new JLabel(TITULO);
