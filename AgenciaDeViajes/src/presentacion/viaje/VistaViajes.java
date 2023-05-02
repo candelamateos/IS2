@@ -16,6 +16,7 @@ import presentacion.controlador.Eventos;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaViajes extends JFrame implements IGUI {
+	
 	private static final long serialVersionUID = 1L;
 
 	private JButton BAniadirViaje;

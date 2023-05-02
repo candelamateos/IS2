@@ -20,6 +20,8 @@ import presentacion.controlador.Eventos;
 
 public class VistaEliminarViaje extends JFrame implements IGUI{
 	
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel lId;
 	private JTextField tId;
 	private JButton ok;

@@ -20,6 +20,9 @@ import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
 public class VistaModificarViaje extends JFrame implements IGUI{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel lId;
 	private JTextField tId;
 	private JLabel lNumPlazas;

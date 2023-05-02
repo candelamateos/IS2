@@ -21,6 +21,8 @@ import presentacion.controlador.Eventos;
 
 public class VistaAniadirViaje extends JFrame implements IGUI{
 	
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel lNumPlazas;
 	private JTextField tNumPlazas;
 	private JLabel lIdActividad;
