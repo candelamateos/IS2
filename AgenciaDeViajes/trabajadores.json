@@ -1,1 +1,1 @@
-{"proximo id":2,"vendedores":[{"idJefe":9,"idDepart":0,"sueldo":600,"id":1,"nombre":"Fernando","activo":false}],"jefes":[{"idDepart":0,"sueldo":1700,"id":0,"nombre":"rodrigo","activo":true}]}
+{"proximo id":3,"vendedores":[{"idJefe":9,"idDepart":0,"sueldo":600,"id":1,"nombre":"Fernando","activo":false},{"idJefe":0,"idDepart":0,"sueldo":300,"id":2,"nombre":"candela ","activo":true}],"jefes":[{"idDepart":0,"sueldo":1700,"id":0,"nombre":"rodrigo","activo":false}]}
