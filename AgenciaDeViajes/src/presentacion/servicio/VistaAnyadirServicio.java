@@ -40,10 +40,16 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 	JPanel mainPanel;
 	JPanel comboBoxPanel;
 	JComboBox<String> comboBox;
-	JTextField textFieldNombre;
-	JTextField textFieldPrecio;
-	JTextField textFieldNumPlazas;
 	JTextField textFieldRegimen;
+	JTextField tfNombreAlo;
+	JTextField tfPrecioAlo;
+	JTextField tfPlazasAlo;
+	JTextField tfNombreAct;
+	JTextField tfPrecioAct;
+	JTextField tfPlazasAct;
+	JTextField tfNombreTrans;
+	JTextField tfPrecioTrans;
+	JTextField tfPlazasTrans;
 	JComboBox<String> comboBoxEstrellas;
 	Map<String, Integer> convertirEstrellas;
 	JButton buttonGuardar;
@@ -97,9 +103,9 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		
 		//panel alojamiento
 		panelAlojamiento.setLayout(new GridLayout(6, 2));
-		textFieldNombre = new JTextField(20);
-		textFieldNumPlazas = new JTextField(20);
-		textFieldPrecio = new JTextField(20);
+		tfNombreAlo = new JTextField(20);
+		tfPlazasAlo = new JTextField(20);
+		tfPrecioAlo = new JTextField(20);
 		textFieldRegimen = new JTextField(20);
 		String opcionesEstrellas[] = {"*", "**", "***", "****", "*****"};
 		convertirEstrellas = new HashMap<String, Integer>();
@@ -110,11 +116,11 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		convertirEstrellas.put("*****", 5);
 		comboBoxEstrellas = new JComboBox<>(opcionesEstrellas);
 		panelAlojamiento.add(new JLabel("nombre", JLabel.CENTER));
-		panelAlojamiento.add(textFieldNombre);
+		panelAlojamiento.add(tfNombreAlo);
 		panelAlojamiento.add(new JLabel("nº plazas", JLabel.CENTER));
-		panelAlojamiento.add(textFieldNumPlazas);
+		panelAlojamiento.add(tfPlazasAlo);
 		panelAlojamiento.add(new JLabel("precio", JLabel.CENTER));
-		panelAlojamiento.add(textFieldPrecio);
+		panelAlojamiento.add(tfPrecioAlo);
 		panelAlojamiento.add(new JLabel("Régimen", JLabel.CENTER));
 		panelAlojamiento.add(textFieldRegimen);
 		panelAlojamiento.add(new JLabel("nº estrellas", JLabel.CENTER));
@@ -122,9 +128,9 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		
 		//panel transporte
 		panelTransporte.setLayout(new GridLayout(6, 2));
-		textFieldNombre = new JTextField(20);
-		textFieldNumPlazas = new JTextField(20);
-		textFieldPrecio = new JTextField(20);
+		tfNombreTrans = new JTextField(20);
+		tfPlazasTrans = new JTextField(20);
+		tfPrecioTrans = new JTextField(20);
 		textFieldTipoTransporte = new JTextField(20);
 		convertirComida = new HashMap<String, Boolean>();
 		convertirComida.put("SI", true);
@@ -132,11 +138,11 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		String opcionesComboBoxComida[] = {"SI", "NO"};
 		comboBoxComida = new JComboBox<String>(opcionesComboBoxComida);
 		panelTransporte.add(new JLabel("nombre", JLabel.CENTER));
-		panelTransporte.add(textFieldNombre);
+		panelTransporte.add(tfNombreTrans);
 		panelTransporte.add(new JLabel("nº plazas", JLabel.CENTER));
-		panelTransporte.add(textFieldNumPlazas);
+		panelTransporte.add(tfPlazasTrans);
 		panelTransporte.add(new JLabel("precio", JLabel.CENTER));
-		panelTransporte.add(textFieldPrecio);
+		panelTransporte.add(tfPrecioTrans);
 		panelTransporte.add(new JLabel("tipo de transporte", JLabel.CENTER));
 		panelTransporte.add(textFieldTipoTransporte);
 		panelTransporte.add(new JLabel("comida incluida", JLabel.CENTER));
@@ -145,9 +151,9 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		
 		//panel actividad
 		panelActividad.setLayout(new GridLayout(6, 2));
-		textFieldNombre = new JTextField(20);
-		textFieldNumPlazas = new JTextField(20);
-		textFieldPrecio = new JTextField(20);
+		tfNombreAct = new JTextField(20);
+		tfPlazasAct = new JTextField(20);
+		tfPrecioAct = new JTextField(20);
 		textFieldTipoActividad = new JTextField(20);
 		convertirColectivo = new HashMap<String, Boolean>();
 		convertirColectivo.put("SI", true);
@@ -155,11 +161,11 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		String opcionesComboBoxColectivo[] = {"SI", "NO"};
 		comboBoxColectivo = new JComboBox<String>(opcionesComboBoxColectivo);
 		panelActividad.add(new JLabel("nombre", JLabel.CENTER));
-		panelActividad.add(textFieldNombre);
+		panelActividad.add(tfNombreAct);
 		panelActividad.add(new JLabel("nº plazas", JLabel.CENTER));
-		panelActividad.add(textFieldNumPlazas);
+		panelActividad.add(tfPlazasAct);
 		panelActividad.add(new JLabel("precio", JLabel.CENTER));
-		panelActividad.add(textFieldPrecio);
+		panelActividad.add(tfPrecioAct);
 		panelActividad.add(new JLabel("tipo de actividad", JLabel.CENTER));
 		panelActividad.add(textFieldTipoActividad);
 		panelActividad.add(new JLabel("colectivo", JLabel.CENTER));
@@ -200,12 +206,13 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 		public void actionPerformed(ActionEvent e) {
 			String panelSeleccionado = (String) comboBox.getSelectedItem();
 			
+			
 			try {
 			switch(panelSeleccionado) {
 			case PANEL_ALOJAMIENTO:{
-				String nombre = textFieldNombre.getText();
-				int numPlazas = Integer.parseInt(textFieldNumPlazas.getText());
-				int precio = Integer.parseInt(textFieldPrecio.getText());
+				String nombre = tfNombreAlo.getText();
+				int numPlazas = Integer.parseInt(tfPlazasAlo.getText());
+				int precio = Integer.parseInt(tfPrecioAlo.getText());
 				String regimen = textFieldRegimen.getText();
 				int estrellas = convertirEstrellas.get((String) comboBoxEstrellas.getSelectedItem());
 				setVisible(false);
@@ -215,9 +222,9 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 			}
 			
 			case PANEL_TRANSPORTE:{
-				String nombre = textFieldNombre.getText();
-				int numPlazas = Integer.parseInt(textFieldNumPlazas.getText());
-				int precio = Integer.parseInt(textFieldPrecio.getText());
+				String nombre = tfNombreTrans.getText();
+				int numPlazas = Integer.parseInt(tfPlazasTrans.getText());
+				int precio = Integer.parseInt(tfPrecioTrans.getText());
 				String tipoTransporte = textFieldTipoTransporte.getText();
 				boolean comida = convertirComida.get(comboBoxComida.getSelectedItem());
 				setVisible(false);
@@ -227,9 +234,9 @@ public class VistaAnyadirServicio extends JFrame implements IGUI{
 			}
 			
 			case PANEL_ACTIVIDAD:{
-				String nombre = textFieldNombre.getText();
-				int numPlazas = Integer.parseInt(textFieldNumPlazas.getText());
-				int precio = Integer.parseInt(textFieldPrecio.getText());
+				String nombre = tfNombreAct.getText();
+				int numPlazas = Integer.parseInt(tfPlazasAct.getText());
+				int precio = Integer.parseInt(tfPrecioAct.getText());
 				String tipoActividad = textFieldTipoActividad.getText();
 				boolean colectivo = convertirColectivo.get(comboBoxColectivo.getSelectedItem());
 				setVisible(false);

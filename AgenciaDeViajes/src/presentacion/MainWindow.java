@@ -12,6 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentacion.controlador.Eventos;
@@ -48,11 +49,10 @@ public class MainWindow extends JFrame implements IGUI {
 		
 		cabecera.setLayout(new BoxLayout(cabecera, BoxLayout.Y_AXIS));
 		mainPanel.add(cabecera, BorderLayout.NORTH);
-		JButton foto = new JButton();
+		JLabel foto = new JLabel();
 		foto.setPreferredSize(new Dimension(300, 130));
 		foto.setAlignmentX(CENTER_ALIGNMENT);
-		foto.setIcon(loadImage("lib/TITULO.JPG.png"
-				+ ""));
+		foto.setIcon(loadImage("lib/TITULO.JPG.png"));
 		cabecera.add(foto);
 		
 		/*JLabel titulo = new JLabel(TITULO);
