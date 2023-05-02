@@ -1,1 +1,1 @@
-{"trabajadores":[{"tipo":"Vendedor","idJefe":0,"idDepart":6,"sueldo":1500,"id":0,"nombre":"Candela M","activo":true}],"proximo id":1}
+{"proximo id":2,"vendedores":[{"idJefe":9,"idDepart":0,"sueldo":600,"id":1,"nombre":"Fernando","activo":false}],"jefes":[{"idDepart":0,"sueldo":1700,"id":0,"nombre":"rodrigo","activo":true}]}

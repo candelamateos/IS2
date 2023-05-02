@@ -4,13 +4,8 @@ import java.util.List;
 
 import integracion.departamento.DaoDepartamento;
 import integracion.factoria.FactoriaAbstractaIntegracion;
-import integracion.servicio.DaoServicio;
 import integracion.trabajador.DaoTrabajador;
 import negocio.departamento.TDepartamento;
-import negocio.servicio.TActividad;
-import negocio.servicio.TAlojamiento;
-import negocio.servicio.TServicio;
-import negocio.servicio.TTransporte;
 
 public class SATrabajadorImp implements SATrabajador {
 
@@ -26,7 +21,6 @@ public class SATrabajadorImp implements SATrabajador {
 				&& trabajador.getNombre()	!= ""
 				&& trabajador.getSueldo() >= 0
 				&& trabajador.getIdDepart() >= 0
-				&& departamento != null
 		;
 	}
 
@@ -47,6 +41,7 @@ public class SATrabajadorImp implements SATrabajador {
 		case "vendedor":{
 			if(comprobarVendedor((TVendedor) trabajador)) {
 				departamento.setNumEmpleados(departamento.getNumEmpleados() + 1);
+				d.updateDepartamento(departamento);
 				return dao.createTrabajador(trabajador);
 			}
 			break;
@@ -55,6 +50,7 @@ public class SATrabajadorImp implements SATrabajador {
 		case "jefe":{
 			if(comprobarTrabajador((TJefe) trabajador)) {
 				departamento.setNumEmpleados(departamento.getNumEmpleados() + 1);
+				d.updateDepartamento(departamento);
 				return dao.createTrabajador(trabajador);
 			}
 			break;
@@ -69,15 +65,39 @@ public class SATrabajadorImp implements SATrabajador {
 	@Override
 	public boolean updateTrabajador(TTrabajador trabajador) {
 		DaoTrabajador dao = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
+		
 		if(trabajador ==  null) return false;
+		
+		DaoDepartamento d = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
+		TDepartamento departamentoNuevo = d.readDepartamento(trabajador.getIdDepart());
+		
 		if(dao.readTrabajador(trabajador.getId()) == null) return false;
+		
+		departamentoNuevo.setNumEmpleados(departamentoNuevo.getNumEmpleados() + 1);
+		d.updateDepartamento(departamentoNuevo);
+		
+		TTrabajador aux = dao.readTrabajador(trabajador.getId());
+		TDepartamento departamentoAntiguo = d.readDepartamento(aux.getIdDepart());
+		departamentoAntiguo.setNumEmpleados(departamentoAntiguo.getNumEmpleados() - 1);
+		d.updateDepartamento(departamentoAntiguo);
+		
+		
 		return dao.updateTrabajador(trabajador);
 	}
 
 	@Override
 	public boolean deleteTrabajador(int id) {
-		DaoServicio dao = FactoriaAbstractaIntegracion.getInstancia().crearDaoServicio();
-		return dao.deleteServicio(id);
+		DaoTrabajador dao = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
+		
+		DaoDepartamento d = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
+		TDepartamento departamento = d.readDepartamento(dao.readTrabajador(id).getIdDepart());
+		
+		if (id == -1) return false;
+		
+		departamento.setNumEmpleados(departamento.getNumEmpleados() - 1);
+		d.updateDepartamento(departamento);
+		
+		return dao.deleteTrabajador(id);
 	}
 
 	@Override

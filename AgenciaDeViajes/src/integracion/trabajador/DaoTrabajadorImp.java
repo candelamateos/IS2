@@ -117,15 +117,6 @@ public class DaoTrabajadorImp implements DaoTrabajador {
 		if (json == null)
 			return false;
 		
-		DaoDepartamento d = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
-		TDepartamento departamento = d.readDepartamento(trabajador.getIdDepart());
-		departamento.setNumEmpleados(departamento.getNumEmpleados() - 1);
-		
-		DaoDepartamento f = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
-		TDepartamento departamento2 = f.readDepartamento(nuevo.getInt("idDepart"));
-		departamento2.setNumEmpleados(departamento2.getNumEmpleados() + 1);
-		
-
 		return saveData(data);
 	}
 
