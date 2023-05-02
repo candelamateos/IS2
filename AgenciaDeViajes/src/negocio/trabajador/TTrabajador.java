@@ -10,18 +10,16 @@ public class TTrabajador {
 	private int sueldo;
 	private int idDepart;
 	private String tipo;
-	private int idJefe;
 	
 	public TTrabajador() {
 	}
 	
-	public TTrabajador(String nombre, int sueldo, int idDepart, String tipo, int idJefe) {
+	public TTrabajador(String nombre, int sueldo, int idDepart, String tipo) {
 		this.nombre = nombre;
 		this.sueldo = sueldo;
 		this.activo = true;
 		this.idDepart = idDepart;
 		this.tipo = tipo;
-		this.idJefe = idJefe;
 	}
 	
 	public int getId() {
@@ -70,13 +68,5 @@ public class TTrabajador {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
-	}
-	
-	public int getIdJefe() {
-		return idJefe;
-	}
-
-	public void setIdJefe(int idJefe) {
-		this.idJefe = idJefe;
 	}
 }

@@ -1,5 +1,6 @@
 package presentacion.trabajador;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,8 @@ import presentacion.factoria.FactoriaAbstractaPresentacion;
 public class VistaTrabajadores extends JFrame implements IGUI{
 
 	private static final long serialVersionUID = 1L;
+
+	public static final Color COLOR_FONDO = Color.white;
 
 	private JButton BAniadirTrabajador;
 	private JButton BBuscarTrabajador;

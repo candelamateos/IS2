@@ -4,95 +4,89 @@ import java.util.List;
 
 import integracion.departamento.DaoDepartamento;
 import integracion.factoria.FactoriaAbstractaIntegracion;
+import integracion.servicio.DaoServicio;
 import integracion.trabajador.DaoTrabajador;
 import negocio.departamento.TDepartamento;
+import negocio.servicio.TActividad;
+import negocio.servicio.TAlojamiento;
+import negocio.servicio.TServicio;
+import negocio.servicio.TTransporte;
 
 public class SATrabajadorImp implements SATrabajador {
 
 	public SATrabajadorImp() {
 
 	}
+	
+	private boolean comprobarTrabajador(TTrabajador trabajador) {
+		DaoDepartamento dao = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
+		TDepartamento departamento = dao.readDepartamento(trabajador.getIdDepart());
+		return
+				trabajador.getNombre() != null
+				&& trabajador.getNombre()	!= ""
+				&& trabajador.getSueldo() >= 0
+				&& trabajador.getIdDepart() >= 0
+				&& departamento != null
+		;
+	}
+
+	private boolean comprobarVendedor(TVendedor vendedor) {
+		return
+				vendedor.getIdJefe() >= 0;
+	}
 
 	@Override
 	public int createTrabajador(TTrabajador trabajador) {
-		int id = -1;
-
-		DaoDepartamento departamento = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
-		DaoTrabajador d = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
-
-		TDepartamento dep = departamento.readDepartamento(trabajador.getIdDepart());
-		if (trabajador.getNombre() == null || trabajador.getNombre().equals("") || trabajador.getSueldo() == 0
-				|| departamento.readDepartamento(trabajador.getIdDepart()) == null || trabajador.getTipo().equals("")) {
-			return -1;
-		} else {
-			departamento.readDepartamento(trabajador.getIdDepart()).setNumEmpleados(departamento.readDepartamento(trabajador.getIdDepart()).getNumEmpleados() + 1);
-			return d.createTrabajador(trabajador);
+		DaoTrabajador dao = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
+		DaoDepartamento d = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
+		TDepartamento departamento = d.readDepartamento(trabajador.getIdDepart());
+		
+		if(!comprobarTrabajador(trabajador)) return -1;
+		
+		switch(trabajador.getTipo()) {
+		case "vendedor":{
+			if(comprobarVendedor((TVendedor) trabajador)) {
+				departamento.setNumEmpleados(departamento.getNumEmpleados() + 1);
+				return dao.createTrabajador(trabajador);
+			}
+			break;
 		}
+		
+		case "jefe":{
+			if(comprobarTrabajador((TJefe) trabajador)) {
+				departamento.setNumEmpleados(departamento.getNumEmpleados() + 1);
+				return dao.createTrabajador(trabajador);
+			}
+			break;
+		}
+		
+		default: throw new IllegalArgumentException("tipo no valido");
+		}
+		
+		return -1;
 	}
 
 	@Override
 	public boolean updateTrabajador(TTrabajador trabajador) {
-		boolean update = false;
-
-		DaoTrabajador d = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
-		DaoDepartamento departamento = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
-
-		if (trabajador.getId() == -1 || trabajador.getNombre() == null || trabajador.getNombre().equals("")
-				|| trabajador.getSueldo() == 0 || departamento.readDepartamento(trabajador.getId()) == null
-				|| trabajador.getTipo().equals("") || trabajador.getIdJefe() == -1) {
-			return false;
-		}else {
-			TTrabajador trab_buscado = d.readTrabajador(trabajador.getId());
-			if (trab_buscado != null) {
-				update = d.updateTrabajador(trabajador);
-			}
-		}
-		return update;
+		DaoTrabajador dao = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
+		if(trabajador ==  null) return false;
+		if(dao.readTrabajador(trabajador.getId()) == null) return false;
+		return dao.updateTrabajador(trabajador);
 	}
 
 	@Override
 	public boolean deleteTrabajador(int id) {
-		DaoTrabajador d = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
-		DaoDepartamento departamento = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
-
-		if (id != -1) {
-			// compruebo, en caso de ser jefe, que no tiene ningún vendedor asociado
-			if (d.readTrabajador(id).getTipo().equals("jefe")) {
-				List<TTrabajador> lista = d.readAllTrabajador();
-				boolean encontrado = false;
-				for (TTrabajador t : lista) {
-					if (t.getTipo().equals("vendedor") && ((TVendedor) t).getIdJefe() == id) {
-						encontrado = true;
-					}
-				}
-
-				if (encontrado) {
-					return false;
-				} else {
-					departamento.readDepartamento(d.readTrabajador(id).getIdDepart()).setNumEmpleados(departamento.readDepartamento(d.readTrabajador(id).getIdDepart()).getNumEmpleados() - 1);
-					return d.deleteTrabajador(id);
-				}
-				
-			}else {
-				departamento.readDepartamento(d.readTrabajador(id).getIdDepart()).setNumEmpleados(departamento.readDepartamento(d.readTrabajador(id).getIdDepart()).getNumEmpleados() - 1);
-				return d.deleteTrabajador(id);
-			}
-
-		} else {
-			return false;
-		}
+		DaoServicio dao = FactoriaAbstractaIntegracion.getInstancia().crearDaoServicio();
+		return dao.deleteServicio(id);
 	}
 
 	@Override
 	public TTrabajador readTrabajador(int id) {
-		DaoTrabajador d = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
-		TTrabajador trabajador = null;
-
-		if (id != -1) {
-			trabajador = d.readTrabajador(id);
-		}
-
-		return trabajador;
+		DaoTrabajador dao = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
+		
+		if (id == -1) return null;
+		
+		return dao.readTrabajador(id);
 	}
 
 	@Override

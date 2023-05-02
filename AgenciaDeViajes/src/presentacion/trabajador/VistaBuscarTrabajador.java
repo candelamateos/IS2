@@ -1,17 +1,14 @@
 package presentacion.trabajador;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 
 import negocio.trabajador.TTrabajador;
 import negocio.trabajador.TVendedor;
@@ -22,36 +19,24 @@ import presentacion.controlador.Eventos;
 
 public class VistaBuscarTrabajador extends JFrame implements IGUI{
 
-private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
 	private JLabel lId;
 	private JTextField tId;
 	private JButton ok;
-	
+
 	public VistaBuscarTrabajador() {
-		super("Buscar Trabajador");
+		super("BUSCAR TRABAJADOR");
 		initGUI();
 	}
-	
+
 	private void initGUI() {
-		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		setContentPane(mainPanel);
-		
-		JPanel fila1 = new JPanel();
-		fila1.setAlignmentX(CENTER_ALIGNMENT);
-		mainPanel.add(fila1);
-		JPanel fila2 = new JPanel();
-		fila2.setAlignmentX(CENTER_ALIGNMENT);
-		mainPanel.add(fila2);
-		
-		lId = new JLabel("Id del trabajador:");
-		lId.setPreferredSize(new Dimension(100, 25));
-		tId = new JTextField(10);
-		fila1.add(lId);
-		fila1.add(tId);
-		
+		JPanel panel = new JPanel();
+
+		lId = new JLabel("ID:");
+		tId = new JTextField(5);
+		panel.add(lId);
+		panel.add(tId);
+
 		ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 
@@ -59,24 +44,24 @@ private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				try {
-					int Iid;
-					
+					int Iid = 0;
 					try {
 						Iid = Integer.parseInt(tId.getText());
-					}catch(NumberFormatException ex) {
-						throw new IllegalArgumentException("El id del trabajador debe ser un entero", ex);
+					} catch (NumberFormatException ex) {
+						tId.setText("");
 					}
-					
 					Controlador.getInstancia().accion(Eventos.BUSCAR_TRABAJADOR, Iid);
-					
-				}catch(IllegalArgumentException ex) {
-					JOptionPane.showMessageDialog(Utils.getWindow(VistaBuscarTrabajador.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaBuscarTrabajador.this), ex.getMessage(), "Error",
+							JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
 				}
+
 			}
 		});
-		fila2.add(ok);
-		
+		panel.add(ok);
+		setContentPane(panel);
+
 		setLocationRelativeTo(null);
 		pack();
 		setVisible(true);
@@ -84,30 +69,39 @@ private static final long serialVersionUID = 1L;
 
 	@Override
 	public void actualizar(int evento, Object datos) {
-		switch(evento) {
-		case(Eventos.RES_BUSCAR_TRABAJADOR_OK):
+		switch (evento) {
+		case (Eventos.RES_BUSCAR_TRABAJADOR_OK):
 			TTrabajador trabajador = (TTrabajador) datos;
 			setVisible(false);
 			StringBuilder str = new StringBuilder();
 			str.append("Trabajador encontrado con datos: ").append(System.lineSeparator());
 			str.append("Id: " + trabajador.getId()).append(System.lineSeparator());
 			str.append("Nombre: " + trabajador.getNombre()).append(System.lineSeparator());
+			str.append(trabajador.isActivo() ? "Servicio activo" :"Servicio inactivo");
+			str.append(System.lineSeparator());
 			str.append("Sueldo: " + trabajador.getSueldo()).append(System.lineSeparator());
-			str.append("IdDepartamento " + trabajador.getIdDepart()).append(System.lineSeparator());
+			str.append("Id del departamento: " + trabajador.getIdDepart()).append(System.lineSeparator());
 			str.append("Tipo: " + trabajador.getTipo()).append(System.lineSeparator());
-			if (trabajador.getTipo().equals("vendedor")) {
-				str.append("IdJefe: " + ((TVendedor)trabajador).getIdJefe()).append(System.lineSeparator());
+			
+			if(trabajador instanceof TVendedor) {
+				str.append("Id del jefe: " + ((TVendedor) trabajador).getIdJefe());
+				str.append(System.lineSeparator());
 			}
-			JOptionPane.showMessageDialog(Utils.getWindow(this), str , "Trabajador encontrado", JOptionPane.INFORMATION_MESSAGE);
+			
+			JOptionPane.showMessageDialog(Utils.getWindow(this), str, "Trabajador encontrado",
+					JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
-		case(Eventos.RES_BUSCAR_TRABAJADOR_ERROR):
+		case (Eventos.RES_BUSCAR_TRABAJADOR_ERROR):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo encontrar el trabajador", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo encontrar al trabajador", "Error",
+					JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
 		}
 		
 	}
+
+
 	
 }
