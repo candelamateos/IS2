@@ -29,12 +29,6 @@ public class ControladorImp extends Controlador {
 		case (Eventos.ALTA_DEPARTAMENTO): {
 			TDepartamento tDepartamento = (TDepartamento) datos;
 			SADepartamento saDepartamento = FactoriaAbstractaNegocio.getInstancia().crearSADepartamento();
-//			int res = saDepartamento.createDepartamento(tDepartamento);
-			// TODO segun el valor de res, se actualiza la vista de una manera u otra.
-			// Si todo ok el aspecto es este(falta el else)
-//			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,res);
-			// ...
-			// break;} }
 			int res = saDepartamento.createDepartamento(tDepartamento);
 			if (res != -1) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Eventos.RES_ALTA_DEPARTAMENTO_OK,
@@ -187,8 +181,6 @@ public class ControladorImp extends Controlador {
 			}
 		}
 
-		// Servicio
-
 		// Trabajador
 		case (Eventos.ALTA_TRABAJADOR):{
 			TTrabajador tTrabajador = (TTrabajador) datos;
@@ -318,9 +310,9 @@ public class ControladorImp extends Controlador {
 			}
 		}
 		case (Eventos.MODIFICAR_VIAJE): {
-			int id = (int) datos;
+			TViaje tViaje = (TViaje) datos;
 			SAViaje saViaje = FactoriaAbstractaNegocio.getInstancia().crearSAViaje();
-			boolean res = saViaje.updateViaje(saViaje.readViaje(id));
+			boolean res = saViaje.updateViaje(tViaje);
 			if (res) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
 						.actualizar(Eventos.RES_MODIFICAR_VIAJE_OK, res);
@@ -404,7 +396,8 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 		}
-//Servicios
+		
+		//Servicios
 		case Eventos.BAJA_SERVICIO:{
 			
 			break;
