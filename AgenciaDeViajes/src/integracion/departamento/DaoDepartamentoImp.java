@@ -19,7 +19,7 @@ import negocio.departamento.TDepartamento;
 
 public class DaoDepartamentoImp implements DaoDepartamento {
 
-	private static final String ARCHIVO = "departamento.json";
+	private static final String ARCHIVO = "departamentos.json";
 
 	@Override
 	public int createDepartamento(TDepartamento departamento) {
@@ -31,7 +31,7 @@ public class DaoDepartamentoImp implements DaoDepartamento {
 		JSONObject json = new JSONObject();
 		json.put("id", id);
 		json.put("nombre", departamento.getNombre());
-		json.put("numPlazas", departamento.getNumEmpleados());
+		json.put("numEmpleados", departamento.getNumEmpleados());
 		json.put("activo", true);
 
 		JSONArray departamentos = data.getJSONArray("departamentos");
@@ -82,8 +82,8 @@ public class DaoDepartamentoImp implements DaoDepartamento {
 			json.put("activo", departamento.getActivo());
 
 			departamentos.put(json.getInt("id"), json);
+			
 		}
-
 		return saveData(data);
 	}
 
@@ -120,7 +120,7 @@ public class DaoDepartamentoImp implements DaoDepartamento {
 
 		for (int i = 0; i < data.getInt("proximo id"); i++) {
 			JSONObject json = departamentos.getJSONObject(i);
-			if (!json.has("id") || !json.has("precio") || !json.has("numEmpleados") || !json.has("activo")) {
+			if (!json.has("id") || !json.has("nombre") || !json.has("numEmpleados") || !json.has("activo")) {
 				return null;
 			}
 			if (json.getBoolean("activo")) {

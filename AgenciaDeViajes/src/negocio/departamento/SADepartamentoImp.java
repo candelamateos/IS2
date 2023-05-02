@@ -11,19 +11,15 @@ public class SADepartamentoImp implements SADepartamento {
 	}
 
 	private boolean comprobarDatos(TDepartamento departamento) {
-		return departamento.getActivo() && departamento.getNumEmpleados() >= 0 && departamento.getNombre() != null;
+		return departamento.getActivo() && departamento.getNumEmpleados() >= 0 && departamento.getNombre() != "" && departamento.getNombre() != null;
 	}
 
 	@Override
 	public int createDepartamento(TDepartamento departamento) {
 		int id = -1;
 		DaoDepartamento d = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
-
 		if (departamento != null && comprobarDatos(departamento)) {
-			TDepartamento existe = d.readDepartamento(departamento.getId());
-			if (existe == null) {
-				id = d.createDepartamento(departamento);
-			}
+			id = d.createDepartamento(departamento);
 		}
 		return id;
 	}
@@ -55,7 +51,7 @@ public class SADepartamentoImp implements SADepartamento {
 		DaoDepartamento d = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
 		TDepartamento existe = d.readDepartamento(id);
 		if (existe != null && comprobarDatos(existe)) {
-			 return existe;
+			return existe;
 		}
 		return null;
 	}
@@ -65,14 +61,17 @@ public class SADepartamentoImp implements SADepartamento {
 		DaoDepartamento d = FactoriaAbstractaIntegracion.getInstancia().crearDaoDepartamento();
 		List<TDepartamento> lista = d.readAllDepartamento();
 		boolean datosCorrectos = true;
-		if(lista != null) {
-			for(TDepartamento departamento : lista) {
-				if(departamento == null || !comprobarDatos(departamento)) datosCorrectos = false;
+		if (lista != null) {
+			for (TDepartamento departamento : lista) {
+				if (departamento == null || !comprobarDatos(departamento))
+					datosCorrectos = false;
 			}
-			if(datosCorrectos) return lista;
-			else return null;
-		}
-		else return null;
+			if (datosCorrectos)
+				return lista;
+			else
+				return null;
+		} else
+			return null;
 	}
 
 }

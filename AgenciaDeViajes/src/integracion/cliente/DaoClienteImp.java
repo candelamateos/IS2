@@ -164,40 +164,5 @@ public class DaoClienteImp implements DaoCliente {
 		
 	}
 
-	//TODO eliminar esto antes de entregar, es solo para probar el codigo
-	public static void main(String[] args) {
-		DaoCliente d = new DaoClienteImp();
-		TCliente miguel = new TCliente("Miguel");
-		TCliente anto = new TCliente("Barbara");
-		TCliente jose = new TCliente("Jose");
-		TCliente rodr = new TCliente("Rodrigo");
-		d.createCliente(miguel);
-		d.createCliente(anto);
-		d.createCliente(jose);
-		d.createCliente(rodr);
-		
-		println(d.readCliente(2)); //jose
-		
-		jose = d.readCliente(2);
-		jose.setNombre("Jos�");
-		d.updateCliente(jose);
-		println(d.readCliente(2));//Jos� con tilde
-		
-		d.deleteCliente(3); //Eliminamos Rodr
-		println(d.readCliente(3));//error
-		
-		d.readAllCliente();
-		for(TCliente c : d.readAllCliente()) {
-			println(c);
-		}
-	}
 	
-	private static void println(TCliente f) {
-		if (f == null) {
-			System.out.println("Error");
-		} else {
-			System.out.println(f.getId() + " " + f.getNombre() + " " + f.getActivo());
-		}
-	}
-
 }

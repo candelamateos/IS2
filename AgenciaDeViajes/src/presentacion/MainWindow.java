@@ -3,12 +3,14 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,19 +45,26 @@ public class MainWindow extends JFrame implements IGUI {
 		//mainPanel con margen de 10
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		mainPanel.setPreferredSize(new Dimension(320, 180));
+		mainPanel.setPreferredSize(new Dimension(700, 340));
 		this.setContentPane(mainPanel);
+		
 		
 		//Cabecera con el t�tulo en zona "NORTH"
 		JPanel cabecera = new JPanel();
+		
 		cabecera.setLayout(new BoxLayout(cabecera, BoxLayout.Y_AXIS));
 		mainPanel.add(cabecera, BorderLayout.NORTH);
+		JButton foto = new JButton();
+		foto.setPreferredSize(new Dimension(300, 130));
+		foto.setAlignmentX(CENTER_ALIGNMENT);
+		foto.setIcon(loadImage("lib/IMG-0902 (1).jpg"));
+		cabecera.add(foto);
 		
-		JLabel titulo = new JLabel(TITULO);
+		/*JLabel titulo = new JLabel(TITULO);
 		titulo.setAlignmentX(CENTER_ALIGNMENT);
 		cabecera.add(titulo);
 		cabecera.add(Box.createVerticalStrut(10)); //Espacio entre el t�tulo y los botones
-		
+		*/
 		//ContentPanel con los botones en la zona "CENTER"
 		//El contentPanel usa GridLayout
 		JPanel contentPanel = new JPanel();
@@ -77,7 +86,7 @@ public class MainWindow extends JFrame implements IGUI {
 		BDepartamento.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.CLIENTES);
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.DEPARTAMENTO);
 			}
 		});
 		contentPanel.add(BDepartamento);
@@ -119,7 +128,10 @@ public class MainWindow extends JFrame implements IGUI {
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	protected ImageIcon loadImage(String path) {
+		return new ImageIcon(Toolkit.getDefaultToolkit().createImage(path));
+	}
 	
 
 }

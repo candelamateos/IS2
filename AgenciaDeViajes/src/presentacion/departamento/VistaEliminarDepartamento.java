@@ -40,9 +40,19 @@ public class VistaEliminarDepartamento extends JFrame implements IGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String id = tId.getText();
-				int Iid = Integer.parseInt(id);
-				Controlador.getInstancia().accion(Eventos.BAJA_DEPARTAMENTO, Iid);
+				try {
+					int Iid;
+					try {
+						Iid = Integer.parseInt(tId.getText());
+					} catch (NumberFormatException ex) {
+						throw new IllegalArgumentException("El id debe ser un numero entero", ex);
+					}
+					Controlador.getInstancia().accion(Eventos.BAJA_DEPARTAMENTO, Iid);
+				} catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaEliminarDepartamento.this), ex.getMessage(),
+							"Error", JOptionPane.ERROR_MESSAGE);
+					setVisible(true);
+				}
 			}
 		});
 		panel.add(ok);
@@ -56,7 +66,7 @@ public class VistaEliminarDepartamento extends JFrame implements IGUI {
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch (evento) {
-		case(Eventos.RES_BAJA_DEPARTAMENTO_OK):
+		case (Eventos.RES_BAJA_DEPARTAMENTO_OK):
 			setVisible(false);
 			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento eliminado con id " + datos,
 					"Departamento eliminado", JOptionPane.INFORMATION_MESSAGE);

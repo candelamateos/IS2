@@ -23,12 +23,14 @@ import presentacion.controlador.Eventos;
 
 public class VistaListarDepartamento extends JFrame implements IGUI {
 
+	private static final long serialVersionUID = 1L;
+
 	private DefaultTableModel dataTableModel;
 
-	private static final String[] HEADERS = { "Id", "Nombre", "Numero de empleados" };
+	private static final String[] HEADERS = { "Id", "Nombre", "Numero de empleados", "Activo" };
 
 	public VistaListarDepartamento() {
-		setTitle("LISTAR DEPARTAMENTO");
+		super("LISTAR DEPARTAMENTO");
 		initGUI();
 	}
 
@@ -51,23 +53,30 @@ public class VistaListarDepartamento extends JFrame implements IGUI {
 
 		JTable tabla = new JTable(dataTableModel);
 		JScrollPane scroll = new JScrollPane(tabla);
+		
 		mainPanel.add(scroll);
-
+		
+		setContentPane(mainPanel);
+		
 		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
 	}
 
 	@Override
 	public void actualizar(int evento, Object datos) {
 		switch (evento) {
 		case (Eventos.RES_LISTAR_DEPARTAMENTO_OK):
-			List<TDepartamento> lista = (ArrayList<TDepartamento>) datos;
+			List<TDepartamento> lista = (List<TDepartamento>) datos;
+
+			dataTableModel.setNumRows(lista.size());
 			for (int i = 0; i < lista.size(); i++) {
 				TDepartamento departamento = lista.get(i);
 				dataTableModel.setValueAt(departamento.getId(), i, 0);
 				dataTableModel.setValueAt(departamento.getNombre(), i, 1);
 				dataTableModel.setValueAt(departamento.getNumEmpleados(), i, 2);
+				dataTableModel.setValueAt(departamento.getActivo(), i, 3);
 			}
-			dataTableModel.fireTableDataChanged();
 			setSize(new Dimension(480, 270));
 			setVisible(true);
 			break;
