@@ -76,7 +76,7 @@ public class VistaAniadirTrabajador extends JFrame implements IGUI{
 		panelJefe = new JPanel();
 		
 		cards.add(panelVendedor, PANEL_VENDEDOR);
-		cards.add(panelVendedor, PANEL_JEFE);
+		cards.add(panelJefe, PANEL_JEFE);
 		
 		String opciones[] = {PANEL_VENDEDOR, PANEL_JEFE};
 		comboBox = new JComboBox<>(opciones);
@@ -111,9 +111,9 @@ public class VistaAniadirTrabajador extends JFrame implements IGUI{
 		
 		//panel jefe
 		panelJefe.setLayout(new GridLayout(6, 2));
-		nombreJefe = new JTextField(20);
-		sueldoJefe = new JTextField(20);
-		idDepartJefe = new JTextField(20);
+		nombreJefe = new JTextField(10);
+		sueldoJefe = new JTextField(10);
+		idDepartJefe = new JTextField(10);
 		panelJefe.add(new JLabel("nombre", JLabel.CENTER));
 		panelJefe.add(nombreJefe);
 		panelJefe.add(new JLabel("sueldo", JLabel.CENTER));
