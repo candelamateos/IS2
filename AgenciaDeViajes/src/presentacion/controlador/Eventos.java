@@ -61,9 +61,32 @@ public class Eventos {
 	public static final int RES_LISTAR_SERVICIO_OK = 214;
 	public static final int RES_LISTAR_SERVICIO_ERROR = 215;
 
+
+	
+	//Trabajador 3xx
+	public static final int TRABAJADORES = 300;
+	public static final int ALTA_TRABAJADOR = 301;
+	public static final int BAJA_TRABAJADOR = 302;
+	public static final int BUSCAR_TRABAJADOR = 303;
+	public static final int MODIFICAR_TRABAJADOR = 304;
+	public static final int LISTAR_TRABAJADOR = 305;
+	public static final int RES_ALTA_TRABAJADOR_OK = 306;
+	public static final int RES_ALTA_TRABAJADOR_ERROR = 307;
+	public static final int RES_BAJA_TRABAJADOR_OK = 308;
+	public static final int RES_BAJA_TRABAJADOR_ERROR = 309;
+	public static final int RES_BUSCAR_TRABAJADOR_OK = 310;
+	public static final int RES_BUSCAR_TRABAJADOR_ERROR = 311;
+	public static final int RES_MODIFICAR_TRABAJADOR_OK = 312;
+	public static final int RES_MODIFICAR_TRABAJADOR_ERROR = 313;
+	public static final int RES_LISTAR_TRABAJADOR_OK = 314;
+	public static final int RES_LISTAR_TRABAJADOR_ERROR = 315;
+	
+	//Viaje 4xx
+
 	// Trabajador 3xx
 
 	// Viaje 4xx
+
 	public static final int VIAJES = 400;
 	public static final int ALTA_VIAJE = 401;
 	public static final int BAJA_VIAJE = 402;

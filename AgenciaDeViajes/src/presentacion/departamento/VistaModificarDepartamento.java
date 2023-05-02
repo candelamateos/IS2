@@ -59,7 +59,7 @@ public class VistaModificarDepartamento extends JFrame implements IGUI {
 		fila0.add(lId);
 		fila0.add(tId);
 		
-		lNombre= new JLabel("Nombre:");
+		lNombre= new JLabel("Nombre del departamento:");
 		lNombre.setPreferredSize(new Dimension(100, 25));
 		tNombre = new JTextField(10);
 		fila1.add(lNombre);
@@ -81,24 +81,30 @@ public class VistaModificarDepartamento extends JFrame implements IGUI {
 				try {
 					int Iid;
 					int InumEmpleados;
+					String Snombre="";
 					try {
 						Iid = Integer.parseInt(tId.getText());
 					} catch (NumberFormatException ex) {
+						tId.setText("");
 						throw new IllegalArgumentException("El id debe ser un numero entero", ex);
 					}
 					try {
-						String Snombre = tNombre.getText();					
-						Controlador.getInstancia().accion(Eventos.ALTA_DEPARTAMENTO, new TDepartamento(Snombre));
+						Snombre = tNombre.getText();	
 					}catch(IllegalArgumentException ex) {
+						tNombre.setText("");
 						JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarDepartamento.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						setVisible(true);
 					}
 					try{
 						InumEmpleados = Integer.parseInt(tNumEmpleados.getText());
 					}catch(NumberFormatException ex) {
+						tNumEmpleados.setText("");
 						throw new IllegalArgumentException("El numero de empleados debe ser un entero", ex);
 					}
-					Controlador.getInstancia().accion(Eventos.MODIFICAR_DEPARTAMENTO, Iid);
+					TDepartamento departamento = new TDepartamento(Snombre);
+					departamento.setId(Iid);
+					departamento.setNumEmpleados(InumEmpleados);
+					Controlador.getInstancia().accion(Eventos.MODIFICAR_DEPARTAMENTO, departamento);
 				} catch (IllegalArgumentException ex) {
 					JOptionPane.showMessageDialog(Utils.getWindow(VistaModificarDepartamento.this), ex.getMessage(),
 							"Error", JOptionPane.ERROR_MESSAGE);
@@ -118,7 +124,7 @@ public class VistaModificarDepartamento extends JFrame implements IGUI {
 		switch (evento) {
 		case (Eventos.RES_MODIFICAR_DEPARTAMENTO_OK):
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento modificado con id " + datos,
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Departamento modificado correctamente",
 					"Departamento modificado", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;

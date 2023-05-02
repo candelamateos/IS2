@@ -1,9 +1,6 @@
 package presentacion.departamento;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -18,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
 import negocio.departamento.TDepartamento;
 import presentacion.IGUI;
 import presentacion.Utils;
-import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
 public class VistaListarDepartamento extends JFrame implements IGUI {
@@ -67,8 +63,8 @@ public class VistaListarDepartamento extends JFrame implements IGUI {
 	public void actualizar(int evento, Object datos) {
 		switch (evento) {
 		case (Eventos.RES_LISTAR_DEPARTAMENTO_OK):
+			setVisible(true);
 			List<TDepartamento> lista = (List<TDepartamento>) datos;
-
 			dataTableModel.setNumRows(lista.size());
 			for (int i = 0; i < lista.size(); i++) {
 				TDepartamento departamento = lista.get(i);
