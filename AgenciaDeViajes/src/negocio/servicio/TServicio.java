@@ -46,5 +46,8 @@ public class TServicio {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	public boolean isActivo() {
+		return this.activo;
+	}
 
 }

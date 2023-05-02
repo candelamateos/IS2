@@ -40,9 +40,19 @@ public class VistaBuscarDepartamento extends JFrame implements IGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String id = tId.getText();
-				int Iid = Integer.parseInt(id);
-				Controlador.getInstancia().accion(Eventos.BUSCAR_DEPARTAMENTO, Iid);
+				try {
+					int Iid=0;
+					try {
+						Iid = Integer.parseInt(tId.getText());
+					} catch (NumberFormatException ex) {
+						tId.setText("");
+					}
+					Controlador.getInstancia().accion(Eventos.BUSCAR_DEPARTAMENTO, Iid);
+				} catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(Utils.getWindow(VistaBuscarDepartamento.this), ex.getMessage(),
+							"Error", JOptionPane.ERROR_MESSAGE);
+					setVisible(true);
+				}
 			}
 		});
 		panel.add(ok);
@@ -64,6 +74,12 @@ public class VistaBuscarDepartamento extends JFrame implements IGUI {
 			str.append("Id: " + departamento.getId()).append(System.lineSeparator());
 			str.append("Nombre: " + departamento.getNombre()).append(System.lineSeparator());
 			str.append("Numero de empleados: " + departamento.getNumEmpleados()).append(System.lineSeparator());
+			if(departamento.getActivo()) {
+				str.append("Departamento activo").append(System.lineSeparator());
+			}
+			else {
+				str.append("Departamento inactivo").append(System.lineSeparator());
+			}
 			JOptionPane.showMessageDialog(Utils.getWindow(this), str, "Departamento encontrado",
 					JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);

@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import presentacion.IGUI;
+import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -44,7 +45,7 @@ public class VistaDepartamentos extends JFrame implements IGUI {
 		fila3.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(fila3);
 
-		BAniadirDepartamento = new JButton("Añadir Departamento");
+		BAniadirDepartamento = new JButton("AÃ±adir Departamento");
 		BAniadirDepartamento.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -78,7 +79,7 @@ public class VistaDepartamentos extends JFrame implements IGUI {
 		BListarDepartamento.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.LISTAR_DEPARTAMENTO);
+				Controlador.getInstancia().accion(Eventos.LISTAR_DEPARTAMENTO, null);
 			}
 		});
 		BListarDepartamento.setPreferredSize(new Dimension(130, 30));

@@ -8,23 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class MainWindow extends JFrame implements IGUI {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private static String TITULO = "Viajes Bel-Mundo";
@@ -57,7 +51,8 @@ public class MainWindow extends JFrame implements IGUI {
 		JButton foto = new JButton();
 		foto.setPreferredSize(new Dimension(300, 130));
 		foto.setAlignmentX(CENTER_ALIGNMENT);
-		foto.setIcon(loadImage("lib/IMG-0902 (1).jpg"));
+		foto.setIcon(loadImage("lib/TITULO.JPG.png"
+				+ ""));
 		cabecera.add(foto);
 		
 		/*JLabel titulo = new JLabel(TITULO);
@@ -86,7 +81,7 @@ public class MainWindow extends JFrame implements IGUI {
 		BDepartamento.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.CLIENTES);
+				FactoriaAbstractaPresentacion.getInstance().createVista(Eventos.DEPARTAMENTO);
 			}
 		});
 		contentPanel.add(BDepartamento);
@@ -125,8 +120,6 @@ public class MainWindow extends JFrame implements IGUI {
 	
 	@Override
 	public void actualizar(int evento, Object datos) {
-		// TODO Auto-generated method stub
-
 	}
 
 	protected ImageIcon loadImage(String path) {

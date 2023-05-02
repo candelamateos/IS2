@@ -6,7 +6,6 @@ import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.factura.DaoFactura;
 import integracion.viaje.DaoViaje;
 import integracion.servicio.DaoServicio;
-import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import negocio.servicio.*;
 
@@ -44,6 +43,7 @@ public class SAViajeImp implements SAViaje{
 	private boolean comprobarDatosActualizados(TViaje nuevo, TViaje antiguo) {
 		boolean correcto = false;
 		DaoServicio dServicio = FactoriaAbstractaIntegracion.getInstancia().crearDaoServicio();
+		
 		TActividad tActividadNuevo = (TActividad) dServicio.readServicio(nuevo.getIdActividad());
 		TAlojamiento tAlojamientoNuevo = (TAlojamiento) dServicio.readServicio(nuevo.getIdAlojamiento());
 		TTransporte tTransporteNuevo = (TTransporte) dServicio.readServicio(nuevo.getIdTransporte());
@@ -55,22 +55,51 @@ public class SAViajeImp implements SAViaje{
 		int antiguasPlazasActividad = tActividadAntiguo.getNumPlazas();
 		int nuevasPlazasActividad = tActividadNuevo.getNumPlazas();
 		int antiguasPlazasAlojamiento = tAlojamientoAntiguo.getNumPlazas();
+		
 		int nuevasPlazasAlojamiento = tAlojamientoNuevo.getNumPlazas();
 		int antiguasPlazasTransporte = tTransporteAntiguo.getNumPlazas();
 		int nuevasPlazasTransporte = tTransporteNuevo.getNumPlazas();
 		
-		if(tActividadNuevo.getId() != tActividadAntiguo.getId()) {
+		if(tActividadNuevo.getId() != tActividadAntiguo.getId()) { /*La actividad ha cambiado*/
 			antiguasPlazasActividad += antiguo.getNumPlazas();
 			nuevasPlazasActividad -= nuevo.getNumPlazas();
 		}
-		if(tAlojamientoNuevo.getId() != tAlojamientoAntiguo.getId()) {
+		else if(tActividadNuevo.getId() == tActividadAntiguo.getId() && nuevo.getNumPlazas() > antiguo.getNumPlazas()){ /*Misma actividad pero mayor numero de plazas*/
+			antiguasPlazasActividad = antiguasPlazasActividad - (nuevo.getNumPlazas() - antiguo.getNumPlazas());
+			nuevasPlazasActividad = antiguasPlazasActividad;
+		}
+		else if(tActividadNuevo.getId() == tActividadAntiguo.getId() && nuevo.getNumPlazas() < antiguo.getNumPlazas()){ /*Misma actividad pero menor numero de plazas*/
+			antiguasPlazasActividad = antiguasPlazasActividad + (antiguo.getNumPlazas() - nuevo.getNumPlazas());
+			nuevasPlazasActividad = antiguasPlazasActividad;
+		}
+		
+		if(tAlojamientoNuevo.getId() != tAlojamientoAntiguo.getId()) { /*El alojamiento ha cambiado*/
 			antiguasPlazasAlojamiento += antiguo.getNumPlazas();
 			nuevasPlazasAlojamiento -= nuevo.getNumPlazas();
 		}
-		if(tTransporteNuevo.getId() != tTransporteAntiguo.getId()) {
+		else if(tAlojamientoNuevo.getId() == tAlojamientoAntiguo.getId() && nuevo.getNumPlazas() > antiguo.getNumPlazas()){ /*Mismo alojamiento pero mayor numero de plazas*/
+			antiguasPlazasAlojamiento = antiguasPlazasAlojamiento - (nuevo.getNumPlazas() - antiguo.getNumPlazas());
+			nuevasPlazasAlojamiento = antiguasPlazasAlojamiento;
+		}
+		else if(tAlojamientoNuevo.getId() == tAlojamientoAntiguo.getId() && nuevo.getNumPlazas() < antiguo.getNumPlazas()){ /*Mismo alojamiento pero menor numero de plazas*/
+			antiguasPlazasAlojamiento = antiguasPlazasAlojamiento + (antiguo.getNumPlazas() - nuevo.getNumPlazas());
+			nuevasPlazasAlojamiento = antiguasPlazasAlojamiento;
+		}
+		
+		if(tTransporteNuevo.getId() != tTransporteAntiguo.getId()) { /*El transporte ha cambiado*/
 			antiguasPlazasTransporte += antiguo.getNumPlazas();
 			nuevasPlazasTransporte -= nuevo.getNumPlazas();
 		}
+		else if(tTransporteNuevo.getId() == tTransporteAntiguo.getId() && nuevo.getNumPlazas() > antiguo.getNumPlazas()){ /*Mismo transporte pero mayor numero de plazas*/
+			antiguasPlazasTransporte = antiguasPlazasTransporte - (nuevo.getNumPlazas() - antiguo.getNumPlazas());
+			nuevasPlazasTransporte = antiguasPlazasTransporte;
+		}
+		else if(tTransporteNuevo.getId() == tTransporteAntiguo.getId() && nuevo.getNumPlazas() < antiguo.getNumPlazas()){ /*Mismo transporte pero menor numero de plazas*/
+			antiguasPlazasTransporte = antiguasPlazasTransporte + (antiguo.getNumPlazas() - nuevo.getNumPlazas());
+			nuevasPlazasTransporte = antiguasPlazasTransporte;
+		}
+		
+		/*Si el servicio no cambia y el numero de plazas tampoco, no hay que hacer ninguna modificación en el servicio*/
 		
 		if(nuevasPlazasActividad >= 0 && nuevasPlazasAlojamiento >= 0 && nuevasPlazasTransporte >= 0) {
 			correcto = true;
