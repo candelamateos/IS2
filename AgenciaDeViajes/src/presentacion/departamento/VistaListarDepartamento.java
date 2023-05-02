@@ -1,9 +1,6 @@
 package presentacion.departamento;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -18,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
 import negocio.departamento.TDepartamento;
 import presentacion.IGUI;
 import presentacion.Utils;
-import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 
 public class VistaListarDepartamento extends JFrame implements IGUI {
