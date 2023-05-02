@@ -18,7 +18,6 @@ import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.factura.VistaAbrirVenta;
 
 public class VistaAniadirViaje extends JFrame implements IGUI{
 	
@@ -33,7 +32,7 @@ public class VistaAniadirViaje extends JFrame implements IGUI{
 	private JButton ok;
 
 	public VistaAniadirViaje() {
-		super("AÑADIR VIAJE");
+		super("Añadir Viaje");
 		initGUI();	
 	}
 	

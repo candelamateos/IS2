@@ -33,7 +33,7 @@ public class VistaModificarViaje extends JFrame implements IGUI{
 	private JButton ok;
 	
 	public VistaModificarViaje() {
-		super("MODIFICAR VIAJE");
+		super("Modificar Viaje");
 		initGUI();
 	}
 	
@@ -108,7 +108,7 @@ public class VistaModificarViaje extends JFrame implements IGUI{
 					try{
 						Iid = Integer.parseInt(tId.getText());
 					}catch(NumberFormatException ex) {
-						throw new IllegalArgumentException("El id debe ser un numero", ex);
+						throw new IllegalArgumentException("El id del viaje debe ser un numero", ex);
 					}
 					
 					try{
