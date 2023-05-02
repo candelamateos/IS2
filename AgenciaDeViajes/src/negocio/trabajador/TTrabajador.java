@@ -16,6 +16,7 @@ public class TTrabajador {
 	}
 	
 	public TTrabajador(String nombre, int sueldo, int idDepart, String tipo, int idJefe) {
+		this.nombre = nombre;
 		this.sueldo = sueldo;
 		this.activo = true;
 		this.idDepart = idDepart;

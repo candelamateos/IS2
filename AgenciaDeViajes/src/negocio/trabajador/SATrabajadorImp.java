@@ -20,7 +20,7 @@ public class SATrabajadorImp implements SATrabajador {
 		DaoTrabajador d = FactoriaAbstractaIntegracion.getInstancia().crearDaoTrabajador();
 
 		if (trabajador.getNombre() == null || trabajador.getNombre().equals("") || trabajador.getSueldo() == 0
-				|| departamento.readDepartamento(trabajador.getId()) == null || trabajador.getTipo().equals("")) {
+				|| departamento.readDepartamento(trabajador.getIdDepart()) == null || trabajador.getTipo().equals("")) {
 			return -1;
 		} else {
 			departamento.readDepartamento(trabajador.getIdDepart()).setNumEmpleados(departamento.readDepartamento(trabajador.getIdDepart()).getNumEmpleados() + 1);

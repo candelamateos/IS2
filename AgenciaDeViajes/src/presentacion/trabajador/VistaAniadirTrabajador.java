@@ -139,17 +139,20 @@ public class VistaAniadirTrabajador extends JFrame implements IGUI{
 					}
 					
 					if (Itipo.equals("Vendedor") || Itipo.equals("vendedor")) {
-						try {
-							IidJefe = Integer.parseInt(tIdJefe.getText());
-						}catch(NumberFormatException ex) {
-							throw new IllegalArgumentException("El id del jefe debe ser un entero", ex);
+						IidJefe = Integer.parseInt(tIdJefe.getText());
+						if (IidJefe == 0) {
+							throw new IllegalArgumentException("el id del jefe no puede ser 0 para un vendedor");
 						}
 					}
 					else {
-						IidJefe = 0;
+						IidJefe = Integer.parseInt(tIdJefe.getText());
+						if (IidJefe != 0) {
+							throw new IllegalArgumentException("el id del jefe debe ser 0 para un jefe");
+						}
 					}
-
+					
 					Controlador.getInstancia().accion(Eventos.ALTA_TRABAJADOR, new TTrabajador(Inombre, Isueldo, IidDepart, Itipo, IidJefe));
+					
 				}catch(IllegalArgumentException ex) {
 					JOptionPane.showMessageDialog(Utils.getWindow(VistaAniadirTrabajador.this), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
@@ -168,13 +171,13 @@ public class VistaAniadirTrabajador extends JFrame implements IGUI{
 		switch(evento) {
 		case(Eventos.RES_ALTA_TRABAJADOR_OK):{
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "Trabajador a�adido con id " + datos, "Trabajador A�adido", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "Trabajador anyadido con id " + datos, "Trabajador Anyadido", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(true);
 			break;
 		}
 		case(Eventos.RES_ALTA_TRABAJADOR_ERROR):{
 			setVisible(false);
-			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo a�adir el trabajador", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Utils.getWindow(this), "No se pudo anyadir el trabajador", "Error", JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
 			break;
 		}
