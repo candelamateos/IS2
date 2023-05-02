@@ -54,6 +54,12 @@ public class Eventos {
 	public static final int RES_ALTA_SERVICIO_ERROR = 207;
 	public static final int RES_BAJA_SERVICIO_OK = 208;
 	public static final int RES_BAJA_SERVICIO_ERROR = 209;
+	public static final int RES_BUSCAR_SERVICIO_OK = 210;
+	public static final int RES_BUSCAR_SERVICIO_ERROR = 211;
+	public static final int RES_MODIFICAR_SERVICIO_OK = 212;
+	public static final int RES_MODIFICAR_SERVICIO_ERROR = 213;
+	public static final int RES_LISTAR_SERVICIO_OK = 214;
+	public static final int RES_LISTAR_SERVICIO_ERROR = 215;
 
 	// Trabajador 3xx
 

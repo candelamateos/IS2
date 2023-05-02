@@ -12,6 +12,7 @@ import negocio.factura.SALineaFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import negocio.servicio.SAServicio;
+import negocio.servicio.TServicio;
 import negocio.viaje.SAViaje;
 import negocio.viaje.TViaje;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -341,17 +342,44 @@ public class ControladorImp extends Controlador {
 		}
 		
 		case Eventos.BUSCAR_SERVICIO:{
-			
-			break;
+			int id = (int) datos;
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			TServicio res = saServicio.readServicio(id);
+			if (res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_SERVICIO_OK, res);
+				break;
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_BUSCAR_SERVICIO_ERROR, res);
+				break;
+			}
 		}
 		
 		case Eventos.LISTAR_SERVICIO:{
-			
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			List<TServicio> res = saServicio.readAllServicio();
+			if (res != null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_LISTAR_SERVICIO_OK, res);
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_LISTAR_SERVICIO_ERROR, res);
+			}
 			break;
 		}
 		
 		case Eventos.MODIFICAR_SERVICIO:{
-			
+			TServicio Servicio = (TServicio) datos;
+			SAServicio saServicio = FactoriaAbstractaNegocio.getInstancia().crearSAServicio();
+			boolean res = saServicio.updateServicio(Servicio);
+			if (res) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_SERVICIO_OK, res);
+			} else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento)
+						.actualizar(Eventos.RES_MODIFICAR_SERVICIO_ERROR, res);
+			}
 			break;
 		}
 		}
