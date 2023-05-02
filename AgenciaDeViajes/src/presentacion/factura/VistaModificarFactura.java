@@ -1,5 +1,6 @@
 package presentacion.factura;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
+import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.TFactura;
+import negocio.factura.TFacturaConLineas;
+import negocio.servicio.TServicio;
 import presentacion.IGUI;
 import presentacion.Utils;
 import presentacion.controlador.Controlador;
@@ -26,10 +32,11 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private JPanel error;
 	private JTextField tFactura;
 	private JTextField tVendedor;
 	private JTextField tCliente;
-	private JButton ok;
+	private JButton Guardar;
 	
 	public VistaModificarFactura() {
 		super("Modificar factura");
@@ -41,6 +48,14 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		setContentPane(mainPanel);
+		
+		error = new JPanel();
+		error.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(error);
+		JLabel lError = new JLabel("Factura no encontrada");
+		lError.setForeground(Color.RED);
+		error.add(lError);
+		error.setVisible(false);
 		
 		JPanel fila0 = new JPanel();
 		fila0.setAlignmentX(CENTER_ALIGNMENT);
@@ -58,6 +73,33 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 		JLabel lFactura = new JLabel("Id de la factura:");
 		lFactura.setPreferredSize(new Dimension(100,25));
 		tFactura = new JTextField(10);
+		tFactura.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				update();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				update();
+			}
+
+			private void update() {
+				try{
+					int id = Integer.parseInt(tFactura.getText());
+					TFacturaConLineas t = FactoriaAbstractaNegocio.getInstancia().crearSAFactura().readFactura(id);
+					if(t == null) actualizar(Eventos.RES_BUSCAR_FACTURA_ERROR, null);
+					else actualizar(Eventos.RES_BUSCAR_FACTURA_OK, t);
+				}
+				catch(NumberFormatException ex){
+					actualizar(Eventos.RES_BUSCAR_FACTURA_ERROR, null);
+				}	
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {}
+		});
+
 		tFactura.setPreferredSize(new Dimension(100,25));
 		fila0.add(lFactura);
 		fila0.add(tFactura);
@@ -76,8 +118,8 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 		fila2.add(lCliente);
 		fila2.add(tCliente);
 		
-		ok = new JButton("OK");
-		ok.addActionListener(new ActionListener() {
+		Guardar = new JButton("Guardar");
+		Guardar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -113,7 +155,7 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 				}
 			}
 		});
-		fila3.add(ok);
+		fila3.add(Guardar);
 		
 		setLocationRelativeTo(null);
 		pack();
@@ -132,6 +174,18 @@ public class VistaModificarFactura extends JFrame implements IGUI {
 			setVisible(false);
 			JOptionPane.showMessageDialog(Utils.getWindow(this), "El cliente o el vendedor no existen", "Error", JOptionPane.ERROR_MESSAGE);
 			setVisible(true);
+			break;	
+		case(Eventos.RES_BUSCAR_FACTURA_OK):
+			TFacturaConLineas facturaConLineas = (TFacturaConLineas) datos;
+			TFactura factura = facturaConLineas.getFactura();
+			tFactura.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2, true));
+			error.setVisible(false);
+			tVendedor.setText(Integer.toString(factura.getIdVendedor()));
+			tCliente.setText(Integer.toString(factura.getIdCliente()));
+			break;
+		case(Eventos.RES_BUSCAR_FACTURA_ERROR):
+			tFactura.setBorder(BorderFactory.createLineBorder(Color.RED, 2, true));
+			error.setVisible(true);
 			break;
 		}
 	}
