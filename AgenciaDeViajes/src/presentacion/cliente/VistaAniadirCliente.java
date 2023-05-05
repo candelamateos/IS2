@@ -48,7 +48,6 @@ public class VistaAniadirCliente extends JFrame implements IGUI{
 					setVisible(true);
 				}
 				String nombre = tNombre.getText();
-				Controlador.getInstancia().accion(Eventos.ALTA_CLIENTE, new TCliente(nombre));
 			}
 		});
 		panel.add(ok);
